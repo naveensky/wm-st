@@ -44,7 +44,7 @@ namespace StudentTracker.Models {
         public StudyCenter StudyCenter { get; set; }
 
         [Display(Name = "Score")]
-        public decimal Score { get; set; }
+        public double Score { get; set; }
 
         [Display(Name = "Already Downloaded")]
         public bool IsDownloaded { get; set; }

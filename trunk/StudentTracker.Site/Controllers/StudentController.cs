@@ -93,16 +93,25 @@ namespace StudentTracker.Site.Controllers {
             Response.BinaryWrite(System.IO.File.ReadAllBytes(tempPath));
         }
 
-        public ActionResult DownloadExcel() {
+        public ActionResult DownloadLeads() {
             return View();
         }
 
         [HttpPost]
-        public ActionResult DownloadExcel(StudentDownloadViewModel viewModel) {
+        public void DownloadLeads(StudentDownloadViewModel viewModel) {
             var students = _studentService.GetStudentsAsLead(viewModel.StartDate, viewModel.EndDate,
                                                              viewModel.DownloadAll);
-            return View();
-        }
 
+
+            var tempPath = CoreService.ConvertToAbsolute(CoreService.GetTempPath("xlsx"));
+
+            var excelGenerator = new ExcelConverter();
+            excelGenerator.GenerateLeadsExcel(tempPath, students);
+            Response.Clear();
+            Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+            Response.AddHeader("content-disposition", "attachment;  filename=Student Record.xlsx");
+            Response.BinaryWrite(System.IO.File.ReadAllBytes(tempPath));
+            CoreService.DeleteFile(tempPath);
+        }
     }
 }

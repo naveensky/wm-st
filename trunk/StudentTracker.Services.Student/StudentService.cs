@@ -77,6 +77,7 @@ namespace StudentTracker.Services.Student {
                     originalStudent.BooksGiven = student.BooksGiven;
                     originalStudent.Email = student.Email;
                     originalStudent.Mobile = student.Mobile;
+                    originalStudent.Score = student.Score;
                     originalStudent.SoftwareGiven = student.SoftwareGiven;
                     originalStudent.WmPrepUsername = student.WmPrepUsername;
                     originalStudent.ModifiedDate = DateTime.UtcNow.AddHours(5).AddMinutes(30);
@@ -94,22 +95,28 @@ namespace StudentTracker.Services.Student {
 
         public IEnumerable<Models.Student> GetStudentsAsLead(DateTime startTime, DateTime endTime, bool getAll) {
             using (var repo = new MongoRepository<Models.Student>(CoreService.GetServer())) {
-                var students = repo.Collection.Where(x => x.Score != 0);
+                var studentsWithScore = repo.Collection.Where(x => x.Score >= 0).ToList().Where(x => x.ModifiedDate.Date >= startTime.Date && x.ModifiedDate.Date <= endTime.Date);
 
-                students = students.Where(x => x.ModifiedDate.Date >= startTime.Date && x.ModifiedDate.Date <= endTime.Date);
+                // studentsWithScore = studentsWithScore).ToList();
 
                 if (!getAll)
-                    students = students.Where(x => !x.IsDownloaded);
+                    studentsWithScore = studentsWithScore.Where(x => !x.IsDownloaded).ToList();
 
-                var studentInRange = repo.Collection.Where(x => x.ActualExamDate.HasValue && x.ActualExamDate.Value <= endTime.Date && x.ActualExamDate.Value.Date >= endTime.Date);
+                var studentInRange = repo.Collection.Where(x => x.ActualExamDate != null).ToList().Where(x => x.ActualExamDate.Value.Date <= endTime.Date && x.ActualExamDate.Value.Date >= endTime.Date);
 
                 if (!getAll)
                     studentInRange = studentInRange.Where(x => !x.IsDownloaded);
 
-                var data = students.ToList();
+                var data = studentsWithScore.ToList();
                 data.AddRange(studentInRange);
-                data.ForEach(x => x.ModifiedDate = DateTime.UtcNow.AddHours(5).AddMinutes(30));
-                return students;
+
+                foreach (var student in data) {
+                    student.ModifiedDate = DateTime.UtcNow.AddHours(5).AddMinutes(30);
+                    student.IsDownloaded = true;
+                    repo.Save(student);
+                }
+
+                return studentsWithScore;
             }
         }
 

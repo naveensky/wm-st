@@ -29,14 +29,21 @@ namespace StudentTracker.Services.Core {
             return string.Format("{0}{1}.{2}", _tempPath, Guid.NewGuid(), extension);
         }
 
+        public static bool DeleteFile(string path) {
+            if (System.IO.File.Exists(path))
+                System.IO.File.Delete(path);
+
+            return true;
+        }
+
         public static string ConvertToAbsolute(string relativePath) {
             return HttpContext.Current.Server.MapPath(relativePath);
         }
 
         public static User GetCurrentUser() {
-          var userId= (ObjectId)(Membership.GetUser().ProviderUserKey.ToString());
-            using(var userRepo=new MongoRepository<User>(CoreService.GetServer())) {
-                var user=userRepo.Collection.Single(x => x.Id==userId);
+            var userId = (ObjectId)(Membership.GetUser().ProviderUserKey.ToString());
+            using (var userRepo = new MongoRepository<User>(CoreService.GetServer())) {
+                var user = userRepo.Collection.Single(x => x.Id == userId);
                 return user;
             }
         }
