@@ -1,0 +1,90 @@
+﻿@model StudentTracker.Site.ViewModels.Student.StudentEditViewModel
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>
+    Edit Details for @Model.Student.Name
+</h2>
+@using (Html.BeginForm()) {
+    <fieldset>
+        <legend>Edit Student</legend>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CourseId)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(model => model.CourseId, new SelectList(Model.Courses, "Id", "Name"), new { disabled = true })
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.StudyCenterId)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(model => model.StudyCenterId, new SelectList(Model.StudyCenters, "Id", "Name"))
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Student.Name)
+        </div>
+        <div class="editor-field">
+            @Html.HiddenFor(m => m.Student.Id)
+            @Html.TextBoxFor(model => model.Student.Name, new { disabled = true })
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Student.Roll)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.Student.Roll, new { disabled = true })
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Student.Email)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Student.Email)
+            @Html.ValidationMessageFor(model => model.Student.Email)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Student.Mobile)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Student.Mobile)
+            @Html.ValidationMessageFor(model => model.Student.Mobile)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Student.ProposedExamDate)
+        </div>
+        <div class="editor-field">
+            <input type="text" value='@string.Format("{0:dd MMM yyyy}", Model.Student.ProposedExamDate)' disabled="disabled" />
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Student.ActualExamDate)
+        </div>
+        <div class="editor-field">
+            <input type="text" class="date" name="Student_ActualExamDate" value='@string.Format("{0:dd MMM yyyy}", Model.Student.ActualExamDate)'/>
+            @Html.ValidationMessageFor(model => model.Student.ActualExamDate)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Student.Score)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Student.Score)
+            @Html.ValidationMessageFor(model => model.Student.Score)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Student.SoftwareGiven) @Html.LabelFor(model => model.Student.SoftwareGiven)
+            @Html.ValidationMessageFor(model => model.Student.SoftwareGiven)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Student.WmPrepUsername)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Student.WmPrepUsername)
+            @Html.ValidationMessageFor(model => model.Student.WmPrepUsername)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Student.BooksGiven) @Html.LabelFor(model => model.Student.BooksGiven)
+            @Html.ValidationMessageFor(model => model.Student.BooksGiven)
+        </div>
+        <p>
+            <input type="submit" value="Update" />
+        </p>
+    </fieldset>
+}

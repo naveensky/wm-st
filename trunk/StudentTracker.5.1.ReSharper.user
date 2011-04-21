@@ -1,0 +1,59 @@
+<Configuration>
+  <SettingsComponent>
+    <string />
+    <integer />
+    <boolean>
+      <setting name="SolutionAnalysisEnabled">False</setting>
+    </boolean>
+  </SettingsComponent>
+  <RecentFiles>
+    <RecentFiles>
+      <File id="9FBBA4BC-DF61-4A93-A0DF-CE4CE7AC1D1E/d:Configs/f:settings.config" caret="267" fromTop="6" />
+      <File id="9FBBA4BC-DF61-4A93-A0DF-CE4CE7AC1D1E/f:Web.config" caret="1105" fromTop="20" />
+      <File id="4E56CCAC-9599-4CB4-938E-49820D5445D1/d:Student/f:StudentEditViewModel.cs" caret="609" fromTop="19" />
+      <File id="9FBBA4BC-DF61-4A93-A0DF-CE4CE7AC1D1E/d:Views/d:Student/f:Edit.cshtml" caret="2772" fromTop="5" />
+      <File id="9FBBA4BC-DF61-4A93-A0DF-CE4CE7AC1D1E/d:Views/d:Student/f:DownloadExcel.cshtml" caret="325" fromTop="10" />
+      <File id="63B8DA3A-095E-49A7-A09F-1FE4D17C531B/f:MongoRepository.cs" caret="0" fromTop="0" />
+      <File id="61A9D591-69F8-409A-B75F-E66C4E5D8696/d:Abstract/f:IRepository.cs" caret="0" fromTop="0" />
+      <File id="A496B47F-9360-4DF6-A9EF-924FB9719C55/f:Student.cs" caret="1559" fromTop="21" />
+      <File id="FA1A9DCC-A0FC-4435-8B3C-FCA7DEE5DF9D/f:StudentService.cs" caret="4584" fromTop="1" />
+      <File id="4E56CCAC-9599-4CB4-938E-49820D5445D1/d:Student/f:StudentDownloadViewModel.cs" caret="375" fromTop="14" />
+      <File id="9FBBA4BC-DF61-4A93-A0DF-CE4CE7AC1D1E/d:Controllers/f:StudentController.cs" caret="3469" fromTop="10" />
+      <File id="E7FE54E3-5836-48C2-8BFB-4AA25D461A76/f:ExcelConverter.cs" caret="256" fromTop="9" />
+    </RecentFiles>
+    <RecentEdits>
+      <File id="9FBBA4BC-DF61-4A93-A0DF-CE4CE7AC1D1E/d:Configs/f:settings.config" caret="248" fromTop="5" />
+      <File id="9FBBA4BC-DF61-4A93-A0DF-CE4CE7AC1D1E/f:Web.config" caret="992" fromTop="17" />
+      <File id="9FBBA4BC-DF61-4A93-A0DF-CE4CE7AC1D1E/d:Views/d:Student/f:Edit.cshtml" caret="2772" fromTop="17" />
+      <File id="9FBBA4BC-DF61-4A93-A0DF-CE4CE7AC1D1E/d:Views/d:Student/f:DownloadExcel.cshtml" caret="451" fromTop="12" />
+      <File id="9FBBA4BC-DF61-4A93-A0DF-CE4CE7AC1D1E/d:Views/d:Student/f:DownloadExcel.cshtml" caret="451" fromTop="8" />
+      <File id="9FBBA4BC-DF61-4A93-A0DF-CE4CE7AC1D1E/d:Views/d:Student/f:DownloadExcel.cshtml" caret="427" fromTop="14" />
+      <File id="9FBBA4BC-DF61-4A93-A0DF-CE4CE7AC1D1E/d:Views/d:Student/f:DownloadExcel.cshtml" caret="325" fromTop="10" />
+      <File id="A496B47F-9360-4DF6-A9EF-924FB9719C55/f:Student.cs" caret="1559" fromTop="21" />
+      <File id="FA1A9DCC-A0FC-4435-8B3C-FCA7DEE5DF9D/f:StudentService.cs" caret="5968" fromTop="24" />
+      <File id="9FBBA4BC-DF61-4A93-A0DF-CE4CE7AC1D1E/d:Controllers/f:StudentController.cs" caret="4213" fromTop="30" />
+      <File id="FA1A9DCC-A0FC-4435-8B3C-FCA7DEE5DF9D/f:StudentService.cs" caret="4531" fromTop="25" />
+      <File id="FA1A9DCC-A0FC-4435-8B3C-FCA7DEE5DF9D/f:StudentService.cs" caret="5526" fromTop="25" />
+      <File id="FA1A9DCC-A0FC-4435-8B3C-FCA7DEE5DF9D/f:StudentService.cs" caret="5018" fromTop="12" />
+      <File id="FA1A9DCC-A0FC-4435-8B3C-FCA7DEE5DF9D/f:StudentService.cs" caret="5342" fromTop="17" />
+      <File id="FA1A9DCC-A0FC-4435-8B3C-FCA7DEE5DF9D/f:StudentService.cs" caret="5936" fromTop="29" />
+      <File id="4E56CCAC-9599-4CB4-938E-49820D5445D1/d:Student/f:StudentDownloadViewModel.cs" caret="375" fromTop="14" />
+      <File id="E7FE54E3-5836-48C2-8BFB-4AA25D461A76/f:ExcelConverter.cs" caret="6640" fromTop="39" />
+      <File id="E7FE54E3-5836-48C2-8BFB-4AA25D461A76/f:ExcelConverter.cs" caret="5806" fromTop="13" />
+      <File id="E7FE54E3-5836-48C2-8BFB-4AA25D461A76/f:ExcelConverter.cs" caret="6145" fromTop="28" />
+      <File id="E7FE54E3-5836-48C2-8BFB-4AA25D461A76/f:ExcelConverter.cs" caret="6625" fromTop="34" />
+      <File id="E7FE54E3-5836-48C2-8BFB-4AA25D461A76/f:ExcelConverter.cs" caret="6625" fromTop="30" />
+    </RecentEdits>
+  </RecentFiles>
+  <NAntValidationSettings>
+    <NAntPath value="" />
+  </NAntValidationSettings>
+  <UnitTestRunner>
+    <Providers />
+  </UnitTestRunner>
+  <UnitTestRunnerNUnit>
+    <NUnitInstallDir IsNull="False">
+    </NUnitInstallDir>
+    <UseAddins>Never</UseAddins>
+  </UnitTestRunnerNUnit>
+</Configuration>

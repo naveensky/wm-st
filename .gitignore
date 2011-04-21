@@ -1,0 +1,10 @@
+bin
+obj
+/trunk/ERP/packages/Ninject.MVC3.2.2.1.1/Content/App_Start/NinjectMVC3.cs.pp
+/trunk/ERP/packages/Ninject.MVC3.2.2.1.1/Ninject.MVC3.2.2.1.1.nupkg
+/trunk/ERP/packages/Ninject.MVC3.2.2.1.1/Tools/install.ps1
+/trunk/ERP/packages/Ninject.MVC3.2.2.1.1/lib/.NetFramework 4.0/Ninject.Web.Mvc.pdb
+/trunk/ERP/packages/Ninject.MVC3.2.2.1.1/lib/.NetFramework 4.0/Ninject.Web.Mvc.xml
+/trunk/ERP/packages/WebActivator.1.4/WebActivator.1.4.nupkg
+/trunk/_ReSharper.TempSolution/
+/trunk/_ReSharper.StudentTracker/
