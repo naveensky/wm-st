@@ -8,6 +8,8 @@
         $(function () {
             $('form').submit(function () {
                 alert('true');
+
+                $('#downloadPlaceHolder').attr('src', '')
                 return false;
             });
         });
@@ -39,6 +41,6 @@
         <input type="submit" name="submit" value="Download " />
     </div>
     
-    <iframe id="downloadPlaceHolder" style="height: 0px; width: 0px"></iframe>
+    <iframe id="downloadPlaceHolder" style="height: 0px; width: 0px; border:none;"></iframe>
 
 }

@@ -33,10 +33,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Converters", "Converters", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentTracker.Converters", "StudentTracker.Converters\StudentTracker.Converters.csproj", "{E7FE54E3-5836-48C2-8BFB-4AA25D461A76}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Website", "Website", "{48E6E393-DCFE-4D78-B16B-57C7CEB2F609}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentTracker.Website", "StudentTracker.Website\StudentTracker.Website.csproj", "{090124C2-C154-4E50-852C-037F3EBC1275}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentTracker.Services.User", "StudentTracker.Services.User\StudentTracker.Services.User.csproj", "{C08EB103-42B7-4C1F-A66F-A8AC6AB1510E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentTracker.Services.Authentication", "StudentTracker.Services.Authentication\StudentTracker.Services.Authentication.csproj", "{E7E9E649-F3F9-4ECE-A596-252B7A52AC03}"
@@ -102,10 +98,6 @@ Global
 		{E7FE54E3-5836-48C2-8BFB-4AA25D461A76}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E7FE54E3-5836-48C2-8BFB-4AA25D461A76}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E7FE54E3-5836-48C2-8BFB-4AA25D461A76}.Release|Any CPU.Build.0 = Release|Any CPU
-		{090124C2-C154-4E50-852C-037F3EBC1275}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{090124C2-C154-4E50-852C-037F3EBC1275}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{090124C2-C154-4E50-852C-037F3EBC1275}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{090124C2-C154-4E50-852C-037F3EBC1275}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C08EB103-42B7-4C1F-A66F-A8AC6AB1510E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C08EB103-42B7-4C1F-A66F-A8AC6AB1510E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C08EB103-42B7-4C1F-A66F-A8AC6AB1510E}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -133,6 +125,5 @@ Global
 		{C08EB103-42B7-4C1F-A66F-A8AC6AB1510E} = {B86273AB-6BFF-4E6B-AFA3-5FE95F31AACC}
 		{E7E9E649-F3F9-4ECE-A596-252B7A52AC03} = {B86273AB-6BFF-4E6B-AFA3-5FE95F31AACC}
 		{E7FE54E3-5836-48C2-8BFB-4AA25D461A76} = {8BF195A5-87BC-40FE-8675-F6A63B9F40EA}
-		{090124C2-C154-4E50-852C-037F3EBC1275} = {48E6E393-DCFE-4D78-B16B-57C7CEB2F609}
 	EndGlobalSection
 EndGlobal

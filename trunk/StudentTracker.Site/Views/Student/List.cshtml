@@ -3,6 +3,13 @@
     ViewBag.Title = "List";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@section head{
+    <script type="text/javascript">
+        function ConfirmDelete(studentName) {
+            return confirm('Do you want to delete ' + studentName);
+        }
+    </script>
+}
 <h2>
     List of Students</h2>
 <div>
@@ -28,7 +35,6 @@
     }
 </div>
 <br />
-
 @if (Model != null && Model.Students != null) { 
     
     <table class="data" cellspacing="0">
@@ -119,7 +125,7 @@
                         </a>
                     </td>
                     <td align="right">
-                        <a href="/Student/Delete/@student.Id">
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/Student/Delete/@student.Id" onclick="return ConfirmDelete('@student.Name')">
                             <img src="/Content/Images/cross.png" alt="Delete Student" title="Delete Student" />
                         </a>
                     </td>
