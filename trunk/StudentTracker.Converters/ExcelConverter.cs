@@ -109,7 +109,7 @@ namespace StudentTracker.Converters {
                     sheet.Cells[rowIdx, 3].Value = student.ProposedExamDate.HasValue ? student.ProposedExamDate.Value.ToString("dd MMM yyyy") : string.Empty;
                     sheet.Cells[rowIdx, 4].Value = student.ActualExamDate.HasValue ? student.ActualExamDate.Value.ToString("dd MMM yyyy") : string.Empty;
                     sheet.Cells[rowIdx, 5].Value = student.Score;
-                    sheet.Cells[rowIdx, 6].Value = student.IsDownloaded ? "Yes" : "No";
+                    sheet.Cells[rowIdx, 6].Value = student.StudyCenter.Name;
                     ++rowIdx;
                 }
 
@@ -123,7 +123,8 @@ namespace StudentTracker.Converters {
             sheet.Cells["c1"].Value = "Proposed Date";
             sheet.Cells["d1"].Value = "Actual Date";
             sheet.Cells["e1"].Value = "Actual Score";
-            sheet.Cells["f1"].Value = "Already Downloaded";
+            sheet.Cells["f1"].Value = "Student Center";
+
         }
     }
 }

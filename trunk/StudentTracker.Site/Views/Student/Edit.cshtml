@@ -58,7 +58,8 @@
             @Html.LabelFor(model => model.Student.ActualExamDate)
         </div>
         <div class="editor-field">
-            <input type="text" class="date" name="Student_ActualExamDate" value='@string.Format("{0:dd MMM yyyy}", Model.Student.ActualExamDate)'/>
+            @Html.TextBoxFor(model => model.Student.ActualExamDate, new { @class = "date" })
+            @*<input type="text" class="date" name="Student_ActualExamDate" value='@string.Format("{0:dd MMM yyyy}", Model.Student.ActualExamDate)'/>*@
             @Html.ValidationMessageFor(model => model.Student.ActualExamDate)
         </div>
         <div class="editor-label">

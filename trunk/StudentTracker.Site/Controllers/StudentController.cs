@@ -69,6 +69,8 @@ namespace StudentTracker.Site.Controllers {
             var studentEditModel = new StudentEditViewModel { Student = _studentService.GetStudent(id) };
             studentEditModel.Courses = _staticData.GetCourses();
             studentEditModel.StudyCenters = _staticData.GetStudyCenters();
+            studentEditModel.StudyCenterId = CoreService.GetCurrentUser().StudyCenter.Id;
+            studentEditModel.CourseId = studentEditModel.Student.Course.Id;
             return View(studentEditModel);
         }
 

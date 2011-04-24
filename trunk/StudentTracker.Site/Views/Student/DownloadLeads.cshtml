@@ -7,10 +7,10 @@
         //DownloadLeads
         $(function () {
             $('form').submit(function () {
-                //alert('true');
+                if (!$(this).valid())
+                    return false;
 
                 var url = '/Student/DownloadLeadsExcel?StartDate=' + $('#StartDate').val() + '&EndDate=' + $('#EndDate').val() + '&DownloadAll=' + $('#DownloadAll').is(':checked');
-//                alert(url);
                 $('#downloadPlaceHolder').attr('src', url);
                 return false;
             });

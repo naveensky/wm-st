@@ -48,5 +48,9 @@ namespace StudentTracker.Services.Core {
             }
         }
 
+        public static StudyCenter GetUserCenter() {
+            return GetCurrentUser().StudyCenter;
+        }
+
     }
 }
