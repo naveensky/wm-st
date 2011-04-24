@@ -38,10 +38,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentTracker.Services.Authentication", "StudentTracker.Services.Authentication\StudentTracker.Services.Authentication.csproj", "{E7E9E649-F3F9-4ECE-A596-252B7A52AC03}"
 EndProject
 Global
-	GlobalSection(SubversionScc) = preSolution
-		Svn-Managed = True
-		Manager = AnkhSVN - Subversion Support for Visual Studio
-	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = StudentTracker.vsmdi
 	EndGlobalSection
