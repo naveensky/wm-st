@@ -34,6 +34,7 @@ namespace StudentTracker.Models {
         [Display(Name = "Books Provided")]
         public bool BooksGiven { get; set; }
 
+        [Required]
         [Display(Name = "Proposed Exam Date")]
         public DateTime? ProposedExamDate { get; set; }
 

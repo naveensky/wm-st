@@ -97,8 +97,8 @@ namespace StudentTracker.Site.Controllers {
             return View();
         }
 
-        [HttpPost]
-        public void DownloadLeads(StudentDownloadViewModel viewModel) {
+        //[HttpPost]
+        public void DownloadLeadsExcel(StudentDownloadViewModel viewModel) {
             var students = _studentService.GetStudentsAsLead(viewModel.StartDate, viewModel.EndDate,
                                                              viewModel.DownloadAll);
 

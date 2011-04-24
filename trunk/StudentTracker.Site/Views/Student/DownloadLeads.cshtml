@@ -7,9 +7,11 @@
         //DownloadLeads
         $(function () {
             $('form').submit(function () {
-                alert('true');
+                //alert('true');
 
-                $('#downloadPlaceHolder').attr('src', '')
+                var url = '/Student/DownloadLeadsExcel?StartDate=' + $('#StartDate').val() + '&EndDate=' + $('#EndDate').val() + '&DownloadAll=' + $('#DownloadAll').is(':checked');
+//                alert(url);
+                $('#downloadPlaceHolder').attr('src', url);
                 return false;
             });
         });
@@ -41,6 +43,7 @@
         <input type="submit" name="submit" value="Download " />
     </div>
     
-    <iframe id="downloadPlaceHolder" style="height: 0px; width: 0px; border:none;"></iframe>
+    <iframe id="downloadPlaceHolder" style="height: 0px; width: 0px; border: none;">
+    </iframe>
 
-}
+} 

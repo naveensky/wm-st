@@ -14,5 +14,6 @@ namespace StudentTracker.Models {
         public string Password { get; set; }
         public bool IsAdmin { get; set; }
         public StudyCenter StudyCenter { get; set; }
+
     }
 }
