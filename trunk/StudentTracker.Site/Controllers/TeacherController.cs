@@ -18,20 +18,19 @@ namespace StudentTracker.Site.Controllers {
         private TeacherService _teacherSvc;
         private StaticDataService _staticDataSvc;
         private AppointmentService _appSvc;
-
-        protected override void Initialize(System.Web.Routing.RequestContext requestContext) {
-            _teacherSvc = new TeacherService();
-            _staticDataSvc = new StaticDataService();
-            _appSvc = new AppointmentService();
-            base.Initialize(requestContext);
+        public TeacherController(TeacherService teacherSvc, StaticDataService staticDataSvc, AppointmentService appSvc) {
+            _teacherSvc = teacherSvc;
+            _staticDataSvc = staticDataSvc;
+            _appSvc = appSvc;
         }
+
 
         public ActionResult List() {
             var model = new TeacherListViewModel { Teachers = _staticDataSvc.GetTeachers() };
             return View(model);
         }
 
-        public ActionResult Appointments(ObjectId id) {
+        public ActionResult Appointments(int id) {
             var model = new AppointmentViewModel {
                 Appointments = _appSvc.GetAppointmentForTeacher(id),
                 Teacher = _staticDataSvc.GetTeacher(id)

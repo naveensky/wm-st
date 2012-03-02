@@ -15,14 +15,13 @@ namespace StudentTracker.Site.Controllers {
     [Authorize]
     public class StudentController : Controller {
 
-        private StaticDataService _staticData;
-        private StudentService _studentService;
-
-        protected override void Initialize(System.Web.Routing.RequestContext requestContext) {
-            _staticData = new StaticDataService();
-            _studentService = new StudentService();
-            base.Initialize(requestContext);
+        private readonly StaticDataService _staticData;
+        private readonly StudentService _studentService;
+        public StudentController(StaticDataService staticData, StudentService studentService) {
+            _staticData = staticData;
+            _studentService = studentService;
         }
+
 
         public ActionResult Create() {
             var model = new StudentRegisterViewModel {
@@ -65,7 +64,7 @@ namespace StudentTracker.Site.Controllers {
             return View(model);
         }
 
-        public ActionResult Edit(ObjectId id) {
+        public ActionResult Edit(int id) {
             var studentEditModel = new StudentEditViewModel { Student = _studentService.GetStudent(id) };
             studentEditModel.Courses = _staticData.GetCourses();
             studentEditModel.StudyCenters = _staticData.GetStudyCenters();
@@ -80,12 +79,12 @@ namespace StudentTracker.Site.Controllers {
             return RedirectToAction("List");
         }
 
-        public ActionResult Delete(ObjectId id) {
+        public ActionResult Delete(int id) {
             _studentService.DeleteStudent(id);
             return RedirectToAction("List");
         }
 
-        public void GenerateExcel(ObjectId id) {
+        public void GenerateExcel(int id) {
             var student = _studentService.GetStudent(id);
             var tempPath = CoreService.ConvertToAbsolute(CoreService.GetTempPath("xlsx"));
             var excelGenerator = new ExcelConverter();

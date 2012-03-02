@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using Norm;
 
 namespace StudentTracker.Models {
-    public class Time : IComparable<Time> {
+    public class Time : IComparable<Time>,IEntity {
         [Key]
         public int Id { get; set; }
         public int Hour { get; set; }

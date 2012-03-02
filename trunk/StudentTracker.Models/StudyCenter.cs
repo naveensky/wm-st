@@ -6,7 +6,7 @@ using System.Text;
 using Norm;
 
 namespace StudentTracker.Models {
-    public class StudyCenter {
+    public class StudyCenter:IEntity {
         [Key]
         public int Id { get; set; }
         public string Name { get; set; }

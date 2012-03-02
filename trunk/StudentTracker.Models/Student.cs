@@ -6,7 +6,7 @@ using System.Text;
 using Norm;
 
 namespace StudentTracker.Models {
-    public class Student {
+    public class Student:IEntity {
 
         public Student() {
             Appointments = new List<Appointment>();

@@ -4,50 +4,55 @@ using System.Linq;
 using System.Text;
 using Norm;
 using StudentTracker.Models;
-using StudentTracker.Repository.MongoDb;
+using StudentTracker.Repository;
 using StudentTracker.Services.Core;
 
 namespace StudentTracker.Services.Student {
     public class StudentService {
-        public void SaveStudent(Models.Student student, ObjectId courseId, ObjectId studyCenterId) {
-            using (var studentRepo = new MongoRepository<Models.Student>(CoreService.GetServer())) {
-                using (var courseRepo = new MongoRepository<Course>(CoreService.GetServer())) {
-                    using (var studyCenterRepo = new MongoRepository<StudyCenter>(CoreService.GetServer())) {
-                        var course = courseRepo.Collection.Single(x => x.Id == courseId);
+         private readonly ISqlUnitOfWork _uow;
+
+        public StudentService(ISqlUnitOfWork uow) {
+            _uow = uow;
+        }
+        public void SaveStudent(Models.Student student, int courseId, int studyCenterId) {
+           // using (var studentRepo = new MongoRepository<Models.Student>(CoreService.GetServer())) {
+             //   using (var courseRepo = new MongoRepository<Course>(CoreService.GetServer())) {
+               //     using (var studyCenterRepo = new MongoRepository<StudyCenter>(CoreService.GetServer())) {
+                        var course = _uow.Courses.Single(x => x.Id == courseId);
                         student.Course = course;
-                        var studyCenter = studyCenterRepo.Collection.Single(x => x.Id == studyCenterId);
+                        var studyCenter = _uow.StudyCenters.Single(x => x.Id == studyCenterId);
                         student.StudyCenter = studyCenter;
                         student.Roll = string.Format("{0}-{1:#0}-{2:####0}", DateTime.Now.Year, DateTime.Now.Month,
-                                                     studentRepo.Collection.Count() + 1);
-                        studentRepo.Save(student);
+                                                     _uow.Students.Fetch().Count()+1);
+                        _uow.Students.Add(student);
                     }
-                }
-            }
-        }
+        //        }
+      //      }
+    //    }
 
-        public Models.Student GetStudent(ObjectId studentId) {
-            using (var repo = new MongoRepository<Models.Student>(CoreService.GetServer())) {
-                return repo.Collection.Single(x => x.Id == studentId);
-            }
+        public Models.Student GetStudent(int studentId) {
+           // using (var repo = new MongoRepository<Models.Student>(CoreService.GetServer())) {
+                return _uow.Students.Single(x => x.Id == studentId);
+            //}
         }
 
         public IEnumerable<Models.Student> GetAllStudents() {
-            using (var studentRepo = new MongoRepository<Models.Student>(CoreService.GetServer())) {
-                return studentRepo.Collection.OrderBy(x => x.Name).ToList();
-            }
+           // using (var studentRepo = new MongoRepository<Models.Student>(CoreService.GetServer())) {
+                return _uow.Students.Fetch().OrderBy(x => x.Name).ToList();
+            //}
         }
 
         public IEnumerable<Models.Student> GetStudents(int count) {
-            using (var studentRepo = new MongoRepository<Models.Student>(CoreService.GetServer())) {
+            //using (var studentRepo = new MongoRepository<Models.Student>(CoreService.GetServer())) {
                 var studyCentreId = CoreService.GetCurrentUser().StudyCenter.Id;
-                return studentRepo.Collection.Where(x => x.StudyCenter.Id == studyCentreId).Take(count).OrderBy(x => x.Name).ToList();
-            }
+                return _uow.Students.Find(x => x.StudyCenter.Id == studyCentreId).Take(count).OrderBy(x => x.Name).ToList();
+            //}
         }
 
-        public IEnumerable<Models.Student> SearchStudents(string studentName, string rollNo, ObjectId courseId) {
-            using (var studentRepo = new MongoRepository<Models.Student>(CoreService.GetServer())) {
+        public IEnumerable<Models.Student> SearchStudents(string studentName, string rollNo, int courseId) {
+            //using (var studentRepo = new MongoRepository<Models.Student>(CoreService.GetServer())) {
                 var studyCentreId = CoreService.GetCurrentUser().StudyCenter.Id;
-                var students = studentRepo.Collection.Where(x => x.StudyCenter.Id == studyCentreId);
+                var students = _uow.Students.Find(x => x.StudyCenter.Id == studyCentreId);
 
                 //filter by studentname if not empty
                 students = string.IsNullOrEmpty(studentName)
@@ -65,14 +70,14 @@ namespace StudentTracker.Services.Student {
                                : students;
 
                 return students.OrderBy(x => x.Name).ToList();
-            }
+            //}
         }
 
-        public void UpdateStudent(Models.Student student, ObjectId studyCenterId) {
-            using (var repo = new MongoRepository<Models.Student>(CoreService.GetServer())) {
-                var originalStudent = repo.Collection.Single(x => x.Id == student.Id);
-                using (var studyCenterRepo = new MongoRepository<StudyCenter>(CoreService.GetServer())) {
-                    originalStudent.StudyCenter = studyCenterRepo.Collection.Single(x => x.Id == studyCenterId);
+        public void UpdateStudent(Models.Student student, int studyCenterId) {
+           // using (var repo = new MongoRepository<Models.Student>(CoreService.GetServer())) {
+                var originalStudent = _uow.Students.Single(x => x.Id == student.Id);
+               // using (var studyCenterRepo = new MongoRepository<StudyCenter>(CoreService.GetServer())) {
+                    originalStudent.StudyCenter = _uow.StudyCenters.Single(x => x.Id == studyCenterId);
                     originalStudent.ActualExamDate = student.ActualExamDate;
                     originalStudent.BooksGiven = student.BooksGiven;
                     originalStudent.Email = student.Email;
@@ -81,28 +86,28 @@ namespace StudentTracker.Services.Student {
                     originalStudent.SoftwareGiven = student.SoftwareGiven;
                     originalStudent.WmPrepUsername = student.WmPrepUsername;
                     originalStudent.ModifiedDate = DateTime.UtcNow.AddHours(5).AddMinutes(30);
-                    repo.Save(originalStudent);
-                }
-            }
+                    _uow.Students.Add(originalStudent);
+                //}
+//            }
         }
 
-        public void DeleteStudent(ObjectId studentId) {
-            using (var repo = new MongoRepository<Models.Student>(CoreService.GetServer())) {
-                var student = repo.Collection.Single(x => x.Id == studentId);
-                repo.Delete(student);
-            }
+        public void DeleteStudent(int studentId) {
+           // using (var repo = new MongoRepository<Models.Student>(CoreService.GetServer())) {
+                var student = _uow.Students.Single(x => x.Id == studentId);
+                _uow.Students.Remove(student);
+            //}
         }
 
         public IEnumerable<Models.Student> GetStudentsAsLead(DateTime startTime, DateTime endTime, bool getAll) {
-            using (var repo = new MongoRepository<Models.Student>(CoreService.GetServer())) {
-                var studentsWithScore = repo.Collection.Where(x => x.Score >= 0).ToList().Where(x => x.ModifiedDate.Date >= startTime.Date && x.ModifiedDate.Date <= endTime.Date);
+            //using (var repo = new MongoRepository<Models.Student>(CoreService.GetServer())) {
+                var studentsWithScore = _uow.Students.Find(x => x.Score >= 0).ToList().Where(x => x.ModifiedDate.Date >= startTime.Date && x.ModifiedDate.Date <= endTime.Date);
 
                 // studentsWithScore = studentsWithScore).ToList();
 
                 if (!getAll)
                     studentsWithScore = studentsWithScore.Where(x => !x.IsDownloaded).ToList();
 
-                var studentInRange = repo.Collection.Where(x => x.ActualExamDate != null).ToList().Where(x => x.ActualExamDate.Value.Date <= endTime.Date && x.ActualExamDate.Value.Date >= endTime.Date);
+                var studentInRange = _uow.Students.Find(x => x.ActualExamDate != null).ToList().Where(x => x.ActualExamDate.Value.Date <= endTime.Date && x.ActualExamDate.Value.Date >= endTime.Date);
 
                 if (!getAll)
                     studentInRange = studentInRange.Where(x => !x.IsDownloaded);
@@ -113,11 +118,11 @@ namespace StudentTracker.Services.Student {
                 foreach (var student in data) {
                     student.ModifiedDate = DateTime.UtcNow.AddHours(5).AddMinutes(30);
                     student.IsDownloaded = true;
-                    repo.Save(student);
+                    _uow.Students.Add(student);
                 }
 
                 return studentsWithScore;
-            }
+           // }
         }
 
     }

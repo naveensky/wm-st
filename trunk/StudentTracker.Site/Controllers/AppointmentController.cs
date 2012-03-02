@@ -18,15 +18,14 @@ namespace StudentTracker.Site.Controllers {
         private StaticDataService _staticData;
         private StudentService _studentService;
         private AppointmentService _appService;
-
-        protected override void Initialize(System.Web.Routing.RequestContext requestContext) {
-            _staticData = new StaticDataService();
-            _studentService = new StudentService();
-            _appService = new AppointmentService();
-            base.Initialize(requestContext);
+        public AppointmentController(StaticDataService staticData, StudentService studentService, AppointmentService appService) {
+            _staticData = staticData;
+            _studentService = studentService;
+            _appService = appService;
         }
 
-        public ActionResult New(ObjectId id) {
+
+        public ActionResult New(int id) {
             var model = new NewAppointmentViewModel();
             model.Student = _studentService.GetStudent(id);
             model.Teachers = _staticData.GetTeachers();
@@ -51,16 +50,31 @@ namespace StudentTracker.Site.Controllers {
                 //model.AppointmentTypeId = 1;
                 return View(model);
             }
-            _appService.CreateNewAppointment(model.GetAppointment(), model.Student.Id);
+            _appService.CreateNewAppointment(GetAppointment(), model.Student.Id);
             return RedirectToAction("List", "Student");
         }
 
-        public ActionResult List(ObjectId id) {
+        public ActionResult List(int id) {
             var model = new ListViewModel {
                 Appointments = _appService.GetAppointmentsForStudent(id),
                 Student = _studentService.GetStudent(id)
             };
             return View(model);
+        }
+
+        public Models.Appointment GetAppointment() {
+            
+            var appointment = new Models.Appointment {
+                Course = _staticData.GetStudentChildCourse(Student.Id).Single(x => x.Id == CourseId),
+                Date = DateTime.Parse(Date),
+                StartTime = new Time(StartTime),
+                EndTime = new Time(EndTime),
+                //Timeslot = staticService.GetTimeSlots().Single(x => x.Id == TimeSlotId),
+                //Duration = Duration,
+                AppointmentType = (AppointmentType)AppointmentTypeId,
+                Teacher = staticService.GetTeachers().Single(x => x.Id == TeacherId)
+            };
+            return appointment;
         }
 
         public ActionResult Delete(ObjectId studentId, ObjectId appointmentId) {

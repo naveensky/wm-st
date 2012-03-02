@@ -12,7 +12,7 @@ namespace StudentTracker.Site.ViewModels.Student {
         public string StudentNameSearchText { get; set; }
 
         [Display(Name = "Filter by Course")]
-        public ObjectId CourseId { get; set; }
+        public int CourseId { get; set; }
         public IEnumerable<Models.Course> Courses { get; set; }
 
         public bool IsSearchEmpty {

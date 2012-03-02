@@ -51,9 +51,9 @@
       <Project>{A496B47F-9360-4DF6-A9EF-924FB9719C55}</Project>
       <Name>StudentTracker.Models</Name>
     </ProjectReference>
-    <ProjectReference Include="..\StudentTracker.Repository.MongoDb\StudentTracker.Repository.MongoDb.csproj">
-      <Project>{63B8DA3A-095E-49A7-A09F-1FE4D17C531B}</Project>
-      <Name>StudentTracker.Repository.MongoDb</Name>
+    <ProjectReference Include="..\StudentTracker.Repository.Sql\StudentTracker.Repository.Sql.csproj">
+      <Project>{E0934D34-2BFB-4F3E-AE18-800445028FCA}</Project>
+      <Name>StudentTracker.Repository.Sql</Name>
     </ProjectReference>
     <ProjectReference Include="..\StudentTracker.Repository\StudentTracker.Repository.csproj">
       <Project>{61A9D591-69F8-409A-B75F-E66C4E5D8696}</Project>

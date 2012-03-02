@@ -11,11 +11,11 @@ namespace StudentTracker.Site.ViewModels.Appointment {
     public class NewAppointmentViewModel {
 
         [Display(Name = "Teacher")]
-        public ObjectId TeacherId { get; set; }
+        public int TeacherId { get; set; }
         public IEnumerable<Models.Teacher> Teachers { get; set; }
 
         [Display(Name = "Course")]
-        public ObjectId CourseId { get; set; }
+        public int CourseId { get; set; }
         public IEnumerable<Course> Courses { get; set; }
 
         [Required]
@@ -24,7 +24,7 @@ namespace StudentTracker.Site.ViewModels.Appointment {
 
         [Required]
         [Display(Name = "Appointment Time Slot")]
-        public ObjectId TimeSlotId { get; set; }
+        public int TimeSlotId { get; set; }
         public IEnumerable<TimeSlot> TimeSlots { get; set; }
 
         [Required]
@@ -55,20 +55,6 @@ namespace StudentTracker.Site.ViewModels.Appointment {
             }
         }
 
-        public Models.Appointment GetAppointment() {
-            var staticService = new StaticDataService();
-            var appointment = new Models.Appointment {
-                Course = staticService.GetStudentChildCourse(Student.Id).Single(x => x.Id == CourseId),
-                Date = DateTime.Parse(Date),
-                StartTime = new Time(StartTime),
-                EndTime = new Time(EndTime),
-                //Timeslot = staticService.GetTimeSlots().Single(x => x.Id == TimeSlotId),
-                //Duration = Duration,
-                AppointmentType = (AppointmentType)AppointmentTypeId,
-                Id = ObjectId.NewObjectId(),
-                Teacher = staticService.GetTeachers().Single(x => x.Id == TeacherId)
-            };
-            return appointment;
-        }
+       
     }
 }

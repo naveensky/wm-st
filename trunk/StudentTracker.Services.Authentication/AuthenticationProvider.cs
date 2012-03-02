@@ -4,11 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Web.Security;
 using StudentTracker.Models;
-using StudentTracker.Repository.MongoDb;
+using StudentTracker.Repository;
+//using StudentTracker.Repository.MongoDb;
 using StudentTracker.Services.Core;
 
 namespace StudentTracker.Services.Authentication {
     public class AuthenticationProvider : System.Web.Security.MembershipProvider {
+         private readonly ISqlUnitOfWork _uow;
+
+        public AuthenticationProvider(ISqlUnitOfWork uow) {
+            _uow = uow;
+        }
         public override MembershipUser CreateUser(string username, string password, string email, string passwordQuestion, string passwordAnswer, bool isApproved, object providerUserKey, out MembershipCreateStatus status) {
             throw new NotImplementedException();
         }
@@ -34,10 +40,10 @@ namespace StudentTracker.Services.Authentication {
         }
 
         public override bool ValidateUser(string username, string password) {
-            using (var repo = new MongoRepository<User>(CoreService.GetServer())) {
-                return repo.Collection.Count(x => x.Username == username && x.Password == password) > 0;
+           // using (var repo = new MongoRepository<User>(CoreService.GetServer())) {
+                return _uow.Users.Fetch().Count(x => x.Username == username && x.Password == password) > 0;
             }
-        }
+        //}
 
         public override bool UnlockUser(string userName) {
             throw new NotImplementedException();
@@ -48,12 +54,12 @@ namespace StudentTracker.Services.Authentication {
         }
 
         public override MembershipUser GetUser(string username, bool userIsOnline) {
-            using (var repo = new MongoRepository<User>(CoreService.GetServer())) {
-                var user = repo.Collection.Single(x => x.Username == username);
+           // using (var repo = new MongoRepository<User>(CoreService.GetServer())) {
+                var user = _uow.Users.Single(x => x.Username == username);
                 return new MembershipUser(this.Name, user.Name, user.Id, null, null, null, true, false, DateTime.Now, DateTime.Now, DateTime.Now, DateTime.Now,
                     DateTime.Now);
             }
-        }
+        //}
 
         public override string GetUserNameByEmail(string email) {
             throw new NotImplementedException();

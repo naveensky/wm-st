@@ -10,7 +10,7 @@ namespace StudentTracker.Site.ViewModels.Teacher {
         public Models.Teacher Teacher { get; set; }
 
         public Models.Teacher GetTeacher() {
-            Teacher.Id = ObjectId.NewObjectId();
+            
             return Teacher;
         }
     }

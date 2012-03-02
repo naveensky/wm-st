@@ -10,11 +10,11 @@ namespace StudentTracker.Site.ViewModels.Student {
     public class StudentRegisterViewModel {
 
         [Display(Name = "Course")]
-        public ObjectId CourseId { get; set; }
+        public int CourseId { get; set; }
         public IEnumerable<Course> Courses { get; set; }
 
         [Display(Name = "Study Center")]
-        public ObjectId StudyCenterId { get; set; }
+        public int StudyCenterId { get; set; }
         public IEnumerable<StudyCenter> StudyCenters { get; set; }
 
         public Models.Student Student { get; set; }

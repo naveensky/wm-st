@@ -7,7 +7,7 @@ using System.Web.Security;
 using Norm;
 
 namespace StudentTracker.Models {
-    public class User {
+    public class User:IEntity {
         [Key]
         public int Id { get; set; }
         public string Name { get; set; }

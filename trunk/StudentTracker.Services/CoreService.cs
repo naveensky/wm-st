@@ -6,7 +6,9 @@ using System.Web;
 using System.Web.Security;
 using Norm;
 using StudentTracker.Models;
-using StudentTracker.Repository.MongoDb;
+using StudentTracker.Repository;
+
+//using StudentTracker.Repository.MongoDb;
 
 namespace StudentTracker.Services.Core {
     public class CoreService {
@@ -16,14 +18,20 @@ namespace StudentTracker.Services.Core {
 
         private const string _tempPath = "/Tmp/";
 
-        public static ServerConfig GetServer() {
-            var config = new ServerConfig {
-                ServerAddress = System.Configuration.ConfigurationManager.AppSettings[_serverKey],
-                Port = Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings[_portKey]),
-                Database = System.Configuration.ConfigurationManager.AppSettings[_dbKey]
-            };
-            return config;
+        private static  ISqlUnitOfWork _uow;
+
+        public  CoreService(ISqlUnitOfWork uow) {
+            _uow = uow;
         }
+
+//        public static ServerConfig GetServer() {
+//            var config = new ServerConfig {
+//                ServerAddress = System.Configuration.ConfigurationManager.AppSettings[_serverKey],
+//                Port = Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings[_portKey]),
+//                Database = System.Configuration.ConfigurationManager.AppSettings[_dbKey]
+//            };
+//            return config;
+//        }
 
         public static string GetTempPath(string extension) {
             return string.Format("{0}{1}.{2}", _tempPath, Guid.NewGuid(), extension);
@@ -41,12 +49,14 @@ namespace StudentTracker.Services.Core {
         }
 
         public static User GetCurrentUser() {
-            var userId = (ObjectId)(Membership.GetUser().ProviderUserKey.ToString());
-            using (var userRepo = new MongoRepository<User>(CoreService.GetServer())) {
-                var user = userRepo.Collection.Single(x => x.Id == userId);
-                return user;
-            }
-        }
+                      var userId = int.Parse(Membership.GetUser().ProviderUserKey.ToString());
+                     //using (var userRepo = new MongoRepository<User>(CoreService.GetServer())) {
+                         var user = _uow.Users.Single(x => x.Id == userId);
+                          return user;
+                      }
+
+           // throw new Exception();
+      //  }
 
         public static StudyCenter GetUserCenter() {
             return GetCurrentUser().StudyCenter;

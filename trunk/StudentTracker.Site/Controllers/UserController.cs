@@ -12,26 +12,19 @@ using StudentTracker.Services.Authentication;
 
 namespace StudentTracker.Site.Controllers {
 
-  
+
     public class UserController : Controller {
         //
         // GET: /User/
-        private StaticDataService _staticData;
-        private UserService _userService;
-        private AuthenticationProvider _authenticationProvider;
-        private FormsAuthenticationService _formAuthentication;
-
-
-        protected override void Initialize(System.Web.Routing.RequestContext requestContext) {
-            _staticData = new StaticDataService();
-            _userService = new UserService();
-            _authenticationProvider = new AuthenticationProvider();
-            _formAuthentication=new FormsAuthenticationService();
-            base.Initialize(requestContext);
-        }
-
-        public ActionResult Index() {
-            return View();
+        private readonly StaticDataService _staticData;
+        private readonly UserService _userService;
+        private readonly AuthenticationProvider _authenticationProvider;
+        private readonly FormsAuthenticationService _formAuthentication;
+        public UserController(StaticDataService staticData, UserService userService, AuthenticationProvider authenticationProvider, FormsAuthenticationService formAuthentication) {
+            _staticData = staticData;
+            _userService = userService;
+            _authenticationProvider = authenticationProvider;
+            _formAuthentication = formAuthentication;
         }
 
         public ActionResult Create() {
