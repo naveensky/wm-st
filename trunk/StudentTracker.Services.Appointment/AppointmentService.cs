@@ -4,21 +4,23 @@ using System.Linq;
 using System.Text;
 using Norm;
 using StudentTracker.Models;
+using StudentTracker.Repository;
 using StudentTracker.Repository.MongoDb;
 using StudentTracker.Services.Core;
 
 namespace StudentTracker.Services.Appointment {
     public class AppointmentService {
 
-        public void CreateNewAppointment(Models.Appointment appointment, ObjectId studentId) {
-            using (var repo = new MongoRepository<Student>(CoreService.GetServer())) {
-                var student = repo.Collection.Single(x => x.Id == studentId);
-                if (student.Appointments == null)
-                    student.Appointments = new List<Models.Appointment>();
+        private readonly ISqlUnitOfWork _uow;
 
-                student.Appointments.Add(appointment);
-                repo.Save(student);
-            }
+        public AppointmentService(ISqlUnitOfWork uow) {
+            _uow = uow;
+        }
+
+        public void CreateNewAppointment(Models.Appointment appointment, int studentId) {
+            var student = _uow.Students.FindById(studentId);
+            student.Appointments.Add(appointment);
+            _uow.Students.SaveChanges();
         }
 
         public IEnumerable<Models.Appointment> GetAppointmentsForStudent(ObjectId studentId) {
@@ -44,7 +46,7 @@ namespace StudentTracker.Services.Appointment {
 
         public IEnumerable<Models.Appointment> GetAppointmentForTeacher(ObjectId teacherId) {
             using (var students = new MongoRepository<Student>(CoreService.GetServer())) {
-                var appointments = students.Collection  
+                var appointments = students.Collection
                                             .Where(x => x.Appointments != null)
                                             .Select(x => x.Appointments.Where(y => y.Teacher.Id == teacherId));
                 return appointments.ToList().SelectMany(x => x);

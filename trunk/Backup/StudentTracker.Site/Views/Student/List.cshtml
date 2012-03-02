@@ -1,0 +1,146 @@
+﻿@model StudentTracker.Site.ViewModels.Student.StudentListViewModel
+@{
+    ViewBag.Title = "List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section head{
+    <script type="text/javascript">
+        function ConfirmDelete(studentName) {
+            return confirm('Do you want to delete ' + studentName);
+        }
+    </script>
+}
+<h2>
+    List of Students</h2>
+<div>
+    @using (Html.BeginForm()) { 
+        
+        <div class="grid_3 alpha">
+            @Html.LabelFor(m => m.StudentNameSearchText)
+            <br />
+            @Html.TextBoxFor(m => m.StudentNameSearchText)
+        </div>
+        <div class="grid_3">
+            @Html.LabelFor(m => m.RollNoSearchText)
+            <br />
+            @Html.TextBoxFor(m => m.RollNoSearchText)
+        </div>
+        <div class="grid_3 omega">
+            @Html.LabelFor(m => m.CourseId)
+            <br />
+            @Html.DropDownListFor(m => m.CourseId, new SelectList(Model.Courses, "Id", "Name"), "All Courses", null)
+        </div>
+        
+        <input id="searchText" type="submit" value="Search" />
+    }
+</div>
+<br />
+@if (Model != null && Model.Students != null) { 
+    
+    <table class="data" cellspacing="0">
+        <thead>
+            <tr>
+                <th>
+                    Student Name
+                </th>
+                <th>
+                    Roll No
+                </th>
+                <th>
+                    Course Name
+                </th>
+                <th style="text-align: center">
+                    Mobile
+                </th>
+                <th style="text-align: center">
+                    Books
+                </th>
+                <th style="text-align: center">
+                    Software
+                </th>
+                <th>
+                    &nbsp;
+                </th>
+                <th>
+                    &nbsp;
+                </th>
+                <th>
+                    &nbsp;
+                </th>
+                <th>
+                    &nbsp;
+                </th>
+                <th>
+                    &nbsp;
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var student in Model.Students) { 
+                <tr>
+                    <td>
+                        @student.Name
+                    </td>
+                    <td>
+                        @student.Roll
+                    </td>
+                    <td>
+                        @student.Course.Name
+                    </td>
+                    <td align="center">
+                        <img src="/Content/Images/telephone.png" title="@student.Mobile" />
+                    </td>
+                    <td align="center">
+                        @if (student.BooksGiven) { 
+                            <img src="/Content/Images/tick.png" title="Books Given" /> 
+                        } else { 
+                            <img src="/Content/Images/cross.png" title="Books Not Given" />
+                        }
+                    </td>
+                    <td align="center">
+                        @if (student.SoftwareGiven) { 
+                            <img src="/Content/Images/tick.png" title="Software Given" /> 
+                        } else { 
+                            <img src="/Content/Images/cross.png" title="Software Not Given" />
+                        }
+                    </td>
+                    <td align="right">
+                        <a href="/Appointment/New/@student.Id">
+                            <img src="/Content/Images/add.png" title="Add New Appointment" />
+                        </a>
+                    </td>
+                    <td align="right">
+                        <a href="/Appointment/List/@student.Id">
+                            <img src="/Content/Images/table.png" title="View All Appointments" />
+                        </a>
+                    </td>
+                    <td align="right">
+                        <a href="/Student/GenerateExcel/@student.Id">
+                            <img src="/Content/Images/page_excel.png" title="Export to Excel" />
+                        </a>
+                    </td>
+                    <td align="right">
+                        <a href="/Student/Edit/@student.Id">
+                            <img src="/Content/Images/user_edit.png" alt="Edit Student" title="Edit Student" />
+                        </a>
+                    </td>
+                    <td align="right">
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/Student/Delete/@student.Id" onclick="return ConfirmDelete('@student.Name')">
+                            <img src="/Content/Images/cross.png" alt="Delete Student" title="Delete Student" />
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+@section right{
+    <div class="section">
+        <h3>
+            Quick Links</h3>
+        <ul class="links">
+            <li>@Html.ActionLink("Create Student", "Create", "Student")</li>
+            <li>@Html.ActionLink("Create Teacher", "Create", "Teacher")</li>
+        </ul>
+    </div>
+}

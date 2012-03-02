@@ -1,11 +1,11 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 using Norm;
 
 namespace StudentTracker.Models {
     public class Time : IComparable<Time> {
-
-        [MongoIdentifier]
-        public ObjectId Id { get; set; }
+        [Key]
+        public int Id { get; set; }
         public int Hour { get; set; }
         public int Minute { get; set; }
         public bool IsAm { get; set; }

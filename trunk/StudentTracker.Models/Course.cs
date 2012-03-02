@@ -6,9 +6,10 @@ using System.Text;
 using Norm;
 
 namespace StudentTracker.Models {
-    public class Course {
-        
-        public ObjectId Id { get; set; }
+    public class Course : IEntity {
+
+        [Key]
+        public int Id { get; set; }
         public string Name { get; set; }
         public IEnumerable<Course> Children { get; set; }
     }

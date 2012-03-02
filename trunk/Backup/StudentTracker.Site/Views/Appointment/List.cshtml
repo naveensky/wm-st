@@ -1,0 +1,72 @@
+﻿@model StudentTracker.Site.ViewModels.Appointment.ListViewModel
+@{
+    ViewBag.Title = "List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>
+    List of Appointment for : @Model.Student.Name
+</h2>
+<table class="data" cellspacing="0">
+    <thead>
+        <tr>
+            <th>
+                Date
+            </th>
+            <th>
+                Start Time
+            </th>
+            <th>
+                End Time
+            </th>
+            @*<th>
+                Time Slot
+            </th>*@
+            <th>
+                Appointment Type
+            </th>
+            <th>
+                Teacher Name
+            </th>
+            <th>
+                Course
+            </th>
+            <th>
+                &nbsp;
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Appointments != null) {
+            foreach (var app in Model.Appointments) { 
+            <tr>
+                <td>
+                    @string.Format("{0:dd MMM yyyy}", app.Date)
+                </td>
+                <td>           
+                    @app.StartTime.ToString()
+                </td>
+                <td>
+                    @app.EndTime.ToString()
+                </td>
+                @* <td>
+                    @app.Timeslot.Display
+                </td>*@
+                <td>
+                    @app.AppointmentType.ToString()
+                </td>
+                <td>
+                    @app.Teacher.Name
+                </td>
+                <td>
+                    @app.Course.Name
+                </td>
+                <td>
+                    <a href="/Appointment/Delete?studentId=@Model.Student.Id&appointmentId=@app.Id">
+                        <img src="/Content/Images/cross.png" alt="Delete Appointment" title="Delete Appointment" />
+                    </a>
+                </td>
+            </tr>
+            }
+        }
+    </tbody>
+</table>

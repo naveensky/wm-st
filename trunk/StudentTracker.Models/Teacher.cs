@@ -8,8 +8,8 @@ using Norm;
 namespace StudentTracker.Models {
     public class Teacher {
 
-        [MongoIdentifier]
-        public ObjectId Id { get; set; }
+        [Key]
+        public int Id { get; set; }
 
         [Required]
         public string Name { get; set; }

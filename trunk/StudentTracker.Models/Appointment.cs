@@ -6,12 +6,12 @@ using System.Text;
 using Norm;
 
 namespace StudentTracker.Models {
-    public class Appointment {
+    public class Appointment : IEntity {
+        [Key]
+        public int Id { get; set; }
 
-        [MongoIdentifier]
-        public ObjectId Id { get; set; }
         public DateTime Date { get; set; }
-        [RegularExpression("^([1-9]|1[0-2]|0[1-9]){1}(:[0-5][0-9][aApP][mM]){1}$",ErrorMessage = "Select the correct time(hh:mm am/pm)")]
+        [RegularExpression("^([1-9]|1[0-2]|0[1-9]){1}(:[0-5][0-9][aApP][mM]){1}$", ErrorMessage = "Select the correct time(hh:mm am/pm)")]
         public Time StartTime { get; set; }
         [RegularExpression("^([1-9]|1[0-2]|0[1-9]){1}(:[0-5][0-9][aApP][mM]){1}$", ErrorMessage = "Select the correct time(hh:mm am/pm)")]
         public Time EndTime { get; set; }

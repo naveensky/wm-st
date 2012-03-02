@@ -8,8 +8,12 @@ using Norm;
 namespace StudentTracker.Models {
     public class Student {
 
-        [MongoIdentifier]
-        public ObjectId Id { get; set; }
+        public Student() {
+            Appointments = new List<Appointment>();
+        }
+
+        [Key]
+        public int Id { get; set; }
 
         [Required]
         public string Name { get; set; }
@@ -55,7 +59,7 @@ namespace StudentTracker.Models {
         [Required]
         [Display(Name = "Mobile / Other Contact Number")]
         public string Mobile { get; set; }
-        public Course Course { get; set; }
-        public IList<Appointment> Appointments { get; set; }
+        public virtual Course Course { get; set; }
+        public virtual ICollection<Appointment> Appointments { get; set; }
     }
 }
