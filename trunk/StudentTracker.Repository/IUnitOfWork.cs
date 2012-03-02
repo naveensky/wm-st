@@ -6,7 +6,7 @@ using StudentTracker.Models;
 
 namespace StudentTracker.Repository {
     public interface ISqlUnitOfWork {
-        IRepository<Student> Students { get; set; }
+        IRepository<Student> Students { get;  set; }
         IRepository<Teacher> Teachers { get; set; }
         IRepository<Course> Courses { get; set; }
         IRepository<Appointment> Appointments { get; set; }
@@ -14,7 +14,7 @@ namespace StudentTracker.Repository {
         IRepository<Time> Times { get; set; }
         IRepository<TimeSlot> TimeSlots { get; set; }
         IRepository<User> Users { get; set; }
-        
+
 
     }
 }

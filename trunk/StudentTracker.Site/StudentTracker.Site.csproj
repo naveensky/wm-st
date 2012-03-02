@@ -40,7 +40,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Ninject, Version=2.0.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL" />
+    <Reference Include="EntityFramework, Version=4.3.1.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject">
+      <HintPath>..\packages\Ninject.2.2.1.4\lib\net40-Full\Ninject.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject.Web.Mvc">
+      <HintPath>..\packages\Ninject.MVC3.2.2.2.0\lib\net40-Full\Ninject.Web.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="Norm, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
@@ -66,8 +76,12 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
+    <Reference Include="WebActivator">
+      <HintPath>..\packages\WebActivator.1.4.4\lib\net40\WebActivator.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\NinjectMVC3.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
@@ -121,7 +135,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="DLL\Moq.dll" />
-    <Content Include="DLL\Ninject.dll" />
     <Content Include="DLL\Norm.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -194,6 +207,18 @@
     <ProjectReference Include="..\StudentTracker.Models\StudentTracker.Models.csproj">
       <Project>{A496B47F-9360-4DF6-A9EF-924FB9719C55}</Project>
       <Name>StudentTracker.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StudentTracker.Repository.Sql\StudentTracker.Repository.Sql.csproj">
+      <Project>{E0934D34-2BFB-4F3E-AE18-800445028FCA}</Project>
+      <Name>StudentTracker.Repository.Sql</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StudentTracker.Repository\StudentTracker.Repository.csproj">
+      <Project>{61A9D591-69F8-409A-B75F-E66C4E5D8696}</Project>
+      <Name>StudentTracker.Repository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StudentTracker.Services.Account\StudentTracker.Services.Account.csproj">
+      <Project>{B4859031-06FE-4534-86DD-2D504D4DE930}</Project>
+      <Name>StudentTracker.Services.Account</Name>
     </ProjectReference>
     <ProjectReference Include="..\StudentTracker.Services.Appointment\StudentTracker.Services.Appointment.csproj">
       <Project>{CD8EC81E-54FE-4D8A-A2EB-87676DAB1242}</Project>
@@ -273,6 +298,9 @@
     <Content Include="Configs\database.config">
       <SubType>Designer</SubType>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
