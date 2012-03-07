@@ -12,6 +12,6 @@ namespace StudentTracker.Site.ViewModels.User {
 
         [Display(Name ="Study Center")]
         public int StudyCenterId { get; set; }
-        public IEnumerable<StudyCenter> StudyCenters { get; set; }
+        public IEnumerable<Site.ViewModels.StudyCenter.StudyCenter> StudyCenters { get; set; }
     }
 }

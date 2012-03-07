@@ -19,6 +19,7 @@ namespace StudentTracker.Repository.Sql {
         public IDbSet<StudyCenter> StudyCenters { get; set; }
         public IDbSet<Time> Times { get; set; }
         public IDbSet<TimeSlot> TimeSlots { get; set; }
-        public IDbSet<User> Users { get; set; } 
+        public IDbSet<User> Users { get; set; }
+        public IDbSet<Topic> Topics { get; set; }
     }
 }

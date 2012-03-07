@@ -5,7 +5,7 @@ using System.Text;
 
 namespace StudentTracker.Site.ViewModels.Appointment {
     public class ListViewModel {
-        public IEnumerable<Models.Appointment> Appointments { get; set; }
-        public Models.Student Student { get; set; }
+        public IEnumerable<NewAppointmentViewModel> Appointments { get; set; }
+        public Student.Student Student { get; set; }
     }
 }

@@ -42,8 +42,8 @@ namespace StudentTracker.Site.Controllers {
         [HttpPost]
         public ActionResult Appointments(AppointmentViewModel viewModel) {
             var model = new AppointmentViewModel {
-                Appointments = viewModel.FilterDate == null ? 
-                        _appSvc.GetAppointmentForTeacher(viewModel.Teacher.Id) : 
+                Appointments = viewModel.FilterDate == null ?
+                        _appSvc.GetAppointmentForTeacher(viewModel.Teacher.Id) :
                         _appSvc.GetAppointmentForTeacher(viewModel.Teacher.Id, viewModel.FilterDate.Value),
                 FilterDate = viewModel.FilterDate,
                 Teacher = _staticDataSvc.GetTeacher(viewModel.Teacher.Id)
@@ -57,7 +57,8 @@ namespace StudentTracker.Site.Controllers {
 
         [HttpPost]
         public ActionResult Create(TeacherCreateViewModel model) {
-            _teacherSvc.AddTeacher(model.GetTeacher());
+            _teacherSvc.AddTeacher(model.Teacher);
+           // _teacherSvc.AddTeacher(model.GetTeacher());
             return RedirectToAction("List", "Teacher");
         }
 

@@ -13,7 +13,7 @@ namespace StudentTracker.Site.ViewModels.Student {
 
         [Display(Name = "Filter by Course")]
         public int CourseId { get; set; }
-        public IEnumerable<Models.Course> Courses { get; set; }
+        public IEnumerable<Course.Course> Courses { get; set; }
 
         public bool IsSearchEmpty {
             get {
@@ -23,6 +23,6 @@ namespace StudentTracker.Site.ViewModels.Student {
             }
         }
 
-        public IEnumerable<Models.Student> Students { get; set; }
+        public IEnumerable<Student> Students { get; set; }
     }
 }

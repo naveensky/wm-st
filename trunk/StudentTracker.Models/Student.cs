@@ -46,7 +46,7 @@ namespace StudentTracker.Models {
         public DateTime? ActualExamDate { get; set; }
 
         [Display(Name = "Study Center")]
-        public StudyCenter StudyCenter { get; set; }
+        public virtual StudyCenter StudyCenter { get; set; }
 
         [Display(Name = "Score")]
         public double Score { get; set; }

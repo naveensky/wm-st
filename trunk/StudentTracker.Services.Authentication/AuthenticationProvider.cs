@@ -10,7 +10,7 @@ using StudentTracker.Services.Core;
 
 namespace StudentTracker.Services.Authentication {
     public class AuthenticationProvider : System.Web.Security.MembershipProvider {
-         private readonly ISqlUnitOfWork _uow;
+        private readonly ISqlUnitOfWork _uow;
 
         public AuthenticationProvider(ISqlUnitOfWork uow) {
             _uow = uow;
@@ -40,9 +40,9 @@ namespace StudentTracker.Services.Authentication {
         }
 
         public override bool ValidateUser(string username, string password) {
-           // using (var repo = new MongoRepository<User>(CoreService.GetServer())) {
-                return _uow.Users.Fetch().Count(x => x.Username == username && x.Password == password) > 0;
-            }
+            // using (var repo = new MongoRepository<User>(CoreService.GetServer())) {
+            return _uow.Users.Fetch().Count(x => x.Username == username && x.Password == password) > 0;
+        }
         //}
 
         public override bool UnlockUser(string userName) {
@@ -54,11 +54,11 @@ namespace StudentTracker.Services.Authentication {
         }
 
         public override MembershipUser GetUser(string username, bool userIsOnline) {
-           // using (var repo = new MongoRepository<User>(CoreService.GetServer())) {
-                var user = _uow.Users.Single(x => x.Username == username);
-                return new MembershipUser(this.Name, user.Name, user.Id, null, null, null, true, false, DateTime.Now, DateTime.Now, DateTime.Now, DateTime.Now,
-                    DateTime.Now);
-            }
+            // using (var repo = new MongoRepository<User>(CoreService.GetServer())) {
+            var user = _uow.Users.Single(x => x.Username == username);
+            return new MembershipUser(this.Name, user.Name, user.Id, null, null, null, true, false, DateTime.Now, DateTime.Now, DateTime.Now, DateTime.Now,
+                DateTime.Now);
+        }
         //}
 
         public override string GetUserNameByEmail(string email) {

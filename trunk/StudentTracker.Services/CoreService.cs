@@ -18,20 +18,11 @@ namespace StudentTracker.Services.Core {
 
         private const string _tempPath = "/Tmp/";
 
-        private static  ISqlUnitOfWork _uow;
+        private static ISqlUnitOfWork _uow;
 
-        public  CoreService(ISqlUnitOfWork uow) {
+        public CoreService(ISqlUnitOfWork uow) {
             _uow = uow;
         }
-
-//        public static ServerConfig GetServer() {
-//            var config = new ServerConfig {
-//                ServerAddress = System.Configuration.ConfigurationManager.AppSettings[_serverKey],
-//                Port = Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings[_portKey]),
-//                Database = System.Configuration.ConfigurationManager.AppSettings[_dbKey]
-//            };
-//            return config;
-//        }
 
         public static string GetTempPath(string extension) {
             return string.Format("{0}{1}.{2}", _tempPath, Guid.NewGuid(), extension);
@@ -47,20 +38,5 @@ namespace StudentTracker.Services.Core {
         public static string ConvertToAbsolute(string relativePath) {
             return HttpContext.Current.Server.MapPath(relativePath);
         }
-
-        public static User GetCurrentUser() {
-                      var userId = int.Parse(Membership.GetUser().ProviderUserKey.ToString());
-                     //using (var userRepo = new MongoRepository<User>(CoreService.GetServer())) {
-                         var user = _uow.Users.Single(x => x.Id == userId);
-                          return user;
-                      }
-
-           // throw new Exception();
-      //  }
-
-        public static StudyCenter GetUserCenter() {
-            return GetCurrentUser().StudyCenter;
-        }
-
     }
 }

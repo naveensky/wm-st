@@ -36,8 +36,11 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -45,28 +48,30 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Account\AccountModels.cs" />
     <Compile Include="Account\RegisterViewModel.cs" />
     <Compile Include="Appointment\ListViewModel.cs" />
     <Compile Include="Appointment\NewAppointmentViewModel.cs" />
+    <Compile Include="Course\Course.cs" />
     <Compile Include="Load\DataViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Student\Student.cs" />
     <Compile Include="Student\StudentDownloadViewModel.cs" />
     <Compile Include="Student\StudentEditViewModel.cs" />
     <Compile Include="Student\StudentListViewModel.cs" />
     <Compile Include="Student\StudentRegisterViewModel.cs" />
+    <Compile Include="StudyCenter\StudyCenter.cs" />
     <Compile Include="Teacher\AppointmentViewModel.cs" />
+    <Compile Include="Teacher\Teacher.cs" />
     <Compile Include="Teacher\TeacherCreateViewModel.cs" />
     <Compile Include="Teacher\TeacherListViewModel.cs" />
+    <Compile Include="Topic\Topic.cs" />
     <Compile Include="User\UserCreateViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\StudentTracker.Models\StudentTracker.Models.csproj">
       <Project>{A496B47F-9360-4DF6-A9EF-924FB9719C55}</Project>
       <Name>StudentTracker.Models</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\StudentTracker.Services\StudentTracker.Services.Core.csproj">
-      <Project>{26BCA343-419A-49FC-BA39-47655DCCACF4}</Project>
-      <Name>StudentTracker.Services.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

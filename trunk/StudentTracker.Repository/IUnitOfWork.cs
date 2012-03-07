@@ -14,6 +14,7 @@ namespace StudentTracker.Repository {
         IRepository<Time> Times { get; set; }
         IRepository<TimeSlot> TimeSlots { get; set; }
         IRepository<User> Users { get; set; }
+        IRepository<Topic> Topics { get; set; }
 
 
     }

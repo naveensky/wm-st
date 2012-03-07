@@ -63,6 +63,10 @@
       <Project>{26BCA343-419A-49FC-BA39-47655DCCACF4}</Project>
       <Name>StudentTracker.Services.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\StudentTracker.Site.ViewModels\StudentTracker.Site.ViewModels.csproj">
+      <Project>{4E56CCAC-9599-4CB4-938E-49820D5445D1}</Project>
+      <Name>StudentTracker.Site.ViewModels</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

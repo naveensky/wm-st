@@ -10,11 +10,13 @@ namespace StudentTracker.Models {
     public class User:IEntity {
         [Key]
         public int Id { get; set; }
+        
+        public Guid UserId { get; set; }
         public string Name { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
         public bool IsAdmin { get; set; }
-        public StudyCenter StudyCenter { get; set; }
+        public virtual StudyCenter StudyCenter { get; set; }
 
     }
 }

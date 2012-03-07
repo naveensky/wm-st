@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -11,6 +12,7 @@ namespace StudentTracker.Models {
         [Key]
         public int Id { get; set; }
         public string Name { get; set; }
-        public IEnumerable<Course> Children { get; set; }
+        //public IEnumerable<Course> Children { get; set; }
+        public virtual IEnumerable<Topic> Topics { get; set; }
     }
 }

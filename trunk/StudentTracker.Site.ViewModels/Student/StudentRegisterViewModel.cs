@@ -11,13 +11,13 @@ namespace StudentTracker.Site.ViewModels.Student {
 
         [Display(Name = "Course")]
         public int CourseId { get; set; }
-        public IEnumerable<Course> Courses { get; set; }
+        public IEnumerable<Course.Course> Courses { get; set; }
 
         [Display(Name = "Study Center")]
         public int StudyCenterId { get; set; }
-        public IEnumerable<StudyCenter> StudyCenters { get; set; }
+        public IEnumerable<Site.ViewModels.StudyCenter.StudyCenter> StudyCenters { get; set; }
 
-        public Models.Student Student { get; set; }
+        public Site.ViewModels.Student.Student Student { get; set; }
 
     }
 }
