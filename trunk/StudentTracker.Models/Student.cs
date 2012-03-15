@@ -9,7 +9,7 @@ namespace StudentTracker.Models {
     public class Student:IEntity {
 
         public Student() {
-            Appointments = new List<Appointment>();
+          // Appointments = new List<Appointment>();
         }
 
         [Key]
@@ -61,5 +61,7 @@ namespace StudentTracker.Models {
         public string Mobile { get; set; }
         public virtual Course Course { get; set; }
         public virtual ICollection<Appointment> Appointments { get; set; }
+        
+       
     }
 }

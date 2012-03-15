@@ -30,13 +30,13 @@ namespace StudentTracker.Services.Student {
             _uow.Students.SaveChanges();
         }
 
-        public StudentTracker.Site.ViewModels.Student.Student GetStudent(int studentId) {
-            StudentTracker.Site.ViewModels.Student.Student student = new StudentTracker.Site.ViewModels.Student.Student();
-            student.Id = studentId;
+        public Models.Student GetStudent(int studentId) {
+            Models.Student student = _uow.Students.FindById(studentId);
+            /*student.Id = studentId;
             var temp = _uow.Students.Single(x => x.Id == studentId);
             student.Name = temp.Name;
             student.Roll = temp.Roll;
-            //return _uow.Students.Single(x => x.Id == studentId);
+            //return _uow.Students.Single(x => x.Id == studentId);*/
             return student;
         }
 
@@ -44,10 +44,12 @@ namespace StudentTracker.Services.Student {
             return _uow.Students.Fetch().OrderBy(x => x.Name).ToList();
         }
 
-        public IEnumerable<Site.ViewModels.Student.Student> GetStudents(int count) {
+        public IEnumerable<Models.Student> GetStudents(int count) {
             var studyCentreId = _userService.GetCurrentUser().StudyCenter.Id;
+            return (_uow.Students.Find(x => x.StudyCenter.Id == studyCentreId).Take(count).OrderBy(x => x.Name).ToList());
+            /*
             var temp = _uow.Students.Find(x => x.StudyCenter.Id == studyCentreId).Take(count).OrderBy(x => x.Name).ToList();
-            return (temp.Select(x => new Site.ViewModels.Student.Student { Id = x.Id, Name = x.Name, Roll = x.Roll }));
+            return (temp.Select(x => new Site.ViewModels.Student.Student { Id = x.Id, Name = x.Name, Roll = x.Roll }));*/
         }
 
         public IEnumerable<Models.Student> SearchStudents(string studentName, string rollNo, int courseId) {
@@ -65,31 +67,33 @@ namespace StudentTracker.Services.Student {
                            : students.Where(x => x.Roll.ToLower().Contains(rollNo.ToLower()));
 
             //filter by course if not empty
-            students = courseId != null
+            students = courseId != 0
                            ? students.Where(x => x.Course.Id == courseId)
                            : students;
 
             return students.OrderBy(x => x.Name).ToList();
         }
 
-        public void UpdateStudent(Site.ViewModels.Student.Student student, int studyCenterId) {
+        public void UpdateStudent(Models.Student student, int studyCenterId) {
             var originalStudent = _uow.Students.Single(x => x.Id == student.Id);
-            originalStudent.StudyCenter = _uow.StudyCenters.Single(x => x.Id == studyCenterId);
-            // originalStudent.ActualExamDate = student.ActualExamDate;
-            //originalStudent.BooksGiven = student.BooksGiven;
-            // originalStudent.Email = student.Email;
-            //originalStudent.Mobile = student.Mobile;
-            // originalStudent.Score = student.Score;
-            //   originalStudent.SoftwareGiven = student.SoftwareGiven;
-            //  originalStudent.WmPrepUsername = student.WmPrepUsername;
+            student.StudyCenter = _uow.StudyCenters.FindById(studyCenterId);
+            originalStudent.StudyCenter = _uow.StudyCenters.FindById(studyCenterId);
+
+            originalStudent.ActualExamDate = student.ActualExamDate;
+            originalStudent.BooksGiven = student.BooksGiven;
+            originalStudent.Email = student.Email;
+            originalStudent.Mobile = student.Mobile;
+            originalStudent.Score = student.Score;
+            originalStudent.SoftwareGiven = student.SoftwareGiven;
+            originalStudent.WmPrepUsername = student.WmPrepUsername;
             originalStudent.ModifiedDate = DateTime.UtcNow.AddHours(5).AddMinutes(30);
-            _uow.Students.Add(originalStudent);
             _uow.Students.SaveChanges();
         }
 
         public void DeleteStudent(int studentId) {
             var student = _uow.Students.Single(x => x.Id == studentId);
             _uow.Students.Remove(student);
+
         }
 
         public IEnumerable<Models.Student> GetStudentsAsLead(DateTime startTime, DateTime endTime, bool getAll) {
@@ -124,8 +128,8 @@ namespace StudentTracker.Services.Student {
             return (_uow.Students.Fetch().ToDictionary(x => x.Id, x => x.Name));
         }
 
-        public IEnumerable<Site.ViewModels.Student.Student> ConvetToViewModel(IEnumerable<Models.Student> enumerable) {
-            return (enumerable.Select(x => new Site.ViewModels.Student.Student { Id = x.Id, Name = x.Name, Roll = x.Roll }));
-        }
+        /*  public IEnumerable<Models.Student> ConvetToViewModel(IEnumerable<Models.Student> enumerable) {
+              return (enumerable.Select(x => Site.ViewModels.Student.Student { Id = x.Id, Name = x.Name, Roll = x.Roll }));
+          }*/
     }
 }

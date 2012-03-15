@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using StudentTracker.Site.ViewModels.Student;
 
 namespace StudentTracker.Site.ViewModels.Appointment {
     public class ListViewModel {
-        public IEnumerable<NewAppointmentViewModel> Appointments { get; set; }
-        public Student.Student Student { get; set; }
+        public IEnumerable<AppointmentViewModel> Appointments { get; set; }
+        public Student.StudentViewModel StudentViewModel { get; set; }
     }
 }

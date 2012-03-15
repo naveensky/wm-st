@@ -22,6 +22,7 @@ namespace StudentTracker.Repository.Sql {
 
         public void Remove(T entity) {
             _dbSet.Remove(entity);
+            SaveChanges();
         }
 
         public IQueryable<T> Fetch(params System.Linq.Expressions.Expression<Func<T, object>>[] includes) {
@@ -61,5 +62,7 @@ namespace StudentTracker.Repository.Sql {
         public void SaveChanges() {
             _dbContext.SaveChanges();
         }
+
+       
     }
 }

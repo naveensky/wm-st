@@ -26,7 +26,7 @@ namespace StudentTracker.Converters {
                 CreateHeaders(sheet);
 
                 var rowIdx = 2;
-                if (student.Appointments != null && student.Appointments.Count > 0) {
+               /* if (student.Appointments != null && student.Appointments.Count > 0) {
 
                     foreach (var appointment in student.Appointments) {
                         sheet.Cells[rowIdx, DateCol].Value = string.Format("{0:dd-MMM-yyyy}", appointment.Date);
@@ -37,7 +37,7 @@ namespace StudentTracker.Converters {
                         sheet.Cells[rowIdx, TypeCol].Value = appointment.AppointmentType;
                         ++rowIdx;
                     }
-                }
+                }*/
 
                 rowIdx = 2;
                 sheet.Cells[rowIdx, DetailLabelCol].Value = "Name";
@@ -58,7 +58,7 @@ namespace StudentTracker.Converters {
                 sheet.Cells[rowIdx, DetailValueCol].Value = student.SoftwareGiven ? "Yes" : "No";
                 sheet.Cells[++rowIdx, DetailLabelCol].Value = "Books Given";
                 sheet.Cells[rowIdx, DetailValueCol].Value = student.BooksGiven ? "Yes" : "No";
-                if (student.Appointments != null && student.Appointments.Count > 0) {
+              /*  if (student.Appointments != null && student.Appointments.Count > 0) {
                     sheet.Cells[++rowIdx, DetailLabelCol].Value = "Total Individual Hours";
                     sheet.Cells[rowIdx, DetailValueCol].Value = decimal.Round(student.Appointments.Where(x => x.AppointmentType == AppointmentType.Individual).Sum(x => x.StartTime.SubtractFrom(x.EndTime)), 2);
                     sheet.Cells[++rowIdx, DetailLabelCol].Value = "Total Group Hours";
@@ -76,7 +76,7 @@ namespace StudentTracker.Converters {
                     sheet.Cells[rowIdx, DetailValueCol].Value = 0;
                     sheet.Cells[++rowIdx, DetailLabelCol].Value = "Total Hours";
                     sheet.Cells[rowIdx, DetailValueCol].Value = 0;
-                }
+                }*/
 
                 excel.Save();
             }

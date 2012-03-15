@@ -12,72 +12,72 @@
             @Html.LabelFor(model => model.CourseId)
         </div>
         <div class="editor-field">
-            @Html.DropDownListFor(model => model.CourseId, new SelectList(Model.Courses, "Id", "Name"))
+            @Html.DropDownListFor(model => model.CourseId, new SelectList(Model.Courses, "key", "value"))
             @Html.ValidationMessageFor(model => model.CourseId)
         </div>
          <div class="editor-label">
             @Html.LabelFor(model => model.StudyCenterId)
         </div>
          <div class="editor-field">
-            @Html.DropDownListFor(model => model.StudyCenterId, new SelectList(Model.StudyCenters, "Id", "Name"))
+            @Html.DropDownListFor(model => model.StudyCenterId, new SelectList(Model.StudyCenters, "Key", "Value"))
             @Html.ValidationMessageFor(model => model.StudyCenterId)
         </div>
         <div class="editor-label">
-            @Html.LabelFor(model => model.Student.Name)
+            @Html.LabelFor(model => model.Name)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Student.Name)
-            @Html.ValidationMessageFor(model => model.Student.Name)
+            @Html.EditorFor(model => model.Name)
+            @Html.ValidationMessageFor(model => model.Name)
         </div>
         <div class="editor-label">
-            @Html.LabelFor(model => model.Student.Email)
+            @Html.LabelFor(model => model.Email)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Student.Email)
-            @Html.ValidationMessageFor(model => model.Student.Email)
+            @Html.EditorFor(model => model.Email)
+            @Html.ValidationMessageFor(model => model.Email)
         </div>
         <div class="editor-label">
-            @Html.LabelFor(model => model.Student.Mobile)
+            @Html.LabelFor(model => model.Mobile)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Student.Mobile)
-            @Html.ValidationMessageFor(model => model.Student.Mobile)
+            @Html.EditorFor(model => model.Mobile)
+            @Html.ValidationMessageFor(model => model.Mobile)
         </div>
         <div class="editor-label">
-            @Html.LabelFor(model => model.Student.RegisterDate)
+            @Html.LabelFor(model => model.RegisterDate)
         </div>
         <div class="editor-field">
-            @Html.TextBoxFor(model => model.Student.RegisterDate, new { @class = "date" })
-            @Html.ValidationMessageFor(model => model.Student.RegisterDate)
+            @Html.TextBoxFor(model => model.RegisterDate, new { @class = "date" })
+            @Html.ValidationMessageFor(model => model.RegisterDate)
         </div>
         <div class="editor-label">
-            @Html.LabelFor(model => model.Student.ProposedExamDate)
+            @Html.LabelFor(model => model.ProposedExamDate)
         </div>
         <div class="editor-field">
-            @Html.TextBoxFor(model => model.Student.ProposedExamDate, new { @class = "date" })
-            @Html.ValidationMessageFor(model => model.Student.ProposedExamDate)
+            @Html.TextBoxFor(model => model.ProposedExamDate, new { @class = "date" })
+            @Html.ValidationMessageFor(model => model.ProposedExamDate)
         </div>
         <div class="editor-label">
-            @Html.LabelFor(model => model.Student.ActualExamDate)
+            @Html.LabelFor(model => model.ActualExamDate)
         </div>
         <div class="editor-field">
-            @Html.TextBoxFor(model => model.Student.ActualExamDate, new { @class = "date" })
-            @Html.ValidationMessageFor(model => model.Student.ActualExamDate)
+            @Html.TextBoxFor(model => model.ActualExamDate, new { @class = "date" })
+            @Html.ValidationMessageFor(model => model.ActualExamDate)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Student.SoftwareGiven) @Html.LabelFor(model => model.Student.SoftwareGiven)
-            @Html.ValidationMessageFor(model => model.Student.SoftwareGiven)
+            @Html.EditorFor(model => model.SoftwareGiven) @Html.LabelFor(model => model.SoftwareGiven)
+            @Html.ValidationMessageFor(model => model.SoftwareGiven)
         </div>
         <div class="editor-label">
-            @Html.LabelFor(model => model.Student.WmPrepUsername)
+            @Html.LabelFor(model => model.WmPrepUsername)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Student.WmPrepUsername)
-            @Html.ValidationMessageFor(model => model.Student.WmPrepUsername)
+            @Html.EditorFor(model => model.WmPrepUsername)
+            @Html.ValidationMessageFor(model => model.WmPrepUsername)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Student.BooksGiven) @Html.LabelFor(model => model.Student.BooksGiven)
-            @Html.ValidationMessageFor(model => model.Student.BooksGiven)
+            @Html.EditorFor(model => model.BooksGiven) @Html.LabelFor(model => model.BooksGiven)
+            @Html.ValidationMessageFor(model => model.BooksGiven)
         </div>
         <p>
             <input type="submit" value="Create" />

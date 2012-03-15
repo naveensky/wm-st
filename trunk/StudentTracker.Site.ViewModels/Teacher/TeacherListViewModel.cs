@@ -5,6 +5,6 @@ using System.Text;
 
 namespace StudentTracker.Site.ViewModels.Teacher {
     public class TeacherListViewModel {
-        public IEnumerable<Teacher> Teachers { get; set; }
+        public IEnumerable<TeacherViewModel> Teachers { get; set; }
     }
 }

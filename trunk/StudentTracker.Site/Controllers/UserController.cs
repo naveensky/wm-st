@@ -8,7 +8,8 @@ using StudentTracker.Site.ViewModels.User;
 using StudentTracker.Services.Core;
 using StudentTracker.Services.User;
 using StudentTracker.Services.Authentication;
-
+using Norm;
+using StudentTracker.Mappings;
 
 namespace StudentTracker.Site.Controllers {
 
@@ -29,13 +30,13 @@ namespace StudentTracker.Site.Controllers {
 
         public ActionResult Create() {
             var viewModel = new UserCreateViewModel();
-            viewModel.StudyCenters = _staticData.GetStudyCenters();
+            viewModel.StudyCenters =  _staticData.GetStudyCenters().Select(x=>x.MapToView());
             return View(viewModel);
         }
 
         [HttpPost]
         public ActionResult Create(UserCreateViewModel viewModel) {
-            _userService.SaveUser(viewModel.User, viewModel.StudyCenterId);
+            _userService.SaveUser(viewModel.User.MapToDomain(), viewModel.StudyCenterId);
             return RedirectToAction("List", "Student");
         }
 
@@ -44,7 +45,7 @@ namespace StudentTracker.Site.Controllers {
         }
 
         [HttpPost]
-        public ActionResult LogOn(User user, string password) {
+        public ActionResult LogOn(UserViewModel user, string password) {
             if (ModelState.IsValid) {
                 if (_authenticationProvider.ValidateUser(user.Username, password)) {
                     _formAuthentication.LogOn(user.Username, false);

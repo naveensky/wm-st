@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <h2>
-    List of Appointment for : @Model.Student.Name
+    List of Appointment for : @Model.StudentViewModel.Name
 </h2>
 <table class="data" cellspacing="0">
     <thead>
@@ -20,19 +20,19 @@
             </th>
             @*<th>
                 Time Slot
-            </th>*@
+            </th>
             <th>
                 Appointment Type
-            </th>
+            </th>*@
             <th>
                 Teacher Name
             </th>
             <th>
-                Course
+                Topic
             </th>
-            <th>
+           @* <th>
                 &nbsp;
-            </th>
+            </th>*@
         </tr>
     </thead>
     <tbody>
@@ -43,25 +43,25 @@
                     @string.Format("{0:dd MMM yyyy}", app.Date)
                 </td>
                 <td>           
-                    @app.StartTime.ToString()
+                    @app.StartTime
                 </td>
                 <td>
-                    @app.EndTime.ToString()
+                    @app.EndTime
                 </td>
                 @* <td>
                     @app.Timeslot.Display
                 </td>*@
+               @*{<td>
+                     @app.AppointmentType.ToString()
+                 </td>}*@
                 <td>
-                    @app.AppointmentType.ToString()
+                    @app.Teacher.
                 </td>
                 <td>
-                    @app.Teacher.Name
+                    @app.Topic
                 </td>
                 <td>
-                    @app.Course.Name
-                </td>
-                <td>
-                    <a href="/Appointment/Delete?studentId=@Model.Student.Id&appointmentId=@app.Id">
+                    <a href="/Appointment/Delete?studentId=@Model.StudentViewModel.Id&appointmentId=@app.Id">
                         <img src="/Content/Images/cross.png" alt="Delete Appointment" title="Delete Appointment" />
                     </a>
                 </td>

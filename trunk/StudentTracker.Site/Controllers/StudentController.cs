@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Norm;
+using StudentTracker.Mappings;
 using StudentTracker.Services.Core;
 using StudentTracker.Services.Student;
 using StudentTracker.Services.User;
@@ -30,8 +31,8 @@ namespace StudentTracker.Site.Controllers {
 
         public ActionResult Create() {
             var model = new StudentRegisterViewModel {
-                Courses = _staticData.GetCourses(),
-                StudyCenters = _staticData.GetStudyCenters(),
+                Courses = _staticData.GetCourses().ToDictionary(x => x.Id, y => y.Name),
+                StudyCenters = _staticData.GetStudyCenters().ToDictionary(x => x.Id, y => y.Name),
             };
 
             return View(model);
@@ -39,15 +40,15 @@ namespace StudentTracker.Site.Controllers {
 
         [HttpPost]
         public ActionResult Create(StudentRegisterViewModel viewModel) {
-            _studentService.SaveStudent(new Student { Id = viewModel.Student.Id, Name = viewModel.Student.Name, Roll = viewModel.Student.Roll }, viewModel.CourseId, viewModel.StudyCenterId);
+            _studentService.SaveStudent(viewModel.MapToDomain(), viewModel.CourseId, viewModel.StudyCenterId);
             return RedirectToAction("List");
         }
 
         [HttpGet]
         public ActionResult List() {
             var model = new StudentListViewModel {
-                Students = _studentService.GetStudents(100),
-                Courses = _staticData.GetCourses()
+                Students = _studentService.GetStudents(100).Select(x => new StudentViewModel { Id = x.Id, BooksGiven = x.BooksGiven, Mobile = x.Mobile, Course = x.Course.MapToView(), Name = x.Name, Roll = x.Roll, SoftwareGiven = x.SoftwareGiven }),
+                Courses = _staticData.GetCourses().ToDictionary(x => x.Id, y => y.Name),
             };
             return View(model);
         }
@@ -55,15 +56,13 @@ namespace StudentTracker.Site.Controllers {
         [HttpPost]
         public ActionResult List(StudentListViewModel studentSearch) {
             var model = new StudentListViewModel {
-                Students = _studentService.ConvetToViewModel(studentSearch.IsSearchEmpty
-                               ? _studentService.GetAllStudents()
-                               : _studentService.SearchStudents(studentSearch.StudentNameSearchText,
-                                                                studentSearch.RollNoSearchText,
-                                                                studentSearch.CourseId)),
+                Students = studentSearch.IsSearchEmpty
+                               ? _studentService.GetAllStudents().Select(x => new StudentViewModel { Id = x.Id, BooksGiven = x.BooksGiven, Mobile = x.Mobile, Course = x.Course.MapToView(), Name = x.Name, Roll = x.Roll, SoftwareGiven = x.SoftwareGiven })
+                               : _studentService.SearchStudents(studentSearch.StudentNameSearchText, studentSearch.RollNoSearchText, studentSearch.CourseId).Select(x => new StudentViewModel { Id = x.Id, BooksGiven = x.BooksGiven, Mobile = x.Mobile, Course = x.Course.MapToView(), Name = x.Name, Roll = x.Roll, SoftwareGiven = x.SoftwareGiven }),
                 CourseId = studentSearch.CourseId,
                 RollNoSearchText = studentSearch.RollNoSearchText,
                 StudentNameSearchText = studentSearch.StudentNameSearchText,
-                Courses = _staticData.GetCourses()
+                Courses = _staticData.GetCourses().ToDictionary(x => x.Id, y => y.Name)
             };
 
             return View(model);
@@ -71,17 +70,16 @@ namespace StudentTracker.Site.Controllers {
 
         public ActionResult Edit(int id) {
             var temp = _studentService.GetStudent(id);
-            var studentEditModel = new StudentEditViewModel { Student = new Site.ViewModels.Student.Student { Id = temp.Id, Roll = temp.Roll, Name = temp.Roll } };
-            studentEditModel.Courses = _staticData.GetCourses();
-            studentEditModel.StudyCenters = _staticData.GetStudyCenters();
+            var studentEditModel = new StudentEditViewModel { StudentViewModel = temp.MapToView(), Courses = _staticData.GetCourses().ToDictionary(x => x.Id, y => y.Name), StudyCenters = _staticData.GetStudyCenters().ToDictionary(x => x.Id, y => y.Name) };
+            // studentEditModel.Courses = _staticData.GetCourses().Select(x => x.MapToDomain());
+            //studentEditModel.StudyCenters = _staticData.GetStudyCenters().Select(x => x.MapToDomain());
             studentEditModel.StudyCenterId = _userService.GetCurrentUser().StudyCenter.Id;
-            // studentEditModel.CourseId = studentEditModel.Student.Course.Id;
             return View(studentEditModel);
         }
 
         [HttpPost]
         public ActionResult Edit(StudentEditViewModel model) {
-            _studentService.UpdateStudent(model.Student, model.StudyCenterId);
+            _studentService.UpdateStudent(model.StudentViewModel.MapToDomain(), model.StudyCenterId);
             return RedirectToAction("List");
         }
 
@@ -94,7 +92,7 @@ namespace StudentTracker.Site.Controllers {
             var student = _studentService.GetStudent(id);
             var tempPath = CoreService.ConvertToAbsolute(CoreService.GetTempPath("xlsx"));
             var excelGenerator = new ExcelConverter();
-            excelGenerator.GenerateExcel(tempPath, new Student { Id = student.Id, Roll = student.Roll, Name = student.Name });
+            excelGenerator.GenerateExcel(tempPath, student);
             Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
             Response.AddHeader("content-disposition", "attachment;  filename=Student Record.xlsx");
             Response.BinaryWrite(System.IO.File.ReadAllBytes(tempPath));

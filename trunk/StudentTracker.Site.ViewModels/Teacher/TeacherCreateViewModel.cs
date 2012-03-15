@@ -7,7 +7,7 @@ using StudentTracker.Models;
 
 namespace StudentTracker.Site.ViewModels.Teacher {
     public class TeacherCreateViewModel {
-        public Teacher Teacher { get; set; }
+        public TeacherViewModel Teacher { get; set; }
 
    //     public Teacher GetTeacher() {
             

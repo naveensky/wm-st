@@ -38,16 +38,16 @@
             @Html.DisplayTextFor(model => model.Student.Name)
         </div>
         <div class="editor-label">
-            @Html.LabelFor(model => model.CourseId)
+            @Html.LabelFor(model => model.TopicId)
         </div>
         <div class="editor-field">
-            @Html.DropDownListFor(model => model.CourseId, new SelectList(Model.Courses, "Id", "Name"))
+            @Html.DropDownListFor(model => model.TopicId, new SelectList(Model.Topic, "Key", "Value"))
         </div>
         <div class="editor-label">
             @Html.LabelFor(model => model.TeacherId)
         </div>
         <div class="editor-field">
-            @Html.DropDownListFor(model => model.TeacherId, new SelectList(Model.Teachers, "Id", "Name"))
+            @Html.DropDownListFor(model => model.TeacherId, new SelectList(Model.Teachers, "Key", "Value"))
         </div>
         <div class="editor-label">
             @Html.LabelFor(model => model.Date)
@@ -82,14 +82,14 @@
         <div class="editor-field">
             @Html.TextBoxFor(model => model.Duration)
             @Html.ValidationMessageFor(m => m.Duration)
-        </div>*@
+        </div>
         <div class="editor-label">
             @Html.LabelFor(model => model.AppointmentTypeId)
         </div>
         <div class="editor-field">
             @Html.DropDownListFor(m => m.AppointmentTypeId, new SelectList(Model.AppointmentType, "Key", "Value"))
             @Html.ValidationMessageFor(m => m.AppointmentTypeId)
-        </div>
+        </div>*@
         <p>
             <input type="submit" value="Create" />
         </p>

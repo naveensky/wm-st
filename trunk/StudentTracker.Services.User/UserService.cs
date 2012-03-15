@@ -24,6 +24,9 @@ namespace StudentTracker.Services.User {
         }
 
         public Models.User GetCurrentUser() {
+            var userCheck = Membership.GetUser();
+            if (userCheck == null)
+                return null;
             var userId = Guid.Parse(Membership.GetUser().ProviderUserKey.ToString());
             var user = _uow.Users.Single(x => x.UserId == userId, x => x.StudyCenter);
             return user;

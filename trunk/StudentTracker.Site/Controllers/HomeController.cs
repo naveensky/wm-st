@@ -10,7 +10,7 @@ namespace StudentTracker.Site.Controllers {
         // GET: /Home/
 
         public ActionResult Index() {
-            return RedirectToAction("List", "Student");
+            return RedirectToAction("LogOn", "Account");
         }
 
     }

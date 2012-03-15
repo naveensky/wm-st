@@ -6,6 +6,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{55DD1B4F-37AA-4C51-9F38-A1F2B76C4E9B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{B86273AB-6BFF-4E6B-AFA3-5FE95F31AACC}"
+	ProjectSection(SolutionItems) = preProject
+		StudentTracker.Services\AppointmentComparer.cs = StudentTracker.Services\AppointmentComparer.cs
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Converters", "Converters", "{8BF195A5-87BC-40FE-8675-F6A63B9F40EA}"
 EndProject
@@ -35,9 +38,22 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentTracker.Services.Aut
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentTracker.Repository.Sql", "StudentTracker.Repository.Sql\StudentTracker.Repository.Sql.csproj", "{E0934D34-2BFB-4F3E-AE18-800445028FCA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentTracker.Mappings", "StudentTracker.Mappings\StudentTracker.Mappings.csproj", "{162BF309-B2D3-4282-B168-E87F608028FE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{FF070A2E-44AF-47B0-A5AE-ACF33067A88B}"
+	ProjectSection(SolutionItems) = preProject
+		Local.testsettings = Local.testsettings
+		StudentTracker1.vsmdi = StudentTracker1.vsmdi
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentTracker.Test", "StudentTracker.Test\StudentTracker.Test.csproj", "{5F0399D2-E5D4-4861-97A5-005A0814BCD7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentTracker.Services.Time", "StudentTracker.Services.Time\StudentTracker.Services.Time.csproj", "{E821125B-312C-40FB-B5CB-09BD5AB6A16B}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
-		CategoryFile = StudentTracker.vsmdi
+		CategoryFile = StudentTracker1.vsmdi
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -96,6 +112,18 @@ Global
 		{E0934D34-2BFB-4F3E-AE18-800445028FCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E0934D34-2BFB-4F3E-AE18-800445028FCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E0934D34-2BFB-4F3E-AE18-800445028FCA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{162BF309-B2D3-4282-B168-E87F608028FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{162BF309-B2D3-4282-B168-E87F608028FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{162BF309-B2D3-4282-B168-E87F608028FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{162BF309-B2D3-4282-B168-E87F608028FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F0399D2-E5D4-4861-97A5-005A0814BCD7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F0399D2-E5D4-4861-97A5-005A0814BCD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F0399D2-E5D4-4861-97A5-005A0814BCD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F0399D2-E5D4-4861-97A5-005A0814BCD7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E821125B-312C-40FB-B5CB-09BD5AB6A16B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E821125B-312C-40FB-B5CB-09BD5AB6A16B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E821125B-312C-40FB-B5CB-09BD5AB6A16B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E821125B-312C-40FB-B5CB-09BD5AB6A16B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -104,6 +132,7 @@ Global
 		{A496B47F-9360-4DF6-A9EF-924FB9719C55} = {FBA5CE81-F94B-492C-B4D1-033D1BD38B9C}
 		{61A9D591-69F8-409A-B75F-E66C4E5D8696} = {FBA5CE81-F94B-492C-B4D1-033D1BD38B9C}
 		{E0934D34-2BFB-4F3E-AE18-800445028FCA} = {FBA5CE81-F94B-492C-B4D1-033D1BD38B9C}
+		{162BF309-B2D3-4282-B168-E87F608028FE} = {FBA5CE81-F94B-492C-B4D1-033D1BD38B9C}
 		{9FBBA4BC-DF61-4A93-A0DF-CE4CE7AC1D1E} = {55DD1B4F-37AA-4C51-9F38-A1F2B76C4E9B}
 		{4E56CCAC-9599-4CB4-938E-49820D5445D1} = {55DD1B4F-37AA-4C51-9F38-A1F2B76C4E9B}
 		{26BCA343-419A-49FC-BA39-47655DCCACF4} = {B86273AB-6BFF-4E6B-AFA3-5FE95F31AACC}
@@ -113,6 +142,7 @@ Global
 		{5147BC34-1B74-483D-AE0B-FAFB852362F1} = {B86273AB-6BFF-4E6B-AFA3-5FE95F31AACC}
 		{C08EB103-42B7-4C1F-A66F-A8AC6AB1510E} = {B86273AB-6BFF-4E6B-AFA3-5FE95F31AACC}
 		{E7E9E649-F3F9-4ECE-A596-252B7A52AC03} = {B86273AB-6BFF-4E6B-AFA3-5FE95F31AACC}
+		{E821125B-312C-40FB-B5CB-09BD5AB6A16B} = {B86273AB-6BFF-4E6B-AFA3-5FE95F31AACC}
 		{E7FE54E3-5836-48C2-8BFB-4AA25D461A76} = {8BF195A5-87BC-40FE-8675-F6A63B9F40EA}
 	EndGlobalSection
 EndGlobal

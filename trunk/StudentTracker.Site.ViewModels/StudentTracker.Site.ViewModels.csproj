@@ -52,21 +52,24 @@
     <Compile Include="Account\RegisterViewModel.cs" />
     <Compile Include="Appointment\ListViewModel.cs" />
     <Compile Include="Appointment\NewAppointmentViewModel.cs" />
-    <Compile Include="Course\Course.cs" />
-    <Compile Include="Load\DataViewModel.cs" />
+    <Compile Include="Common\CourseViewModel.cs" />
+    <Compile Include="Common\Load\DataViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Student\Student.cs" />
+    <Compile Include="Student\AppointmentViewModel.cs" />
+    <Compile Include="Student\StudentViewModel.cs" />
     <Compile Include="Student\StudentDownloadViewModel.cs" />
     <Compile Include="Student\StudentEditViewModel.cs" />
     <Compile Include="Student\StudentListViewModel.cs" />
     <Compile Include="Student\StudentRegisterViewModel.cs" />
-    <Compile Include="StudyCenter\StudyCenter.cs" />
+    <Compile Include="Common\StudyCenterViewModel.cs" />
     <Compile Include="Teacher\AppointmentViewModel.cs" />
-    <Compile Include="Teacher\Teacher.cs" />
+    <Compile Include="Teacher\TeacherViewModel.cs" />
     <Compile Include="Teacher\TeacherCreateViewModel.cs" />
     <Compile Include="Teacher\TeacherListViewModel.cs" />
-    <Compile Include="Topic\Topic.cs" />
+    <Compile Include="Common\TopicViewModel.cs" />
+    <Compile Include="Time\TimeViewModel.cs" />
     <Compile Include="User\UserCreateViewModel.cs" />
+    <Compile Include="User\UserViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\StudentTracker.Models\StudentTracker.Models.csproj">

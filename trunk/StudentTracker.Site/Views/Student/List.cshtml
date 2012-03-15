@@ -28,7 +28,7 @@
         <div class="grid_3 omega">
             @Html.LabelFor(m => m.CourseId)
             <br />
-            @Html.DropDownListFor(m => m.CourseId, new SelectList(Model.Courses, "Id", "Name"), "All Courses", null)
+            @Html.DropDownListFor(m => m.CourseId, new SelectList(Model.Courses, "Key", "Value"), "All Courses", null)
         </div>
         
         <input id="searchText" type="submit" value="Search" />

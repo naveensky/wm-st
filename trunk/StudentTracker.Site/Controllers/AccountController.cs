@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using System.Web.Security;
+using StudentTracker.Services.User;
 using StudentTracker.Site.ViewModels.Account;
 
 namespace OnLineStore.Controllers {
@@ -12,9 +13,16 @@ namespace OnLineStore.Controllers {
 
         //
         // GET: /Account/LogOn
+        private UserService _userService;
+        public AccountController(UserService userService) {
+            _userService = userService;
+        }
 
         public ActionResult LogOn() {
-            return View();
+            if (_userService.GetCurrentUser() == null)
+                return View();
+            else
+                return RedirectToAction("List", "Student");
         }
 
         //
@@ -46,14 +54,18 @@ namespace OnLineStore.Controllers {
         public ActionResult LogOff() {
             FormsAuthentication.SignOut();
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("LogOn");
         }
 
         //
         // GET: /Account/Register
 
         public ActionResult Register() {
+            if (_userService.GetUserCenter() == null)
             return View();
+            else
+                return RedirectToAction("List", "Student");
+
         }
 
         //

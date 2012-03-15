@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Norm;
+using StudentTracker.Site.ViewModels.Common;
 
 namespace StudentTracker.Site.ViewModels.Student {
     public class StudentListViewModel {
@@ -13,9 +14,9 @@ namespace StudentTracker.Site.ViewModels.Student {
 
         [Display(Name = "Filter by Course")]
         public int CourseId { get; set; }
-        public IEnumerable<Course.Course> Courses { get; set; }
+       public IDictionary<int ,string> Courses { get; set; }
 
-        public bool IsSearchEmpty {
+       public bool IsSearchEmpty { 
             get {
                 return string.IsNullOrEmpty(RollNoSearchText)
                     && string.IsNullOrEmpty(StudentNameSearchText)
@@ -23,6 +24,6 @@ namespace StudentTracker.Site.ViewModels.Student {
             }
         }
 
-        public IEnumerable<Student> Students { get; set; }
+        public IEnumerable<StudentViewModel> Students { get; set; }
     }
 }

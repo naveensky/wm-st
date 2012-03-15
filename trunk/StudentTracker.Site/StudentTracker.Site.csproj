@@ -205,6 +205,10 @@
       <Project>{E7FE54E3-5836-48C2-8BFB-4AA25D461A76}</Project>
       <Name>StudentTracker.Converters</Name>
     </ProjectReference>
+    <ProjectReference Include="..\StudentTracker.Mappings\StudentTracker.Mappings.csproj">
+      <Project>{162BF309-B2D3-4282-B168-E87F608028FE}</Project>
+      <Name>StudentTracker.Mappings</Name>
+    </ProjectReference>
     <ProjectReference Include="..\StudentTracker.Models\StudentTracker.Models.csproj">
       <Project>{A496B47F-9360-4DF6-A9EF-924FB9719C55}</Project>
       <Name>StudentTracker.Models</Name>
@@ -236,6 +240,10 @@
     <ProjectReference Include="..\StudentTracker.Services.Teacher\StudentTracker.Services.Teacher.csproj">
       <Project>{5147BC34-1B74-483D-AE0B-FAFB852362F1}</Project>
       <Name>StudentTracker.Services.Teacher</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StudentTracker.Services.Time\StudentTracker.Services.Time.csproj">
+      <Project>{E821125B-312C-40FB-B5CB-09BD5AB6A16B}</Project>
+      <Name>StudentTracker.Services.Time</Name>
     </ProjectReference>
     <ProjectReference Include="..\StudentTracker.Services.User\StudentTracker.Services.User.csproj">
       <Project>{C08EB103-42B7-4C1F-A66F-A8AC6AB1510E}</Project>

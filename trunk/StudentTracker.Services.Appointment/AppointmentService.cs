@@ -9,7 +9,8 @@ using StudentTracker.Repository;
 //using StudentTracker.Repository.MongoDb;
 using StudentTracker.Repository.Sql;
 using StudentTracker.Services.Core;
-using StudentTracker.Site.ViewModels.Appointment;
+using StudentTracker.Services.Time;
+
 
 namespace StudentTracker.Services.Appointment {
     public class AppointmentService {
@@ -26,61 +27,81 @@ namespace StudentTracker.Services.Appointment {
             _uow.Students.SaveChanges();
         }
 
-        public IEnumerable<StudentTracker.Site.ViewModels.Appointment.NewAppointmentViewModel> GetAppointmentsForStudent(int studentId) {
+        public IEnumerable<Models.AppointMentList> GetAppointmentsForStudent(int studentId) {
             var appointments = _uow.Students.Single(x => x.Id == studentId).Appointments;
             if (appointments == null)
                 return null;
-            IList<int> studentList = new List<int>();
-            var student = _uow.Students.FindById(studentId);
-            studentList.Add(student.Id);
-            return appointments.Select(x => new Site.ViewModels.Appointment.NewAppointmentViewModel { SelectedTeacherId = x.Teacher.Id, Date = x.Date, StartTime = x.StartTime, EndTime = x.EndTime, SelectedStudents = studentList,Topics = x.Course.Topics.ToDictionary(y=>y.Id,z=>z.Name)});
+            else {
+                return appointments.Select(x => new AppointMentList { Id = x.Id, Teacher = x.Teacher.Name, Topic = x.Topic.Name, StartTime = x.StartTime.ToString(), EndTime = x.EndTime.ToString(), Date = x.Date });
+            }
+            /*  IList<int> studentList = new List<int>();
+              var student = _uow.Students.FindById(studentId);
+              studentList.Add(student.Id);
+              return appointments.Select(x => new Site.ViewModels.Appointment.NewAppointmentViewModel { SelectedTeacherId = x.Teacher.Id, Date = x.Date, StartTime = x.StartTime, EndTime = x.EndTime, SelectedStudents = studentList,Topics = x.Course.Topics.ToDictionary(y=>y.Id,z=>z.Name)});*/
         }
 
         public void DeleteAppointmentForStudent(int studentId, int appointmentId) {
-            // using (var repo = new MongoRepository<Student>(CoreService.GetServer())) {
-            var student = _uow.Students.Single(x => x.Id == studentId);
-            if (student.Appointments != null) {
-                var appointment = student.Appointments.Single(x => x.Id == appointmentId);
-                student.Appointments.Remove(appointment);
-                _uow.Students.Add(student);
-                _uow.Students.SaveChanges();
-            }
-        }
-        // }
+            var appointment = _uow.Appointments.FindById(appointmentId, x => x.Students);
 
-        public IEnumerable<Site.ViewModels.Appointment.NewAppointmentViewModel> GetAppointmentForTeacher(int teacherId) {
+            //if no appointment is found, return
+            if (appointment == null)
+                return;
+
+            //if appointment is for this only student, delete the whole appointment itself
+            if (appointment.Students.Count() == 1 && appointment.Students.First().Id == studentId) {
+                _uow.Appointments.Remove(appointment);
+            } else {
+
+                //find student
+                var student = appointment.Students.SingleOrDefault(x => x.Id == studentId);
+
+                //if no such student, return
+                if (student == null)
+                    return;
+
+                //remove student 
+                appointment.Students.Remove(student);
+            }
+
+            //save database changes
+            _uow.Students.SaveChanges();
+        }
+
+        public IEnumerable<Models.Appointment> GetAppointmentForTeacher(int teacherId) {
             //using (var students = new MongoRepository<Student>(CoreService.GetServer())) {
             var appointments = _uow.Students.Find(x => x.Appointments != null)
                                         .Select(x => x.Appointments.Where(y => y.Teacher.Id == teacherId));
+            return (appointments.ToList().SelectMany(x => x));
+
             var temp = appointments.ToList().SelectMany(x => x);
-            return
-                temp.Select(
-                    x =>
-                    new Site.ViewModels.Appointment.NewAppointmentViewModel {
-                        SelectedTeacherId = teacherId,
-                        Topics = x.Course.Topics.ToDictionary(y => y.Id, z => z.Name),
-                        Date = x.Date,
-                        StartTime = x.StartTime
-                    });
+            /*   return
+                   temp.Select(
+                       x =>
+                       new Site.ViewModels.Appointment.NewAppointmentViewModel {
+                           SelectedTeacherId = teacherId,
+                           Topics = x.Course.Topics.ToDictionary(y => y.Id, z => z.Name),
+                           Date = x.Date,
+                           StartTime = x.StartTime
+                       });*/
         }
         //}
 
 
-        public IEnumerable<Site.ViewModels.Appointment.NewAppointmentViewModel> GetAppointmentForTeacher(int teacherId, DateTime filterDate) {
+        public IEnumerable<Models.Appointment> GetAppointmentForTeacher(int teacherId, DateTime filterDate) {
             //using (var students = new MongoRepository<Student>(CoreService.GetServer())) {
             var appointments = _uow.Students.Find(x => x.Appointments != null)
                                 .Select(x => x.Appointments.Where(a => a.Teacher.Id == teacherId && a.Date.Date.Equals(filterDate.Date)));
-
-            var temp = appointments.ToList().SelectMany(x => x);
-            return
-                temp.Select(
-                    x =>
-                    new Site.ViewModels.Appointment.NewAppointmentViewModel {
-                        SelectedTeacherId = teacherId,
-                        Topics = x.Course.Topics.ToDictionary(y => y.Id, z => z.Name),
-                        Date = x.Date,
-                        StartTime = x.StartTime
-                    });
+            return (appointments.ToList().SelectMany(x => x));
+            /* var temp = appointments.ToList().SelectMany(x => x);
+             return
+                 temp.Select(
+                     x =>
+                     new Site.ViewModels.Appointment.NewAppointmentViewModel {
+                         SelectedTeacherId = teacherId,
+                         Topics = x.Course.Topics.ToDictionary(y => y.Id, z => z.Name),
+                         Date = x.Date,
+                         StartTime = x.StartTime
+                     });*/
             // }
         }
 
@@ -89,15 +110,16 @@ namespace StudentTracker.Services.Appointment {
         }
 
 
-        public void SaveAppointment(NewAppointmentViewModel model) {
-            Models.Appointment appointment = new Models.Appointment();
-            appointment.StartTime = model.StartTime;
-            appointment.EndTime = model.EndTime;
-            appointment.Teacher.Id = model.SelectedTeacherId;
-            appointment.Date = model.Date;
-            appointment.Duration = (float)model.EndTime.SubtractFrom(model.StartTime);
-            appointment.Course = _uow.Topics.FindById(model.SelectedTopicId).course;
-            _uow.Appointments.Add(appointment);
+        public void SaveAppointment(Models.Appointment model, int topicId, int teacherId, int studentId, StudentTracker.Models.Time sTime, StudentTracker.Models.Time eTime) {
+
+            model.Teacher = _uow.Teachers.FindById(teacherId);
+            model.Duration = (float)TimeService.SubtractFrom(eTime, sTime);
+            model.Topic = _uow.Topics.FindById(topicId);
+            model.Students=new List<Student>();
+            model.Students.Add(_uow.Students.FindById(studentId));
+            model.StartTime = sTime;
+            model.EndTime = eTime;
+            _uow.Appointments.Add(model);
             _uow.Appointments.SaveChanges();
 
 

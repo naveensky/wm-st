@@ -16,5 +16,8 @@ namespace StudentTracker.Models {
         
         [Required]
         public string Mobile { get; set; }
+
+        [Required]
+        public virtual ICollection<Appointment> Appointments { get; set; }
     }
 }
