@@ -15,16 +15,20 @@ namespace StudentTracker.Site.ViewModels.Appointment {
     public class NewAppointmentViewModel {
         public int Id { get; set; }
         public StudentViewModel Student { get; set; }
+        [Display(Name = "Topic")]
         public int TopicId { get; set; }
+        [Display(Name = "Teacher")]
         public int TeacherId { get; set; }
         [Display(Name = "Teacher")]
         public IDictionary<int, string> Teachers { get; set; }
+        [Display(Name = "Teacher")]
         public int SelectedTeacherId { get; set; }
         public DateTime Date { get; set; }
         public string StartTime { get; set; }
         [Required]
         //[Range(0.5, 9, ErrorMessage = "A class has to be at least of 30 mints and maximum of 9 hours")]
         public string EndTime { get; set; }
+        [Display(Name = "Topic")]
         public IDictionary<int,string> Topic { get; set; }
         // public IDictionary<int, string> Topics { get; set; }
         //public int SelectedTopicId { get; set; }

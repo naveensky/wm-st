@@ -51,6 +51,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentTracker.Test", "Stud
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentTracker.Services.Time", "StudentTracker.Services.Time\StudentTracker.Services.Time.csproj", "{E821125B-312C-40FB-B5CB-09BD5AB6A16B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentTracker.Service.Topic", "StudentTracker.Service.Topic\StudentTracker.Service.Topic.csproj", "{71E29C56-C783-4750-AB79-B84570ABA270}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = StudentTracker1.vsmdi
@@ -124,6 +126,10 @@ Global
 		{E821125B-312C-40FB-B5CB-09BD5AB6A16B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E821125B-312C-40FB-B5CB-09BD5AB6A16B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E821125B-312C-40FB-B5CB-09BD5AB6A16B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{71E29C56-C783-4750-AB79-B84570ABA270}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71E29C56-C783-4750-AB79-B84570ABA270}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71E29C56-C783-4750-AB79-B84570ABA270}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71E29C56-C783-4750-AB79-B84570ABA270}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -143,6 +149,7 @@ Global
 		{C08EB103-42B7-4C1F-A66F-A8AC6AB1510E} = {B86273AB-6BFF-4E6B-AFA3-5FE95F31AACC}
 		{E7E9E649-F3F9-4ECE-A596-252B7A52AC03} = {B86273AB-6BFF-4E6B-AFA3-5FE95F31AACC}
 		{E821125B-312C-40FB-B5CB-09BD5AB6A16B} = {B86273AB-6BFF-4E6B-AFA3-5FE95F31AACC}
+		{71E29C56-C783-4750-AB79-B84570ABA270} = {B86273AB-6BFF-4E6B-AFA3-5FE95F31AACC}
 		{E7FE54E3-5836-48C2-8BFB-4AA25D461A76} = {8BF195A5-87BC-40FE-8675-F6A63B9F40EA}
 	EndGlobalSection
 EndGlobal

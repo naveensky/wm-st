@@ -69,11 +69,13 @@ namespace StudentTracker.Services.Appointment {
 
         public IEnumerable<Models.Appointment> GetAppointmentForTeacher(int teacherId) {
             //using (var students = new MongoRepository<Student>(CoreService.GetServer())) {
-            var appointments = _uow.Students.Find(x => x.Appointments != null)
-                                        .Select(x => x.Appointments.Where(y => y.Teacher.Id == teacherId));
-            return (appointments.ToList().SelectMany(x => x));
-
-            var temp = appointments.ToList().SelectMany(x => x);
+            var students = _uow.Students.Fetch().ToList();
+           
+            var appointments = students.Where(x => x.Appointments != null).Select(x => x.Appointments.Where(y => y.Teacher.Id == teacherId)).SelectMany(x => x);
+           
+           return appointments;
+            return null;
+            //var temp = appointments.ToList().SelectMany(x => x);
             /*   return
                    temp.Select(
                        x =>
@@ -110,13 +112,13 @@ namespace StudentTracker.Services.Appointment {
         }
 
 
-        public void SaveAppointment(Models.Appointment model, int topicId, int teacherId, int studentId, StudentTracker.Models.Time sTime, StudentTracker.Models.Time eTime) {
+        public void SaveAppointment(Models.Appointment model, int topicId, int teacherId, IList<int> studentId, StudentTracker.Models.Time sTime, StudentTracker.Models.Time eTime) {
 
             model.Teacher = _uow.Teachers.FindById(teacherId);
             model.Duration = (float)TimeService.SubtractFrom(eTime, sTime);
             model.Topic = _uow.Topics.FindById(topicId);
-            model.Students=new List<Student>();
-            model.Students.Add(_uow.Students.FindById(studentId));
+           // model.Students=new List<Student>();
+            model.Students = studentId.Select(x => _uow.Students.FindById(x)).ToList();
             model.StartTime = sTime;
             model.EndTime = eTime;
             _uow.Appointments.Add(model);

@@ -131,5 +131,11 @@ namespace StudentTracker.Services.Student {
         /*  public IEnumerable<Models.Student> ConvetToViewModel(IEnumerable<Models.Student> enumerable) {
               return (enumerable.Select(x => Site.ViewModels.Student.Student { Id = x.Id, Name = x.Name, Roll = x.Roll }));
           }*/
+
+        public IEnumerable<Models.Student> GetStudentsByTopic(int topicId) {
+            int couseId=_uow.Topics.FindById(topicId).Course.Id;
+            var students = _uow.Students.Find(x => x.Course.Id == couseId);
+            return students;
+        }
     }
 }

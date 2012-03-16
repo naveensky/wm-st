@@ -6,9 +6,12 @@ using System.Web.Mvc;
 using Norm;
 using StudentTracker.Mappings;
 //using StudentTracker.Services.Appointment;
+using StudentTracker.Services.Appointment;
 using StudentTracker.Services.Core;
 using StudentTracker.Services.Teacher;
+using StudentTracker.Services.Time;
 using StudentTracker.Site.ViewModels;
+using StudentTracker.Site.ViewModels.Appointment;
 using StudentTracker.Site.ViewModels.Teacher;
 
 namespace StudentTracker.Site.Controllers {
@@ -18,11 +21,13 @@ namespace StudentTracker.Site.Controllers {
 
         private TeacherService _teacherSvc;
         private StaticDataService _staticDataSvc;
-       // private AppointmentService _appSvc;
-        public TeacherController(TeacherService teacherSvc, StaticDataService staticDataSvc/*, AppointmentService appSvc*/) {
+        private AppointmentService _appSvc;
+        private TimeService _timeService;
+        public TeacherController(TeacherService teacherSvc, StaticDataService staticDataSvc, AppointmentService appSvc,TimeService timeService) {
             _teacherSvc = teacherSvc;
             _staticDataSvc = staticDataSvc;
-         //   _appSvc = appSvc;
+            _appSvc = appSvc;
+            _timeService = timeService;
         }
 
 
@@ -31,26 +36,26 @@ namespace StudentTracker.Site.Controllers {
             return View(model);
         }
 
-      /*  public ActionResult Appointments(int id) {
-            var model = new AppointmentViewModel {
-                Appointments = _appSvc.GetAppointmentForTeacher(id).Select(x=>x.MapToView()),
+        public ActionResult Appointments(int id) {
+            var model = new StudentTracker.Site.ViewModels.Teacher.AppointmentViewModel {
+                Appointments = _appSvc.GetAppointmentForTeacher(id).Select(x=> new TeacherAppointModel{Date=x.Date,StartTime=x.StartTime.ToString(),EndTime=x.EndTime.ToString(),Topic=x.Topic.Name}),
                 Teacher = _staticDataSvc.GetTeacher(id).MapToView()
             };
 
             return View(model);
         }
-
+        
         [HttpPost]
         public ActionResult Appointments(AppointmentViewModel viewModel) {
             var model = new AppointmentViewModel {
                 Appointments = viewModel.FilterDate == null ?
-                        _appSvc.GetAppointmentForTeacher(viewModel.Teacher.Id).Select(x => x.MapToView()) :
-                        _appSvc.GetAppointmentForTeacher(viewModel.Teacher.Id, viewModel.FilterDate.Value).Select(x => x.MapToView()),
+                        _appSvc.GetAppointmentForTeacher(viewModel.Teacher.Id).Select(x=> new TeacherAppointModel{Date=x.Date,StartTime=x.StartTime.ToString(),EndTime=x.EndTime.ToString(),Topic=x.Topic.Name}) :
+                        _appSvc.GetAppointmentForTeacher(viewModel.Teacher.Id).Select(x=> new TeacherAppointModel{Date=x.Date,StartTime=x.StartTime.ToString(),EndTime=x.EndTime.ToString(),Topic=x.Topic.Name}).Where(x=>x.Date==viewModel.FilterDate),
                 FilterDate = viewModel.FilterDate,
                 Teacher = _staticDataSvc.GetTeacher(viewModel.Teacher.Id).MapToView()
             };
             return View(model);
-        }*/
+        }
 
         public ActionResult Create() {
             return View();

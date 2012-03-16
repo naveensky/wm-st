@@ -60,6 +60,7 @@ namespace StudentTracker.Site.App_Start {
             kernel.Bind<Services.Student.StudentService>().ToSelf();
             kernel.Bind<Services.Teacher.TeacherService>().ToSelf();
             kernel.Bind<Services.User.UserService>().ToSelf();
+            kernel.Bind<Service.Topic.TopicService>().ToSelf();
             kernel.Bind<Repository.IRepository<Student>>().To
                 <StudentTracker.Repository.Sql.SqlRepository<Student>>();
             kernel.Bind<Repository.IRepository<Teacher>>().To

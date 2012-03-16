@@ -1,0 +1,76 @@
+﻿@model StudentTracker.Site.ViewModels.Appointment.AppointmentViewModels
+
+@{
+    ViewBag.Title = "CreateAppointment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>CreateAppointment</h2>
+
+@section head{
+   <script src="" type="text/javascript"></script>
+
+  <script src="/Content/Scripts/chosen.jquery.min.js" type="text/javascript"></script>
+
+  <script type="text/javascript">
+
+      $(function () {
+          $('.chzn-select').chosen();
+      });
+ </script>
+ 
+
+}
+
+@using (Html.BeginForm("SaveAppintment", "Appointment", FormMethod.Post)) {
+    @Html.ValidationSummary(true)
+    <fieldset>
+        
+        <legend>Create New Appointment</legend>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TopicId)
+        </div>
+       
+        <div class="editor-field">
+            @Html.DropDownListFor(model => model.TopicId, new SelectList(Model.Topics, "Key", "Value"), new {@readonly="readonly"})
+            
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TeacherId)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(model => model.TeacherId, new SelectList(Model.Teachers, "Key", "Value"))
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Date)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.Date, new {@class = "date"})
+            @Html.ValidationMessageFor(m => m.Date)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.StartTime)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.StartTime)
+            @Html.ValidationMessageFor(m => m.StartTime)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.EndTime)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.EndTime)
+            @Html.ValidationMessageFor(m => m.EndTime)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.StudentsId)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(model => model.StudentsId, new SelectList(Model.Students, "Key", "Value"), new {multiple = "multiple", @class = "chzn-select", data_placeholder = "Choose at least one student", style = "width:150px"})
+        </div>
+        
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}

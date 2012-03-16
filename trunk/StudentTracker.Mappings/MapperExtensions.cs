@@ -79,6 +79,10 @@ namespace StudentTracker.Mappings {
         public static Site.ViewModels.Student.AppointmentViewModel MapToView(this AppointMentList appointMentLists) {
             return Mapper.Map<AppointMentList,Site.ViewModels.Student.AppointmentViewModel>(appointMentLists);
         }
+
+        public static Appointment MapToDomain(this AppointmentViewModels appointmentViewModels) {
+            return Mapper.Map<AppointmentViewModels,Appointment>(appointmentViewModels);
+        }
         public static void ConfigureMappings() {
             Mapper.CreateMap<Course, StudentTracker.Site.ViewModels.Common.CourseViewModel>()
                 .ForMember(d => d.Topics, s => s.MapFrom(src => src.Topics));
@@ -101,6 +105,7 @@ namespace StudentTracker.Mappings {
             Mapper.CreateMap<UserViewModel, User>();
             Mapper.CreateMap<TimeViewModel, Time>();
             Mapper.CreateMap<AppointMentList,Site.ViewModels.Student.AppointmentViewModel>();
+            Mapper.CreateMap<AppointmentViewModels, Appointment>().ForMember(d => d.Topic, s => s.Ignore()).ForMember(d => d.Teacher, s => s.Ignore()).ForMember(d => d.Duration, s => s.Ignore()).ForMember(d => d.Students, s => s.Ignore()).ForMember(d => d.StartTime, s => s.Ignore()).ForMember(d => d.EndTime, d => d.Ignore());
             Mapper.AssertConfigurationIsValid();
         }
 

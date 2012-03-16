@@ -7,6 +7,7 @@ namespace StudentTracker.Site.ViewModels.Student {
     public class StudentViewModel {
         public int Id { get; set; }
         [Required]
+        [Display(Name = "Student")]
         public string Name { get; set; }
         [Display(Name = "Roll No.")]
         public string Roll { get; set; }

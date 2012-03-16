@@ -61,7 +61,7 @@ namespace OnLineStore.Controllers {
         // GET: /Account/Register
 
         public ActionResult Register() {
-            if (_userService.GetUserCenter() == null)
+            if (_userService.GetCurrentUser() == null)
             return View();
             else
                 return RedirectToAction("List", "Student");
