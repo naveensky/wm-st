@@ -56,7 +56,6 @@
     <Compile Include="StudyCenter.cs" />
     <Compile Include="Teacher.cs" />
     <Compile Include="Time.cs" />
-    <Compile Include="TimeSlot.cs" />
     <Compile Include="Topic.cs" />
     <Compile Include="User.cs" />
   </ItemGroup>

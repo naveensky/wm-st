@@ -33,6 +33,7 @@ namespace StudentTracker.Site.Controllers {
             var model = new StudentRegisterViewModel {
                 Courses = _staticData.GetCourses().ToDictionary(x => x.Id, y => y.Name),
                 StudyCenters = _staticData.GetStudyCenters().ToDictionary(x => x.Id, y => y.Name),
+                //RegisterDate = DateTime.Now
             };
 
             return View(model);

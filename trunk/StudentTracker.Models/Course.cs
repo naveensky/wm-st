@@ -12,6 +12,6 @@ namespace StudentTracker.Models {
         [Key]
         public int Id { get; set; }
         public string Name { get; set; }
-        public virtual IEnumerable<Topic> Topics { get; set; }
+        public virtual ICollection<Topic> Topics { get; set; }
     }
 }

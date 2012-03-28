@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>CreateAppointment</h2>
+<h2>Create Appointment</h2>
 
 @section head{
    <script src="" type="text/javascript"></script>
@@ -13,8 +13,7 @@
   <script src="/Content/Scripts/chosen.jquery.min.js" type="text/javascript"></script>
 
   <script type="text/javascript">
-
-      $(function () {
+     $(function () {
           $('.chzn-select').chosen();
       });
  </script>
@@ -32,9 +31,19 @@
         </div>
        
         <div class="editor-field">
-            @Html.DropDownListFor(model => model.TopicId, new SelectList(Model.Topics, "Key", "Value"), new {@readonly="readonly"})
+            <select id="TopicId" name="TopicId" disabled="disabled" >
+                @foreach(var group in Model.Course) {
+                    <optgroup label="@group.Name">
+                        @foreach(var item in group.Topics) {
+                            <option value="@item.Id">@item.Name</option>
+                        }
+                    </optgroup>
+                }
+                
+            </select>
             
         </div>
+        @Html.HiddenFor(model=>model.TopicId, new{value=@Model.TopicId})
         <div class="editor-label">
             @Html.LabelFor(model => model.TeacherId)
         </div>
@@ -52,21 +61,19 @@
             @Html.LabelFor(model => model.StartTime)
         </div>
         <div class="editor-field">
-            @Html.TextBoxFor(model => model.StartTime)
-            @Html.ValidationMessageFor(m => m.StartTime)
+                 @Html.DropDownListFor(model => model.StartTime, new SelectList(Model.StratTimes, "Key", "Value"))
         </div>
         <div class="editor-label">
             @Html.LabelFor(model => model.EndTime)
         </div>
         <div class="editor-field">
-            @Html.TextBoxFor(model => model.EndTime)
-            @Html.ValidationMessageFor(m => m.EndTime)
+                   @Html.DropDownListFor(model => model.EndTime, new SelectList(Model.EndTimes, "Key", "Value"))
         </div>
         <div class="editor-label">
             @Html.LabelFor(model => model.StudentsId)
         </div>
         <div class="editor-field">
-            @Html.DropDownListFor(model => model.StudentsId, new SelectList(Model.Students, "Key", "Value"), new {multiple = "multiple", @class = "chzn-select", data_placeholder = "Choose at least one student", style = "width:150px"})
+            @Html.DropDownListFor(model => model.StudentsId, new SelectList(Model.Students, "Key", "Value"), new { multiple = "multiple", @class = "chzn-select", data_placeholder = "Choose at least one student", style = "width:150px" })
         </div>
         
         <p>

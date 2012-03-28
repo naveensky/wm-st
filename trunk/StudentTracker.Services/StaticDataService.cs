@@ -16,7 +16,7 @@ namespace StudentTracker.Services.Core {
             _uow = uow;
         }
         public IEnumerable<Course> GetCourses() {
-            return _uow.Courses.Fetch();
+            return _uow.Courses.Fetch().ToList();
         }
         public IEnumerable<Topic> GetTopics(int id) {
             int courseId = _uow.Students.FindById(id).Course.Id;
@@ -42,9 +42,7 @@ namespace StudentTracker.Services.Core {
             return _uow.Students.Fetch().ToList();
         }
 
-        public IEnumerable<TimeSlot> GetTimeSlots() {
-            return _uow.TimeSlots.Fetch().ToList();
-        }
+        
 
         public IEnumerable<StudyCenter> GetStudyCenters() {
             return _uow.StudyCenters.Fetch();

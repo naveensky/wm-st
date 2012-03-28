@@ -15,10 +15,10 @@
             @Html.DropDownListFor(model => model.CourseId, new SelectList(Model.Courses, "key", "value"))
             @Html.ValidationMessageFor(model => model.CourseId)
         </div>
-         <div class="editor-label">
+        <div class="editor-label">
             @Html.LabelFor(model => model.StudyCenterId)
         </div>
-         <div class="editor-field">
+        <div class="editor-field">
             @Html.DropDownListFor(model => model.StudyCenterId, new SelectList(Model.StudyCenters, "Key", "Value"))
             @Html.ValidationMessageFor(model => model.StudyCenterId)
         </div>
@@ -47,7 +47,7 @@
             @Html.LabelFor(model => model.RegisterDate)
         </div>
         <div class="editor-field">
-            @Html.TextBoxFor(model => model.RegisterDate, new { @class = "date" })
+            @Html.TextBoxFor(model => model.RegisterDate, new { @class = "date", value = DateTime.Now.ToString("dd MMM yyyy") })
             @Html.ValidationMessageFor(model => model.RegisterDate)
         </div>
         <div class="editor-label">
@@ -83,4 +83,4 @@
             <input type="submit" value="Create" />
         </p>
     </fieldset>
-} 
+}

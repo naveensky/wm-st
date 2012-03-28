@@ -39,7 +39,8 @@ namespace StudentTracker.Site.Controllers {
         public ActionResult Appointments(int id) {
             var model = new StudentTracker.Site.ViewModels.Teacher.AppointmentViewModel {
                 Appointments = _appSvc.GetAppointmentForTeacher(id).Select(x=> new TeacherAppointModel{Date=x.Date,StartTime=x.StartTime.ToString(),EndTime=x.EndTime.ToString(),Topic=x.Topic.Name}),
-                Teacher = _staticDataSvc.GetTeacher(id).MapToView()
+                Teacher = _staticDataSvc.GetTeacher(id).MapToView(),
+                FilterDate = DateTime.Now
             };
 
             return View(model);

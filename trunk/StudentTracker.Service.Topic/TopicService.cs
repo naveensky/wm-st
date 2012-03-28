@@ -13,6 +13,10 @@ namespace StudentTracker.Service.Topic {
 
         public IEnumerable<Models.Topic> GetTopics() {
             return _uow.Topics.Fetch();
-        } 
+        }
+
+        public ICollection<Models.Topic> GetTopicsByCourse(int id) {
+          return  _uow.Topics.Fetch().Where(x => x.Course.Id == id).ToList();
+        }
     }
 }

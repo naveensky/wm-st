@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="Account\AccountModels.cs" />
     <Compile Include="Account\RegisterViewModel.cs" />
+    <Compile Include="Appointment\Appointmentlist.cs" />
     <Compile Include="Appointment\AppointmentViewModels.cs" />
     <Compile Include="Appointment\StudentListViewModel.cs" />
     <Compile Include="Appointment\NewAppointmentViewModel.cs" />

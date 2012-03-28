@@ -6,14 +6,13 @@ using StudentTracker.Models;
 
 namespace StudentTracker.Repository {
   public  class SqlUnitOfWork : ISqlUnitOfWork {
-      public SqlUnitOfWork(IRepository<Student> student, IRepository<Teacher> teachers, IRepository<Course> course, IRepository<Appointment> appointments, IRepository<StudyCenter> studyCenters, IRepository<Time> time, IRepository<TimeSlot> timeSlots, IRepository<User> users, IRepository<Topic> topics) {
+      public SqlUnitOfWork(IRepository<Student> student, IRepository<Teacher> teachers, IRepository<Course> course, IRepository<Appointment> appointments, IRepository<StudyCenter> studyCenters, IRepository<Time> time, IRepository<User> users, IRepository<Topic> topics) {
             Students = student;
             Teachers = teachers;
             Courses = course;
             Appointments = appointments;
             StudyCenters = studyCenters;
             Times = time;
-            TimeSlots = timeSlots;
             Users = users;
             Topics = topics;
       }
@@ -33,8 +32,6 @@ namespace StudentTracker.Repository {
         
 
         public IRepository<Time> Times {get ;set ; }
-
-        public IRepository<TimeSlot> TimeSlots { get;set; }
 
         public IRepository<User> Users {get ;set; }
 

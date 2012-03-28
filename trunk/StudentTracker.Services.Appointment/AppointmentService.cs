@@ -28,7 +28,8 @@ namespace StudentTracker.Services.Appointment {
         }
 
         public IEnumerable<Models.AppointMentList> GetAppointmentsForStudent(int studentId) {
-            var appointments = _uow.Students.Single(x => x.Id == studentId).Appointments;
+            var student = _uow.Students.FindById(studentId);
+            var appointments = _uow.Students.FindById(studentId).Appointments;
             if (appointments == null)
                 return null;
             else {
@@ -69,9 +70,9 @@ namespace StudentTracker.Services.Appointment {
 
         public IEnumerable<Models.Appointment> GetAppointmentForTeacher(int teacherId) {
             //using (var students = new MongoRepository<Student>(CoreService.GetServer())) {
-            var students = _uow.Students.Fetch().ToList();
+            var appointment = _uow.Appointments.Fetch().ToList();
            
-            var appointments = students.Where(x => x.Appointments != null).Select(x => x.Appointments.Where(y => y.Teacher.Id == teacherId)).SelectMany(x => x);
+            var appointments = appointment.Where(x => x.Teacher.Id==teacherId);
            
            return appointments;
             return null;
@@ -112,10 +113,9 @@ namespace StudentTracker.Services.Appointment {
         }
 
 
-        public void SaveAppointment(Models.Appointment model, int topicId, int teacherId, IList<int> studentId, StudentTracker.Models.Time sTime, StudentTracker.Models.Time eTime) {
+        public void SaveAppointment(Models.Appointment model, int topicId, int teacherId, IList<int> studentId, DateTime sTime, DateTime eTime) {
 
             model.Teacher = _uow.Teachers.FindById(teacherId);
-            model.Duration = (float)TimeService.SubtractFrom(eTime, sTime);
             model.Topic = _uow.Topics.FindById(topicId);
            // model.Students=new List<Student>();
             model.Students = studentId.Select(x => _uow.Students.FindById(x)).ToList();
@@ -125,6 +125,11 @@ namespace StudentTracker.Services.Appointment {
             _uow.Appointments.SaveChanges();
 
 
+        }
+
+        public IEnumerable<Models.Appointment> GetAllAppointment() {
+            var appointments = _uow.Appointments.Fetch().ToList();
+            return appointments;
         }
     }
 }

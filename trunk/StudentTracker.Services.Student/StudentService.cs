@@ -46,6 +46,7 @@ namespace StudentTracker.Services.Student {
 
         public IEnumerable<Models.Student> GetStudents(int count) {
             var studyCentreId = _userService.GetCurrentUser().StudyCenter.Id;
+           
             return (_uow.Students.Find(x => x.StudyCenter.Id == studyCentreId).Take(count).OrderBy(x => x.Name).ToList());
             /*
             var temp = _uow.Students.Find(x => x.StudyCenter.Id == studyCentreId).Take(count).OrderBy(x => x.Name).ToList();
@@ -54,6 +55,7 @@ namespace StudentTracker.Services.Student {
 
         public IEnumerable<Models.Student> SearchStudents(string studentName, string rollNo, int courseId) {
             var studyCentreId = _userService.GetCurrentUser().StudyCenter.Id;
+            //var temp = _uow.Students.Fetch();
             var students = _uow.Students.Find(x => x.StudyCenter.Id == studyCentreId);
 
             //filter by studentname if not empty
