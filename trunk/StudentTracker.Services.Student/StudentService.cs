@@ -135,8 +135,9 @@ namespace StudentTracker.Services.Student {
           }*/
 
         public IEnumerable<Models.Student> GetStudentsByTopic(int topicId) {
+            var studyCentreId = _userService.GetCurrentUser().StudyCenter.Id;
             int couseId=_uow.Topics.FindById(topicId).Course.Id;
-            var students = _uow.Students.Find(x => x.Course.Id == couseId);
+            var students = _uow.Students.Find(x => x.Course.Id == couseId&&x.StudyCenter.Id==studyCentreId);
             return students;
         }
     }

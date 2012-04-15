@@ -62,7 +62,7 @@
     <Compile Include="Student\StudentViewModel.cs" />
     <Compile Include="Student\StudentDownloadViewModel.cs" />
     <Compile Include="Student\StudentEditViewModel.cs" />
-    <Compile Include="Student\StudentListViewModel.cs" />
+    <Compile Include="Student\ListViewModel.cs" />
     <Compile Include="Student\StudentRegisterViewModel.cs" />
     <Compile Include="Common\StudyCenterViewModel.cs" />
     <Compile Include="Teacher\AppointmentViewModel.cs" />

@@ -8,7 +8,6 @@ using StudentTracker.Site.ViewModels.User;
 using StudentTracker.Services.Core;
 using StudentTracker.Services.User;
 using StudentTracker.Services.Authentication;
-using Norm;
 using StudentTracker.Mappings;
 
 namespace StudentTracker.Site.Controllers {

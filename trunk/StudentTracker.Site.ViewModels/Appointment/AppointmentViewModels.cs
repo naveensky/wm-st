@@ -33,6 +33,7 @@ namespace StudentTracker.Site.ViewModels.Appointment {
       [Display(Name = "Student")]
       public IDictionary<int, string> Students { get; set; }
       [Required]
+      [Display(Name = "Students")]
       public IList<int> StudentsId { get; set; } 
   }
 }

@@ -74,8 +74,8 @@ namespace StudentTracker.Services.Appointment {
            
             var appointments = appointment.Where(x => x.Teacher.Id==teacherId);
            
-           return appointments;
-            return null;
+           return appointments.OrderByDescending(x=>x.Date);
+            
             //var temp = appointments.ToList().SelectMany(x => x);
             /*   return
                    temp.Select(

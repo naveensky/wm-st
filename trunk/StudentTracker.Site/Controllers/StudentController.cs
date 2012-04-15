@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Norm;
 using StudentTracker.Mappings;
 using StudentTracker.Services.Core;
 using StudentTracker.Services.Student;
@@ -51,6 +50,7 @@ namespace StudentTracker.Site.Controllers {
                 Students = _studentService.GetStudents(100).Select(x => new StudentViewModel { Id = x.Id, BooksGiven = x.BooksGiven, Mobile = x.Mobile, Course = x.Course.MapToView(), Name = x.Name, Roll = x.Roll, SoftwareGiven = x.SoftwareGiven }),
                 Courses = _staticData.GetCourses().ToDictionary(x => x.Id, y => y.Name),
             };
+            model.Courses.Add(0, "All Course");
             return View(model);
         }
 
@@ -64,8 +64,8 @@ namespace StudentTracker.Site.Controllers {
                 RollNoSearchText = studentSearch.RollNoSearchText,
                 StudentNameSearchText = studentSearch.StudentNameSearchText,
                 Courses = _staticData.GetCourses().ToDictionary(x => x.Id, y => y.Name)
-            };
-
+                };
+            model.Courses.Add(0, "All Course");
             return View(model);
         }
 

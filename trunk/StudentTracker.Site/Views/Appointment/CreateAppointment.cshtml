@@ -73,7 +73,7 @@
             @Html.LabelFor(model => model.StudentsId)
         </div>
         <div class="editor-field">
-            @Html.DropDownListFor(model => model.StudentsId, new SelectList(Model.Students, "Key", "Value"), new { multiple = "multiple", @class = "chzn-select", data_placeholder = "Choose at least one student", style = "width:150px" })
+            @Html.DropDownListFor(model => model.StudentsId, new SelectList(Model.Students, "Key", "Value"), new { multiple = "multiple", @class = "chzn-select", data_placeholder = "Choose at least one student", style = "width:100%" })
         </div>
         
         <p>

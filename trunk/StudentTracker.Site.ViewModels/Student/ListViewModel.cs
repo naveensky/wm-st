@@ -12,8 +12,9 @@ namespace StudentTracker.Site.ViewModels.Student {
         [Display(Name = "Search By Student Name")]
         public string StudentNameSearchText { get; set; }
 
-        [Display(Name = "Filter by Course")]
-        public int CourseId { get; set; }
+       [Display(Name = "Filter by Course")]
+       public int CourseId { get; set; }
+       
        public IDictionary<int ,string> Courses { get; set; }
 
        public bool IsSearchEmpty { 

@@ -39,10 +39,10 @@
                     @string.Format("{0:dd MMM yyyy}", app.Date)
                 </td>
                 <td>
-                    @app.StartTime
+                    @string.Format("{0:hh:mm tt}",app.StartTime)
                 </td>
                 <td>
-                    @app.EndTime
+                   @string.Format("{0:hh:mm tt}", app.EndTime)
                 </td>
                 <td>
                     @app.Topic
