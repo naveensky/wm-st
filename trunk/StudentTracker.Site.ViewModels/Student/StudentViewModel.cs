@@ -7,12 +7,14 @@ namespace StudentTracker.Site.ViewModels.Student {
     public class StudentViewModel {
         public int Id { get; set; }
         [Required]
+        [Display(Name = "Student")]
         public string Name { get; set; }
         [Display(Name = "Roll No.")]
         public string Roll { get; set; }
         public DateTime RegisterDate { get; set; }
 
         public bool SoftwareGiven { get; set; }
+        [Required]
         public string Mobile { get; set; }
         public bool BooksGiven { get; set; }
         public string Email { get; set; }
@@ -22,6 +24,7 @@ namespace StudentTracker.Site.ViewModels.Student {
         public DateTime ModifiedDate { get; set; }
         public bool IsDownloaded { get; set; }
         public string WmPrepUsername { get; set; }
+
         public virtual Common.StudyCenterViewModel StudyCenter { get; set; }
         public ViewModels.Common.CourseViewModel Course { get; set; }
     }

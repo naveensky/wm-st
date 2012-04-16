@@ -10,7 +10,7 @@
         <label>
             Filter by Date</label>
         @Html.HiddenFor(m => m.Teacher.Id)
-        <input type="text" name="FilterDate" class="date" value='@string.Format("{0:dd MMM yyyy}", Model.FilterDate)' /> <br />
+        <input type="text" name="FilterDate" class="date" value='@string.Format("{0:dd MMM yyyy}", Model.FilterDate)' />
         <input type="submit" value="Fiter" />
     }
 </p>
@@ -21,7 +21,10 @@
                 Date
             </th>
             <th>
-                Duration (hrs)
+                Start Time
+            </th>
+            <th>
+                End Time
             </th>
             <th>
                 Course
@@ -36,10 +39,13 @@
                     @string.Format("{0:dd MMM yyyy}", app.Date)
                 </td>
                 <td>
-                    @decimal.Round(app.StartTime.SubtractFrom(@app.EndTime), 2)
+                    @string.Format("{0:hh:mm tt}",app.StartTime)
                 </td>
                 <td>
-                    @app.Course.Name
+                   @string.Format("{0:hh:mm tt}", app.EndTime)
+                </td>
+                <td>
+                    @app.Topic
                 </td>
             </tr>
             }

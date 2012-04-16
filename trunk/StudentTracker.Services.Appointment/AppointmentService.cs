@@ -28,7 +28,8 @@ namespace StudentTracker.Services.Appointment {
         }
 
         public IEnumerable<Models.AppointMentList> GetAppointmentsForStudent(int studentId) {
-            var appointments = _uow.Students.Single(x => x.Id == studentId).Appointments;
+            var student = _uow.Students.FindById(studentId);
+            var appointments = _uow.Students.FindById(studentId).Appointments;
             if (appointments == null)
                 return null;
             else {
@@ -69,11 +70,13 @@ namespace StudentTracker.Services.Appointment {
 
         public IEnumerable<Models.Appointment> GetAppointmentForTeacher(int teacherId) {
             //using (var students = new MongoRepository<Student>(CoreService.GetServer())) {
-            var appointments = _uow.Students.Find(x => x.Appointments != null)
-                                        .Select(x => x.Appointments.Where(y => y.Teacher.Id == teacherId));
-            return (appointments.ToList().SelectMany(x => x));
-
-            var temp = appointments.ToList().SelectMany(x => x);
+            var appointment = _uow.Appointments.Fetch().ToList();
+           
+            var appointments = appointment.Where(x => x.Teacher.Id==teacherId);
+           
+           return appointments.OrderByDescending(x=>x.Date);
+            
+            //var temp = appointments.ToList().SelectMany(x => x);
             /*   return
                    temp.Select(
                        x =>
@@ -110,19 +113,23 @@ namespace StudentTracker.Services.Appointment {
         }
 
 
-        public void SaveAppointment(Models.Appointment model, int topicId, int teacherId, int studentId, StudentTracker.Models.Time sTime, StudentTracker.Models.Time eTime) {
+        public void SaveAppointment(Models.Appointment model, int topicId, int teacherId, IList<int> studentId, DateTime sTime, DateTime eTime) {
 
             model.Teacher = _uow.Teachers.FindById(teacherId);
-            model.Duration = (float)TimeService.SubtractFrom(eTime, sTime);
             model.Topic = _uow.Topics.FindById(topicId);
-            model.Students=new List<Student>();
-            model.Students.Add(_uow.Students.FindById(studentId));
+           // model.Students=new List<Student>();
+            model.Students = studentId.Select(x => _uow.Students.FindById(x)).ToList();
             model.StartTime = sTime;
             model.EndTime = eTime;
             _uow.Appointments.Add(model);
             _uow.Appointments.SaveChanges();
 
 
+        }
+
+        public IEnumerable<Models.Appointment> GetAllAppointment() {
+            var appointments = _uow.Appointments.Fetch().ToList();
+            return appointments;
         }
     }
 }

@@ -52,6 +52,10 @@ namespace StudentTracker.Mappings {
             return Mapper.Map<Models.Teacher, TeacherViewModel>(teacher);
         }
 
+        public static TopicViewModel MapToView(this Models.Topic topic) {
+            return Mapper.Map<Models.Topic, TopicViewModel>(topic);
+        }
+
         public static Appointment MapToDomain(this NewAppointmentViewModel newAppointmentViewModel) {
             return Mapper.Map<NewAppointmentViewModel, Appointment>(newAppointmentViewModel);
         }
@@ -79,6 +83,10 @@ namespace StudentTracker.Mappings {
         public static Site.ViewModels.Student.AppointmentViewModel MapToView(this AppointMentList appointMentLists) {
             return Mapper.Map<AppointMentList,Site.ViewModels.Student.AppointmentViewModel>(appointMentLists);
         }
+
+        public static Appointment MapToDomain(this AppointmentViewModels appointmentViewModels) {
+            return Mapper.Map<AppointmentViewModels,Appointment>(appointmentViewModels);
+        }
         public static void ConfigureMappings() {
             Mapper.CreateMap<Course, StudentTracker.Site.ViewModels.Common.CourseViewModel>()
                 .ForMember(d => d.Topics, s => s.MapFrom(src => src.Topics));
@@ -95,12 +103,14 @@ namespace StudentTracker.Mappings {
              .ForMember(d=>d.EndTime,s=>s.Ignore()).ForMember(d=>d.StartTime,s=>s.Ignore()).ForMember(d=>d.SelectedTeacherId,s=>s.Ignore())
              .ForMember(d=>d.Teachers,s=>s.Ignore()).ForMember(d=>d.Student,s=>s.Ignore());
             Mapper.CreateMap<Models.Teacher, TeacherViewModel>();
-            Mapper.CreateMap<NewAppointmentViewModel, Appointment>().ForMember(d => d.Topic, s => s.Ignore()).ForMember(d => d.Teacher, s => s.Ignore()).ForMember(d => d.Duration, s => s.Ignore()).ForMember(d=>d.Students,s=>s.Ignore()).ForMember(d=>d.StartTime,s=>s.Ignore()).ForMember(d=>d.EndTime,d=>d.Ignore());
+            Mapper.CreateMap<NewAppointmentViewModel, Appointment>().ForMember(d => d.Topic, s => s.Ignore()).ForMember(d => d.Teacher, s => s.Ignore()).ForMember(d=>d.Students,s=>s.Ignore()).ForMember(d=>d.StartTime,s=>s.Ignore()).ForMember(d=>d.EndTime,d=>d.Ignore());
             Mapper.CreateMap<TeacherViewModel, Teacher>().ForMember(d=>d.Appointments,s=>s.Ignore());
             Mapper.CreateMap<IEnumerable<StudyCenter>, IEnumerable<StudyCenterViewModel>>();
             Mapper.CreateMap<UserViewModel, User>();
             Mapper.CreateMap<TimeViewModel, Time>();
             Mapper.CreateMap<AppointMentList,Site.ViewModels.Student.AppointmentViewModel>();
+            Mapper.CreateMap<AppointmentViewModels, Appointment>().ForMember(d => d.Topic, s => s.Ignore()).ForMember(d => d.Teacher, s => s.Ignore()).ForMember(d => d.Students, s => s.Ignore()).ForMember(d => d.StartTime, s => s.Ignore()).ForMember(d => d.EndTime, d => d.Ignore());
+            Mapper.CreateMap<Topic, TopicViewModel>();
             Mapper.AssertConfigurationIsValid();
         }
 

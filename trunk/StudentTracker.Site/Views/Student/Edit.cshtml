@@ -77,8 +77,8 @@
             @Html.LabelFor(model => model.StudentViewModel.WmPrepUsername)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.StudentViewModel.WmPrepUsername)
-            @Html.ValidationMessageFor(model => model.StudentViewModel.WmPrepUsername)
+             <input type="text" value='@Model.StudentViewModel.WmPrepUsername' disabled="disabled" class="text-box single-line" id="StudentViewModel_WmPrepUsername" name="StudentViewModel.WmPrepUsername"/>
+           @* @Html.ValidationMessageFor(model => model.StudentViewModel.WmPrepUsername)*@
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.StudentViewModel.BooksGiven) @Html.LabelFor(model => model.StudentViewModel.BooksGiven)

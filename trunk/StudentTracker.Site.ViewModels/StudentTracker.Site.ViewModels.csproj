@@ -50,8 +50,11 @@
   <ItemGroup>
     <Compile Include="Account\AccountModels.cs" />
     <Compile Include="Account\RegisterViewModel.cs" />
-    <Compile Include="Appointment\ListViewModel.cs" />
+    <Compile Include="Appointment\Appointmentlist.cs" />
+    <Compile Include="Appointment\AppointmentViewModels.cs" />
+    <Compile Include="Appointment\StudentListViewModel.cs" />
     <Compile Include="Appointment\NewAppointmentViewModel.cs" />
+    <Compile Include="Appointment\TeacherAppointModel.cs" />
     <Compile Include="Common\CourseViewModel.cs" />
     <Compile Include="Common\Load\DataViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -59,7 +62,7 @@
     <Compile Include="Student\StudentViewModel.cs" />
     <Compile Include="Student\StudentDownloadViewModel.cs" />
     <Compile Include="Student\StudentEditViewModel.cs" />
-    <Compile Include="Student\StudentListViewModel.cs" />
+    <Compile Include="Student\ListViewModel.cs" />
     <Compile Include="Student\StudentRegisterViewModel.cs" />
     <Compile Include="Common\StudyCenterViewModel.cs" />
     <Compile Include="Teacher\AppointmentViewModel.cs" />

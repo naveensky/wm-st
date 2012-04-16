@@ -51,31 +51,18 @@
     <Reference Include="Ninject.Web.Mvc">
       <HintPath>..\packages\Ninject.MVC3.2.2.2.0\lib\net40-Full\Ninject.Web.Mvc.dll</HintPath>
     </Reference>
-    <Reference Include="Norm, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Web.WebPages" />
-    <Reference Include="System.Web.Helpers" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Web.DynamicData" />
-    <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
-    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Abstractions" />
     <Reference Include="System.Web.Routing" />
-    <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
-    <Reference Include="System.Web.Services" />
-    <Reference Include="System.EnterpriseServices" />
     <Reference Include="WebActivator">
       <HintPath>..\packages\WebActivator.1.4.4\lib\net40\WebActivator.dll</HintPath>
     </Reference>
@@ -95,8 +82,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Images\add.png" />
-    <Content Include="Content\Images\cancel.png" />
     <Content Include="Content\Images\ajax-loader.gif" />
+    <Content Include="Content\Images\cancel.png" />
     <Content Include="Content\Images\cross.png" />
     <Content Include="Content\Images\delete_item.png" />
     <Content Include="Content\Images\page_excel.png" />
@@ -122,9 +109,61 @@
     <Content Include="Content\Plugin\jui\js\jquery-ui-1.8.7.custom.min.js" />
     <Content Include="Content\Plugin\timepicker\jquery-ui-timepicker.css" />
     <Content Include="Content\Plugin\timepicker\jquery.ui.timepicker-0.0.4.js" />
+    <Content Include="Content\Scripts\chosen.jquery.min.js" />
     <Content Include="Content\Scripts\common.js" />
+    <Content Include="Content\Scripts\jquery-1.4.4-vsdoc.js" />
+    <Content Include="Content\Scripts\jquery-1.4.4.js" />
+    <Content Include="Content\Scripts\jquery-1.4.4.min.js" />
+    <Content Include="Content\Scripts\jquery-ui.js" />
+    <Content Include="Content\Scripts\jquery-ui.min.js" />
+    <Content Include="Content\Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Content\Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Content\Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Content\Scripts\jquery.validate.js" />
+    <Content Include="Content\Scripts\jquery.validate.min.js" />
+    <Content Include="Content\Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Content\Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Content\Scripts\MicrosoftAjax.debug.js" />
+    <Content Include="Content\Scripts\MicrosoftAjax.js" />
+    <Content Include="Content\Scripts\MicrosoftMvcAjax.debug.js" />
+    <Content Include="Content\Scripts\MicrosoftMvcAjax.js" />
+    <Content Include="Content\Scripts\MicrosoftMvcValidation.debug.js" />
+    <Content Include="Content\Scripts\MicrosoftMvcValidation.js" />
+    <Content Include="Content\Styles\chosen.css" />
     <Content Include="Content\Styles\grid.css" />
     <Content Include="Content\Styles\main.css" />
+    <Content Include="Content\Styles\Site.css" />
+    <Content Include="Controllers\Content\Images\add.png" />
+    <Content Include="Controllers\Content\Images\cancel.png" />
+    <Content Include="Controllers\Content\Images\ajax-loader.gif" />
+    <Content Include="Controllers\Content\Images\cross.png" />
+    <Content Include="Controllers\Content\Images\delete_item.png" />
+    <Content Include="Controllers\Content\Images\page_excel.png" />
+    <Content Include="Controllers\Content\Images\table.png" />
+    <Content Include="Controllers\Content\Images\telephone.png" />
+    <Content Include="Controllers\Content\Images\tick.png" />
+    <Content Include="Controllers\Content\Images\user_edit.png" />
+    <Content Include="Controllers\Content\Plugin\jui\css\flick\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Controllers\Content\Plugin\jui\css\flick\images\ui-bg_flat_0_eeeeee_40x100.png" />
+    <Content Include="Controllers\Content\Plugin\jui\css\flick\images\ui-bg_flat_55_ffffff_40x100.png" />
+    <Content Include="Controllers\Content\Plugin\jui\css\flick\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Controllers\Content\Plugin\jui\css\flick\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Controllers\Content\Plugin\jui\css\flick\images\ui-bg_highlight-soft_100_f6f6f6_1x100.png" />
+    <Content Include="Controllers\Content\Plugin\jui\css\flick\images\ui-bg_highlight-soft_25_0073ea_1x100.png" />
+    <Content Include="Controllers\Content\Plugin\jui\css\flick\images\ui-bg_highlight-soft_50_dddddd_1x100.png" />
+    <Content Include="Controllers\Content\Plugin\jui\css\flick\images\ui-icons_0073ea_256x240.png" />
+    <Content Include="Controllers\Content\Plugin\jui\css\flick\images\ui-icons_454545_256x240.png" />
+    <Content Include="Controllers\Content\Plugin\jui\css\flick\images\ui-icons_666666_256x240.png" />
+    <Content Include="Controllers\Content\Plugin\jui\css\flick\images\ui-icons_ff0084_256x240.png" />
+    <Content Include="Controllers\Content\Plugin\jui\css\flick\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Controllers\Content\Plugin\jui\css\flick\jquery-ui-1.8.7.custom.css" />
+    <Content Include="Controllers\Content\Plugin\jui\js\jquery-1.4.4.min.js" />
+    <Content Include="Controllers\Content\Plugin\jui\js\jquery-ui-1.8.7.custom.min.js" />
+    <Content Include="Controllers\Content\Plugin\timepicker\jquery-ui-timepicker.css" />
+    <Content Include="Controllers\Content\Plugin\timepicker\jquery.ui.timepicker-0.0.4.js" />
+    <Content Include="Controllers\Content\Scripts\common.js" />
+    <Content Include="Controllers\Content\Styles\grid.css" />
+    <Content Include="Controllers\Content\Styles\main.css" />
     <Content Include="DLL\EPPlus.dll" />
     <Content Include="DLL\Microsoft.Web.Infrastructure.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -167,7 +206,59 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Global.asax" />
-    <Content Include="Content\Styles\Site.css" />
+    <Content Include="Controllers\Content\Styles\Site.css" />
+    <Content Include="Views\Content\Images\add.png" />
+    <Content Include="Views\Content\Images\ajax-loader.gif" />
+    <Content Include="Views\Content\Images\cancel.png" />
+    <Content Include="Views\Content\Images\cross.png" />
+    <Content Include="Views\Content\Images\delete_item.png" />
+    <Content Include="Views\Content\Images\page_excel.png" />
+    <Content Include="Views\Content\Images\table.png" />
+    <Content Include="Views\Content\Images\telephone.png" />
+    <Content Include="Views\Content\Images\tick.png" />
+    <Content Include="Views\Content\Images\user_edit.png" />
+    <Content Include="Views\Content\Plugin\jui\css\flick\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Views\Content\Plugin\jui\css\flick\images\ui-bg_flat_0_eeeeee_40x100.png" />
+    <Content Include="Views\Content\Plugin\jui\css\flick\images\ui-bg_flat_55_ffffff_40x100.png" />
+    <Content Include="Views\Content\Plugin\jui\css\flick\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Views\Content\Plugin\jui\css\flick\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Views\Content\Plugin\jui\css\flick\images\ui-bg_highlight-soft_100_f6f6f6_1x100.png" />
+    <Content Include="Views\Content\Plugin\jui\css\flick\images\ui-bg_highlight-soft_25_0073ea_1x100.png" />
+    <Content Include="Views\Content\Plugin\jui\css\flick\images\ui-bg_highlight-soft_50_dddddd_1x100.png" />
+    <Content Include="Views\Content\Plugin\jui\css\flick\images\ui-icons_0073ea_256x240.png" />
+    <Content Include="Views\Content\Plugin\jui\css\flick\images\ui-icons_454545_256x240.png" />
+    <Content Include="Views\Content\Plugin\jui\css\flick\images\ui-icons_666666_256x240.png" />
+    <Content Include="Views\Content\Plugin\jui\css\flick\images\ui-icons_ff0084_256x240.png" />
+    <Content Include="Views\Content\Plugin\jui\css\flick\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Views\Content\Plugin\jui\css\flick\jquery-ui-1.8.7.custom.css" />
+    <Content Include="Views\Content\Plugin\jui\js\jquery-1.4.4.min.js" />
+    <Content Include="Views\Content\Plugin\jui\js\jquery-ui-1.8.7.custom.min.js" />
+    <Content Include="Views\Content\Plugin\timepicker\jquery-ui-timepicker.css" />
+    <Content Include="Views\Content\Plugin\timepicker\jquery.ui.timepicker-0.0.4.js" />
+    <Content Include="Views\Content\Scripts\chosen.jquery.min.js" />
+    <Content Include="Views\Content\Scripts\common.js" />
+    <Content Include="Views\Content\Scripts\jquery-1.4.4-vsdoc.js" />
+    <Content Include="Views\Content\Scripts\jquery-1.4.4.js" />
+    <Content Include="Views\Content\Scripts\jquery-1.4.4.min.js" />
+    <Content Include="Views\Content\Scripts\jquery-ui.js" />
+    <Content Include="Views\Content\Scripts\jquery-ui.min.js" />
+    <Content Include="Views\Content\Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Views\Content\Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Views\Content\Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Views\Content\Scripts\jquery.validate.js" />
+    <Content Include="Views\Content\Scripts\jquery.validate.min.js" />
+    <Content Include="Views\Content\Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Views\Content\Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Views\Content\Scripts\MicrosoftAjax.debug.js" />
+    <Content Include="Views\Content\Scripts\MicrosoftAjax.js" />
+    <Content Include="Views\Content\Scripts\MicrosoftMvcAjax.debug.js" />
+    <Content Include="Views\Content\Scripts\MicrosoftMvcAjax.js" />
+    <Content Include="Views\Content\Scripts\MicrosoftMvcValidation.debug.js" />
+    <Content Include="Views\Content\Scripts\MicrosoftMvcValidation.js" />
+    <Content Include="Views\Content\Styles\chosen.css" />
+    <Content Include="Views\Content\Styles\grid.css" />
+    <Content Include="Views\Content\Styles\main.css" />
+    <Content Include="Views\Content\Styles\Site.css" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -177,28 +268,47 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Content\Scripts\jquery-1.4.4.js" />
-    <Content Include="Content\Scripts\jquery-1.4.4.min.js" />
-    <Content Include="Content\Scripts\jquery-1.4.4-vsdoc.js" />
-    <Content Include="Content\Scripts\jquery.unobtrusive-ajax.js" />
-    <Content Include="Content\Scripts\jquery.unobtrusive-ajax.min.js" />
-    <Content Include="Content\Scripts\jquery.validate.js" />
-    <Content Include="Content\Scripts\jquery.validate.min.js" />
-    <Content Include="Content\Scripts\jquery.validate.unobtrusive.js" />
-    <Content Include="Content\Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Content\Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Content\Scripts\jquery-ui.js" />
-    <Content Include="Content\Scripts\jquery-ui.min.js" />
-    <Content Include="Content\Scripts\MicrosoftAjax.js" />
-    <Content Include="Content\Scripts\MicrosoftAjax.debug.js" />
-    <Content Include="Content\Scripts\MicrosoftMvcAjax.js" />
-    <Content Include="Content\Scripts\MicrosoftMvcAjax.debug.js" />
-    <Content Include="Content\Scripts\MicrosoftMvcValidation.js" />
-    <Content Include="Content\Scripts\MicrosoftMvcValidation.debug.js" />
+    <Content Include="Controllers\Content\Scripts\jquery-1.4.4.js" />
+    <Content Include="Controllers\Content\Scripts\jquery-1.4.4.min.js" />
+    <Content Include="Controllers\Content\Scripts\jquery-1.4.4-vsdoc.js" />
+    <Content Include="Controllers\Content\Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Controllers\Content\Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Controllers\Content\Scripts\jquery.validate.js" />
+    <Content Include="Controllers\Content\Scripts\jquery.validate.min.js" />
+    <Content Include="Controllers\Content\Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Controllers\Content\Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Controllers\Content\Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Controllers\Content\Scripts\jquery-ui.js" />
+    <Content Include="Controllers\Content\Scripts\jquery-ui.min.js" />
+    <Content Include="Controllers\Content\Scripts\MicrosoftAjax.js" />
+    <Content Include="Controllers\Content\Scripts\MicrosoftAjax.debug.js" />
+    <Content Include="Controllers\Content\Scripts\MicrosoftMvcAjax.js" />
+    <Content Include="Controllers\Content\Scripts\MicrosoftMvcAjax.debug.js" />
+    <Content Include="Controllers\Content\Scripts\MicrosoftMvcValidation.js" />
+    <Content Include="Controllers\Content\Scripts\MicrosoftMvcValidation.debug.js" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <None Include="_bin_deployableAssemblies\System.Web.Mvc.dll" />
+    <None Include="_bin_deployableAssemblies\WebMatrix.WebData.xml" />
+    <None Include="_bin_deployableAssemblies\WebMatrix.WebData.dll" />
+    <None Include="_bin_deployableAssemblies\WebMatrix.Data.xml" />
+    <None Include="_bin_deployableAssemblies\WebMatrix.Data.dll" />
+    <None Include="_bin_deployableAssemblies\System.Web.WebPages.xml" />
+    <None Include="_bin_deployableAssemblies\System.Web.WebPages.Razor.xml" />
+    <None Include="_bin_deployableAssemblies\System.Web.WebPages.Razor.dll" />
+    <None Include="_bin_deployableAssemblies\System.Web.WebPages.dll" />
+    <None Include="_bin_deployableAssemblies\System.Web.WebPages.Deployment.xml" />
+    <None Include="_bin_deployableAssemblies\System.Web.WebPages.Deployment.dll" />
+    <None Include="_bin_deployableAssemblies\System.Web.WebPages.Administration.dll" />
+    <None Include="_bin_deployableAssemblies\System.Web.Razor.xml" />
+    <None Include="_bin_deployableAssemblies\System.Web.Razor.dll" />
+    <None Include="_bin_deployableAssemblies\System.Web.Helpers.xml" />
+    <None Include="_bin_deployableAssemblies\System.Web.Helpers.dll" />
+    <None Include="_bin_deployableAssemblies\NuGet.Core.dll" />
+    <None Include="_bin_deployableAssemblies\Microsoft.Web.Infrastructure.xml" />
+    <None Include="_bin_deployableAssemblies\Microsoft.Web.Infrastructure.dll" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\StudentTracker.Converters\StudentTracker.Converters.csproj">
@@ -220,6 +330,10 @@
     <ProjectReference Include="..\StudentTracker.Repository\StudentTracker.Repository.csproj">
       <Project>{61A9D591-69F8-409A-B75F-E66C4E5D8696}</Project>
       <Name>StudentTracker.Repository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StudentTracker.Service.Topic\StudentTracker.Service.Topic.csproj">
+      <Project>{71E29C56-C783-4750-AB79-B84570ABA270}</Project>
+      <Name>StudentTracker.Service.Topic</Name>
     </ProjectReference>
     <ProjectReference Include="..\StudentTracker.Services.Account\StudentTracker.Services.Account.csproj">
       <Project>{B4859031-06FE-4534-86DD-2D504D4DE930}</Project>
@@ -322,6 +436,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Account\ChangePasswordSuccess.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Appointment\Create.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Appointment\CreateAppointment.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Appointment\ListAll.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

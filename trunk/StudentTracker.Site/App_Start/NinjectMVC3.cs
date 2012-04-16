@@ -60,6 +60,7 @@ namespace StudentTracker.Site.App_Start {
             kernel.Bind<Services.Student.StudentService>().ToSelf();
             kernel.Bind<Services.Teacher.TeacherService>().ToSelf();
             kernel.Bind<Services.User.UserService>().ToSelf();
+            kernel.Bind<Service.Topic.TopicService>().ToSelf();
             kernel.Bind<Repository.IRepository<Student>>().To
                 <StudentTracker.Repository.Sql.SqlRepository<Student>>();
             kernel.Bind<Repository.IRepository<Teacher>>().To
@@ -72,9 +73,7 @@ namespace StudentTracker.Site.App_Start {
                 <StudentTracker.Repository.Sql.SqlRepository<StudyCenter>>();
             kernel.Bind<Repository.IRepository<Time>>().To
                 <StudentTracker.Repository.Sql.SqlRepository<Time>>();
-            kernel.Bind<Repository.IRepository<TimeSlot>>().To
-                <StudentTracker.Repository.Sql.SqlRepository<TimeSlot>>();
-            kernel.Bind<Repository.IRepository<User>>().To
+           kernel.Bind<Repository.IRepository<User>>().To
                 <StudentTracker.Repository.Sql.SqlRepository<User>>();
             kernel.Bind<ISqlUnitOfWork>().To<SqlUnitOfWork>();
             kernel.Bind<StudentTracker.Repository.IRepository<Topic>>().To

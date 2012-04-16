@@ -9,7 +9,11 @@ using StudentTracker.Site.ViewModels.Common;
 
 namespace StudentTracker.Site.ViewModels.Student {
     public class StudentRegisterViewModel {
-        
+
+        public StudentRegisterViewModel() {
+            RegisterDate = DateTime.Now.Date;
+        }
+
         public int Id { get; set; }
 
         [Required]
@@ -18,7 +22,7 @@ namespace StudentTracker.Site.ViewModels.Student {
         [Display(Name = "Roll No.")]
         public string Roll { get; set; }
 
-        [Required]
+        //[Required]
         [DataType(DataType.Date)]
         [Display(Name = "Registration Date")]
         public DateTime RegisterDate { get; set; }
@@ -56,10 +60,11 @@ namespace StudentTracker.Site.ViewModels.Student {
         [Required]
         [Display(Name = "Mobile / Other Contact Number")]
         public string Mobile { get; set; }
-
+        [Display(Name="Course")]
         public int CourseId { get; set; }
         public IDictionary<int, string> Courses { get; set; }
         public IDictionary<int, string> StudyCenters { get; set; }
+        [Display(Name = "StudyCenter")]
         public int StudyCenterId { get; set; }
         public CourseViewModel Course { get; set; }
        // public ICollection<Appointment> Appointments { get; set; }

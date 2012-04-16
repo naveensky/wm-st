@@ -26,6 +26,7 @@ namespace StudentTracker.Repository.Sql {
         }
 
         public IQueryable<T> Fetch(params System.Linq.Expressions.Expression<Func<T, object>>[] includes) {
+            //return _dbSet.AsQueryable();
             return _dbSet.IncludeMultiple(includes);
         }
 
@@ -35,6 +36,7 @@ namespace StudentTracker.Repository.Sql {
         }
 
         public IQueryable<T> Find(Func<T, bool> predicate, params System.Linq.Expressions.Expression<Func<T, object>>[] includes) {
+           
             return _dbSet.IncludeMultiple(includes).Where(predicate).AsQueryable();
         }
 

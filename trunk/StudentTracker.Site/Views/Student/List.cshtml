@@ -28,7 +28,7 @@
         <div class="grid_3 omega">
             @Html.LabelFor(m => m.CourseId)
             <br />
-            @Html.DropDownListFor(m => m.CourseId, new SelectList(Model.Courses, "Key", "Value"), "All Courses", null)
+            @Html.DropDownListFor(m => m.CourseId, new SelectList(Model.Courses, "Key", "Value"))
         </div>
         
         <input id="searchText" type="submit" value="Search" />
@@ -141,6 +141,7 @@
         <ul class="links">
             <li>@Html.ActionLink("Create Student", "Create", "Student")</li>
             <li>@Html.ActionLink("Create Teacher", "Create", "Teacher")</li>
+            <li>@Html.ActionLink("Create Appointments","Create","Appointment")</li>
         </ul>
     </div>
 }
