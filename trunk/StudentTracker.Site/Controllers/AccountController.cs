@@ -48,12 +48,15 @@ namespace OnLineStore.Controllers {
             return View(model);
         }
 
+        public ActionResult Login(LogOnModel model, string returnUrl) {
+            return RedirectToAction("LogOn", new { model, returnUrl });
+        }
+
         //
         // GET: /Account/LogOff
 
         public ActionResult LogOff() {
             FormsAuthentication.SignOut();
-
             return RedirectToAction("LogOn");
         }
 
@@ -62,7 +65,7 @@ namespace OnLineStore.Controllers {
 
         public ActionResult Register() {
             if (_userService.GetCurrentUser() == null)
-            return View();
+                return View();
             else
                 return RedirectToAction("List", "Student");
 
