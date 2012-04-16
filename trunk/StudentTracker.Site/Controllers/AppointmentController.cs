@@ -198,6 +198,7 @@ namespace StudentTracker.Site.Controllers {
             int minute = Convert.ToInt32(startTimeArray[1]);
             bool isAm = startTimeArray[2].Equals("AM") ? true : false;
             if (!isAm) {
+                if (hour != 12)
                 hour = hour + 12;
             }
             startTime = appointmentViewModels.Date.AddHours(hour).AddMinutes(minute);
@@ -205,6 +206,7 @@ namespace StudentTracker.Site.Controllers {
             minute = Convert.ToInt32(endTimeArray[1]);
             isAm = endTimeArray[2].Equals("AM") ? true : false;
             if (!isAm) {
+                if(hour!=12)
                 hour = hour + 12;
             }
             endTime = appointmentViewModels.Date.AddHours(hour).AddMinutes(minute);
