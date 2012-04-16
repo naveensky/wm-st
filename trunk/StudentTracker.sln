@@ -1,14 +1,11 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
+Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{FBA5CE81-F94B-492C-B4D1-033D1BD38B9C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{55DD1B4F-37AA-4C51-9F38-A1F2B76C4E9B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{B86273AB-6BFF-4E6B-AFA3-5FE95F31AACC}"
-	ProjectSection(SolutionItems) = preProject
-		StudentTracker.Services\AppointmentComparer.cs = StudentTracker.Services\AppointmentComparer.cs
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Converters", "Converters", "{8BF195A5-87BC-40FE-8675-F6A63B9F40EA}"
 EndProject
@@ -39,13 +36,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentTracker.Repository.Sql", "StudentTracker.Repository.Sql\StudentTracker.Repository.Sql.csproj", "{E0934D34-2BFB-4F3E-AE18-800445028FCA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentTracker.Mappings", "StudentTracker.Mappings\StudentTracker.Mappings.csproj", "{162BF309-B2D3-4282-B168-E87F608028FE}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{FF070A2E-44AF-47B0-A5AE-ACF33067A88B}"
-	ProjectSection(SolutionItems) = preProject
-		Local.testsettings = Local.testsettings
-		StudentTracker1.vsmdi = StudentTracker1.vsmdi
-		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentTracker.Test", "StudentTracker.Test\StudentTracker.Test.csproj", "{5F0399D2-E5D4-4861-97A5-005A0814BCD7}"
 EndProject
