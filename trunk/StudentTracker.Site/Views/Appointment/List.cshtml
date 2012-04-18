@@ -73,7 +73,7 @@
                     @app.Topic
                 </td>
                 <td>
-                    @(app.IsPersonal?"Personal Appointment":"Group Appointment")
+                    @(app.IsPersonal?"Personal":"Group")
                 </td>
                 <td>
                     <a href="/Appointment/Delete?studentId=@Model.StudentViewModel.Id&appointmentId=@app.Id">
