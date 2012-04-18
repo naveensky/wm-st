@@ -33,7 +33,7 @@ namespace StudentTracker.Services.Appointment {
             if (appointments == null)
                 return null;
             else {
-                return appointments.Select(x => new AppointMentList { Id = x.Id, Teacher = x.Teacher.Name, Topic = x.Topic.Name, StartTime = x.StartTime.ToString(), EndTime = x.EndTime.ToString(), Date = x.Date });
+                return appointments.Select(x => new AppointMentList { Id = x.Id, Teacher = x.Teacher.Name, Topic = x.Topic.Name, StartTime = x.StartTime.ToString(), EndTime = x.EndTime.ToString(), Date = x.Date,IsPersonal = x.IsPersonal});
             }
             /*  IList<int> studentList = new List<int>();
               var student = _uow.Students.FindById(studentId);
@@ -76,18 +76,9 @@ namespace StudentTracker.Services.Appointment {
            
            return appointments.OrderByDescending(x=>x.Date);
             
-            //var temp = appointments.ToList().SelectMany(x => x);
-            /*   return
-                   temp.Select(
-                       x =>
-                       new Site.ViewModels.Appointment.NewAppointmentViewModel {
-                           SelectedTeacherId = teacherId,
-                           Topics = x.Course.Topics.ToDictionary(y => y.Id, z => z.Name),
-                           Date = x.Date,
-                           StartTime = x.StartTime
-                       });*/
+           
         }
-        //}
+        
 
 
         public IEnumerable<Models.Appointment> GetAppointmentForTeacher(int teacherId, DateTime filterDate) {

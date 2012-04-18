@@ -1,18 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using StudentTracker.Mappings;
-using StudentTracker.Models;
-using StudentTracker.Service.Topic;
 using StudentTracker.Services.Appointment;
 using StudentTracker.Services.Core;
 using StudentTracker.Services.Student;
 using StudentTracker.Services.Teacher;
 using StudentTracker.Services.Time;
 using StudentTracker.Site.ViewModels.Appointment;
-using StudentTracker.Site.ViewModels.Time;
 using StudentTracker.Site.ViewModels.Common;
 
 
@@ -21,28 +17,26 @@ namespace StudentTracker.Site.Controllers {
     [Authorize]
     public class AppointmentController : Controller {
 
-        private StaticDataService _staticData;
-        private StudentService _studentService;
-        private AppointmentService _appService;
-        private TeacherService _teacherService;
-        private TopicService _topicService;
-
+        private readonly StaticDataService _staticData;
+        private readonly StudentService _studentService;
+        private readonly AppointmentService _appService;
+        private readonly TeacherService _teacherService;
+        private readonly TimeService _timeService;
         public AppointmentController(StaticDataService staticData, StudentService studentService,
-                                     AppointmentService appService, TeacherService teacherService,
-                                     TopicService topicService) {
+                                     AppointmentService appService, TeacherService teacherService, TimeService timeService) {
             _staticData = staticData;
             _studentService = studentService;
             _appService = appService;
             _teacherService = teacherService;
-            _topicService = topicService;
+            _timeService = timeService;
         }
 
 
-        public ActionResult New(int Id) {
+        public ActionResult New(int id) {
             var model = new NewAppointmentViewModel();
-            model.Student = _studentService.GetStudent(Id).MapToView();
+            model.Student = _studentService.GetStudent(id).MapToView();
             model.Teachers = _teacherService.GetTeachersDictionary();
-            model.Topic = _staticData.GetTopics(Id).ToDictionary(x => x.Id, y => y.Name);
+            model.Topic = _staticData.GetTopics(id).ToDictionary(x => x.Id, y => y.Name);
             //model.Topics = _appService.GetTopicsDictionary();
             //model.TimeSlots = _staticData.GetTimeSlots();
             return View(model);
@@ -91,10 +85,17 @@ namespace StudentTracker.Site.Controllers {
         public ActionResult List(int id) {
             var model = new ListViewModel {
                 Appointments =
-                    _appService.GetAppointmentsForStudent(id).OrderByDescending(x=>x.Date).Select(x => x.MapToView()),
+                    _appService.GetAppointmentsForStudent(id).OrderByDescending(x => x.Date).Select(x => x.MapToView()),
                 StudentViewModel = _studentService.GetStudent(id).MapToView()
             };
+            var totalDuration = _timeService.GetTotalDuration(model.Appointments.Select(x => x.Duration));
+            if (totalDuration - Math.Floor(totalDuration) != 0)
+                ViewBag.TotalDuration = (int)totalDuration + " Hours " + (int)((totalDuration - Math.Floor(totalDuration)) * 60) + " Minutes";
+            else {
+                ViewBag.TotalDuration = (int)totalDuration + " Hours ";
+            }
             return View(model);
+
         }
 
         /*       public Models.Appointment GetAppointment() {
@@ -133,10 +134,10 @@ namespace StudentTracker.Site.Controllers {
 
         [HttpPost]
         public ActionResult Create(AppointmentViewModels appointmentViewModels) {
-            if (appointmentViewModels.TopicId != 0) {
+            if (appointmentViewModels.TopicId != 0)
 
                 return RedirectToAction("CreateAppointment", appointmentViewModels);
-            } else {
+            else {
                 return RedirectToAction("Create");
             }
         }
@@ -199,15 +200,15 @@ namespace StudentTracker.Site.Controllers {
             bool isAm = startTimeArray[2].Equals("AM") ? true : false;
             if (!isAm) {
                 if (hour != 12)
-                hour = hour + 12;
+                    hour = hour + 12;
             }
             startTime = appointmentViewModels.Date.AddHours(hour).AddMinutes(minute);
             hour = Convert.ToInt32(endTimeArray[0]);
             minute = Convert.ToInt32(endTimeArray[1]);
             isAm = endTimeArray[2].Equals("AM") ? true : false;
             if (!isAm) {
-                if(hour!=12)
-                hour = hour + 12;
+                if (hour != 12)
+                    hour = hour + 12;
             }
             endTime = appointmentViewModels.Date.AddHours(hour).AddMinutes(minute);
 

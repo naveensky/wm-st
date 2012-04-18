@@ -11,6 +11,11 @@ namespace StudentTracker.Site.ViewModels.Student {
        public string Teacher { get; set; }
        public string Topic { get; set; }
        public DateTime Date { get; set; }
-   
+       public TimeSpan Duration 
+       {
+           get { return EndTime.Subtract(StartTime); }
+       }
+
+       public bool IsPersonal { get; set; }
    }
 }

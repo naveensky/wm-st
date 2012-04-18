@@ -11,6 +11,7 @@ namespace StudentTracker.Models {
       public string Teacher { get; set; }
       public string Topic { get; set; }
       public DateTime Date { get; set; }
+      public bool IsPersonal { get; set; }
 
     }
 }

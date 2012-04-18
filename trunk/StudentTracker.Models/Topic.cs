@@ -7,7 +7,7 @@ using System.Text;
 using System.ComponentModel.DataAnnotations.Resources;
 
 namespace StudentTracker.Models {
-    [Table(Name = "Topic")]
+    
     public class Topic : IEntity {
         [Key]
         public int Id { get; set; }
