@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using Norm;
-using StudentTracker.Models;
 using StudentTracker.Repository;
-using StudentTracker.Services.Core;
 using StudentTracker.Services.User;
 
 namespace StudentTracker.Services.Student {
@@ -46,7 +42,7 @@ namespace StudentTracker.Services.Student {
 
         public IEnumerable<Models.Student> GetStudents(int count) {
             var studyCentreId = _userService.GetCurrentUser().StudyCenter.Id;
-           
+
             return (_uow.Students.Find(x => x.StudyCenter.Id == studyCentreId).Take(count).OrderBy(x => x.Name).ToList());
             /*
             var temp = _uow.Students.Find(x => x.StudyCenter.Id == studyCentreId).Take(count).OrderBy(x => x.Name).ToList();
@@ -136,9 +132,33 @@ namespace StudentTracker.Services.Student {
 
         public IEnumerable<Models.Student> GetStudentsByTopic(int topicId) {
             var studyCentreId = _userService.GetCurrentUser().StudyCenter.Id;
-            int couseId=_uow.Topics.FindById(topicId).Course.Id;
-            var students = _uow.Students.Find(x => x.Course.Id == couseId&&x.StudyCenter.Id==studyCentreId);
+            int couseId = _uow.Topics.FindById(topicId).Course.Id;
+            var students = _uow.Students.Find(x => x.Course.Id == couseId && x.StudyCenter.Id == studyCentreId);
             return students;
+        }
+
+        public IDictionary<Models.Student, DateTime> GetStudentStatus() {
+            var studyCentreId = _userService.GetCurrentUser().StudyCenter.Id;
+            var students = _uow.Students.Fetch().Where(x=>x.StudyCenter.Id==studyCentreId);
+            var status = new Dictionary<Models.Student, DateTime>();
+            foreach (var student in students) {
+                var lastAppointmentDate = new DateTime();
+                if (student.Appointments.Count != 0) {
+                    lastAppointmentDate = student.Appointments.Max(x => x.Date);
+
+
+                    var today = DateTime.Now;
+                    var temp = lastAppointmentDate.AddDays(10);
+                    if (temp <= today)
+                        status.Add(student, lastAppointmentDate);
+                }
+                else
+                    status.Add(student, lastAppointmentDate);
+            }
+            var sortstatus = (from temp in status orderby temp.Value ascending select temp).ToDictionary(x => x.Key,
+                                                                                                         y => y.Value);
+            
+            return sortstatus;
         }
     }
 }

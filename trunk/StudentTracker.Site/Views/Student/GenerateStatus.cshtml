@@ -1,0 +1,70 @@
+﻿@model StudentTracker.Site.ViewModels.Student.StatusModel
+@{
+    ViewBag.Title = "GenerateStatus";
+}
+<h2>
+    Generate Status</h2>
+<table class="data" cellspacing="0">
+    <thead>
+        <tr>
+            <th>
+                Student Name
+            </th>
+            <th>
+                Roll No
+            </th>
+            <th>
+                Course Name
+            </th>
+            <th>
+                Last Appointment Date
+            </th>
+             <th>
+                Days By
+            </th>
+            <th>
+                &nbsp;
+            </th>
+            <th>
+                &nbsp;
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var student in Model.StudentStatus) {
+            
+            <tr  style="color: @(student.LastAppointment.Year != 1 ? "green" : "red")">
+                <td>
+                    @student.Student.Name
+                </td>
+                <td>
+                    @student.Student.Roll
+                </td>
+                <td>
+                    @student.Student.Course.Name
+                </td>
+                <td>
+                    @if (student.LastAppointment.Year!= 1) {
+                        <p>@student.LastAppointment.ToString("dd MMM yyyy")</p>
+                    }
+                    else {
+                        <p>Never</p>
+                    }
+                </td>
+                <td>
+                    @student.TotalDays
+                </td>
+                <td align="right">
+                    <a href="/Appointment/New/@student.Student.Id">
+                        <img src="/Content/Images/add.png" title="Add New Appointment" />
+                    </a>
+                </td>
+                <td align="right">
+                    <a href="/Appointment/List/@student.Student.Id">
+                        <img src="/Content/Images/table.png" title="View All Appointments" />
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

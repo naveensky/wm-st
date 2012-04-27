@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Linq;
 using System.Web.Mvc;
 using StudentTracker.Mappings;
 using StudentTracker.Services.Core;
 using StudentTracker.Services.Student;
 using StudentTracker.Services.User;
-using StudentTracker.Site.ViewModels;
 using StudentTracker.Converters;
 using StudentTracker.Site.ViewModels.Student;
-using Student = StudentTracker.Models.Student;
 
 namespace StudentTracker.Site.Controllers {
 
@@ -118,6 +113,12 @@ namespace StudentTracker.Site.Controllers {
             Response.AddHeader("content-disposition", "attachment;  filename=Student Record.xlsx");
             Response.BinaryWrite(System.IO.File.ReadAllBytes(tempPath));
             CoreService.DeleteFile(tempPath);
+        }
+
+        public ActionResult GenerateStatus() {
+            var status = new StatusModel();
+            status.StudentStatus = _studentService.GetStudentStatus().Select(x=>new ValueModel{Student = x.Key.MapToView(),LastAppointment = x.Value});
+            return View(status);
         }
     }
 }

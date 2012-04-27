@@ -59,6 +59,7 @@
     <Compile Include="Common\Load\DataViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Student\AppointmentViewModel.cs" />
+    <Compile Include="Student\StatusModel.cs" />
     <Compile Include="Student\StudentViewModel.cs" />
     <Compile Include="Student\StudentDownloadViewModel.cs" />
     <Compile Include="Student\StudentEditViewModel.cs" />
