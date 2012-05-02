@@ -141,6 +141,7 @@ namespace StudentTracker.Services.Student {
             var studyCentreId = _userService.GetCurrentUser().StudyCenter.Id;
             var students = _uow.Students.Fetch().Where(x=>x.StudyCenter.Id==studyCentreId);
             var status = new Dictionary<Models.Student, DateTime>();
+            var statusForNonAppointed = new Dictionary<Models.Student, DateTime>();
             foreach (var student in students) {
                 var lastAppointmentDate = new DateTime();
                 if (student.Appointments.Count != 0) {
@@ -152,13 +153,16 @@ namespace StudentTracker.Services.Student {
                     if (temp <= today)
                         status.Add(student, lastAppointmentDate);
                 }
-                else
-                    status.Add(student, lastAppointmentDate);
+                else {
+                    statusForNonAppointed.Add(student,lastAppointmentDate);
+                }
             }
             var sortstatus = (from temp in status orderby temp.Value ascending select temp).ToDictionary(x => x.Key,
                                                                                                          y => y.Value);
-            
-            return sortstatus;
+            var sortstatusForNonAppointed = (from temp in statusForNonAppointed orderby (DateTime.Now - temp.Key.RegisterDate) descending select temp).ToDictionary(x => x.Key,
+                                                                                                         y => y.Value);
+            var resultstatus=sortstatusForNonAppointed.Concat(sortstatus).ToDictionary(x=>x.Key,y=>y.Value);
+            return resultstatus;
         }
     }
 }
