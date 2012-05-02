@@ -33,7 +33,7 @@
     <tbody>
         @foreach(var student in Model.StudentStatus) {
             
-            <tr  style="color: @(student.LastAppointment.Year != 1 ? "green" : "red")">
+            <tr  style="color: @(student.LastAppointment.Year != 1 ? "black" : "red")">
                 <td>
                     @student.Student.Name
                 </td>

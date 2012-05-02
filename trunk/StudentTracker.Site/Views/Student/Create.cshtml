@@ -47,7 +47,7 @@
             @Html.LabelFor(model => model.RegisterDate)
         </div>
         <div class="editor-field">
-            @Html.TextBoxFor(model => model.RegisterDate, new { @class = "date", value = DateTime.Now.ToString("dd MMM yyyy") })
+            @Html.TextBoxFor(model => model.RegisterDate, new { @class = "date", @Value = DateTime.Now.ToString("dd MMM yyyy") })
             @Html.ValidationMessageFor(model => model.RegisterDate)
         </div>
         <div class="editor-label">

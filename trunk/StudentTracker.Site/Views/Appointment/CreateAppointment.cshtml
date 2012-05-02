@@ -54,7 +54,7 @@
             @Html.LabelFor(model => model.Date)
         </div>
         <div class="editor-field">
-            @Html.TextBoxFor(model => model.Date, new {@class = "date"})
+            @Html.TextBoxFor(model => model.Date, new {@class = "date",})
             @Html.ValidationMessageFor(m => m.Date)
         </div>
         <div class="editor-label">
