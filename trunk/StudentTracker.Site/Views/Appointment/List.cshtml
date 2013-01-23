@@ -7,11 +7,11 @@
     List of Appointment for : @Model.StudentViewModel.Name
 </h2>
 <br>
-<b>Group Classes : @Model.GroupedDurations.Hours Hours @Model.GroupedDurations.Minutes Minute</b>
+<b>Group Classes : @(Model.GroupedDurations.Hours+Model.GroupedDurations.Days*24) Hours @Model.GroupedDurations.Minutes Minute</b>
 <br/>
-<b>Personal Classes : @Model.PersonalDurations.Hours Hours @Model.PersonalDurations.Minutes Minute</b>
+<b>Personal Classes : @(Model.PersonalDurations.Hours+Model.PersonalDurations.Days*24) Hours @Model.PersonalDurations.Minutes Minute</b>
 <br/>
-<b>Total Classes : @Model.TotalDurations.Hours Hours @Model.TotalDurations.Minutes Minute</b>
+<b>Total Classes : @(Model.TotalDurations.Hours + Model.TotalDurations.Days * 24) Hours @Model.TotalDurations.Minutes Minute</b>
 <br/>
 <br />
 <br />
