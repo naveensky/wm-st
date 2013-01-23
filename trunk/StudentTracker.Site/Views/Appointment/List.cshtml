@@ -7,7 +7,12 @@
     List of Appointment for : @Model.StudentViewModel.Name
 </h2>
 <br>
-<b>Total Duration : @ViewBag.TotalDuration </b>
+<b>Group Classes : @Model.GroupedDurations.Hours Hours @Model.GroupedDurations.Minutes Minute</b>
+<br/>
+<b>Personal Classes : @Model.PersonalDurations.Hours Hours @Model.PersonalDurations.Minutes Minute</b>
+<br/>
+<b>Total Classes : @Model.TotalDurations.Hours Hours @Model.TotalDurations.Minutes Minute</b>
+<br/>
 <br />
 <br />
 <table class="data" cellspacing="0">

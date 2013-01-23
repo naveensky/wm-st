@@ -83,17 +83,13 @@ namespace StudentTracker.Site.Controllers {
         }
 
         public ActionResult List(int id) {
+            
             var model = new ListViewModel {
                 Appointments =
                     _appService.GetAppointmentsForStudent(id).OrderByDescending(x => x.Date).Select(x => x.MapToView()),
                 StudentViewModel = _studentService.GetStudent(id).MapToView()
             };
-            var totalDuration = _timeService.GetTotalDuration(model.Appointments.Select(x => x.Duration));
-            if (totalDuration - Math.Floor(totalDuration) != 0)
-                ViewBag.TotalDuration = (int)totalDuration + " Hours " + (int)((totalDuration - Math.Floor(totalDuration)) * 60) + " Minutes";
-            else {
-                ViewBag.TotalDuration = (int)totalDuration + " Hours ";
-            }
+           
             return View(model);
 
         }

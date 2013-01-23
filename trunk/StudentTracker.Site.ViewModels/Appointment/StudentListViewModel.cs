@@ -8,5 +8,34 @@ namespace StudentTracker.Site.ViewModels.Appointment {
     public class ListViewModel {
         public IEnumerable<AppointmentViewModel> Appointments { get; set; }
         public Student.StudentViewModel StudentViewModel { get; set; }
+        public TimeSpan GroupedDurations {
+            get {
+                var totalAppontMents = Appointments.Where(x => !x.IsPersonal);
+
+                var totalTime = new TimeSpan(0, 0, 0, 0, 0);
+                totalTime = totalAppontMents.Aggregate(totalTime, (current, appointmentViewModel) => current.Add(appointmentViewModel.Duration));
+                return totalTime;
+            }
+        }
+
+        public TimeSpan PersonalDurations {
+            get {
+                var totalAppontMents = Appointments.Where(x => x.IsPersonal);
+
+                var totalTime = new TimeSpan(0, 0, 0, 0, 0);
+                totalTime = totalAppontMents.Aggregate(totalTime, (current, appointmentViewModel) => current.Add(appointmentViewModel.Duration));
+                return totalTime;
+            }
+        }
+
+        public TimeSpan TotalDurations {
+            get {
+                
+
+                var totalTime = new TimeSpan(0, 0, 0, 0, 0);
+                totalTime = Appointments.Aggregate(totalTime, (current, appointmentViewModel) => current.Add(appointmentViewModel.Duration));
+                return totalTime;
+            }
+        }
     }
 }
