@@ -10,7 +10,10 @@ namespace StudentTracker.Repository.Sql {
 
         protected  override void OnModelCreating(DbModelBuilder modelBuilder) {
             modelBuilder.Entity<Student>().HasMany(x => x.Appointments).WithMany(x => x.Students).Map(x => x.ToTable("AppointmentStudents"));
-            modelBuilder.Entity<Student>().HasMany(x=>x.Missed).WithMany(x=>x.AbsentStudents).Map(x=>x.ToTable("MissedAppoinments"));
+            modelBuilder.Entity<Student>().HasMany(x=>x.Missed).WithMany(x=>x.AbsentStudents).Map(x=>x.ToTable("MissedAppointments"));
+            modelBuilder.Entity<Student>().Property(x => x.AmountPaid).HasPrecision(18, 2);
+            modelBuilder.Entity<Student>().Property(x => x.AmountPending).HasPrecision(18, 2);
+            
 
         }
 
