@@ -34,6 +34,12 @@ namespace StudentTracker.Site.ViewModels.Appointment {
       public IDictionary<int, string> Students { get; set; }
       [Required]
       [Display(Name = "Students")]
-      public IList<int> StudentsId { get; set; } 
+      public IList<int> StudentsId { get; set; }
+
+      [Display(Name = "Absentee")]
+      public IDictionary<int, string> AbsentStudents { get; set; }
+      [Required]
+      [Display(Name = "Absentees")]
+      public IList<int> AbsentStudentsId { get; set; }
   }
 }

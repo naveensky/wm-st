@@ -21,14 +21,13 @@ namespace StudentTracker.Site.Controllers {
         private readonly StudentService _studentService;
         private readonly AppointmentService _appService;
         private readonly TeacherService _teacherService;
-        private readonly TimeService _timeService;
+
         public AppointmentController(StaticDataService staticData, StudentService studentService,
                                      AppointmentService appService, TeacherService teacherService, TimeService timeService) {
             _staticData = staticData;
             _studentService = studentService;
             _appService = appService;
             _teacherService = teacherService;
-            _timeService = timeService;
         }
 
 
@@ -37,8 +36,7 @@ namespace StudentTracker.Site.Controllers {
             model.Student = _studentService.GetStudent(id).MapToView();
             model.Teachers = _teacherService.GetTeachersDictionary();
             model.Topic = _staticData.GetTopics(id).ToDictionary(x => x.Id, y => y.Name);
-            //model.Topics = _appService.GetTopicsDictionary();
-            //model.TimeSlots = _staticData.GetTimeSlots();
+
             return View(model);
         }
 
@@ -65,49 +63,31 @@ namespace StudentTracker.Site.Controllers {
             endTime = model.Date.AddHours(hour).AddMinutes(minute);
             if (endTime.Subtract(startTime).Ticks <= 0) {
                 ModelState.AddModelError("EndTime", "Start time should be less than End time");
-                // model.Student = _studentService.GetStudent(model.Student.Id);
-                //model.Teachers = _staticData.GetTeachers();
-                //model.Courses = _staticData.GetStudentChildCourse(model.Student.Id);
-                //model.TimeSlots = _staticData.GetTimeSlots();
-                //model.Date = string.Format("{0:dd MMM yyy}", DateTime.Now);
-                //model.AppointmentTypeId = 1;
+
             } else {
                 List<int> temp = new List<int>();
                 temp.Add(model.Student.Id);
-                _appService.SaveAppointment(model.MapToDomain(), model.TopicId, model.TeacherId, temp,
+                _appService.SaveAppointment(model.MapToDomain(), model.TopicId, model.TeacherId, temp,new List<int>(), 
                                             startTime, endTime);
-                //return View(model);
+
             }
-            //_appService.CreateNewAppointment(GetAppointment(), model.Student.Id);
+
             return RedirectToAction("List", new { id = model.Student.Id });
         }
 
         public ActionResult List(int id) {
-            
+           
             var model = new ListViewModel {
                 Appointments =
                     _appService.GetAppointmentsForStudent(id).OrderByDescending(x => x.Date).Select(x => x.MapToView()),
                 StudentViewModel = _studentService.GetStudent(id).MapToView()
             };
-           
+
             return View(model);
 
         }
 
-        /*       public Models.Appointment GetAppointment() {
-            
-                   var appointment = new Models.Appointment {
-                       Course = _staticData.GetStudentChildCourse(Student.Id).Single(x => x.Id == CourseId),
-                       Date = DateTime.Parse(Date),
-                       StartTime = new Time(StartTime),
-                       EndTime = new Time(EndTime),
-                       //Timeslot = staticService.GetTimeSlots().Single(x => x.Id == TimeSlotId),
-                       //Duration = Duration,
-                       AppointmentType = (AppointmentType)AppointmentTypeId,
-                       Teacher = staticService.GetTeachers().Single(x => x.Id == TeacherId)
-                   };
-                   return appointment;
-               }*/
+
 
 
         public ActionResult Delete(int studentId, int appointmentId) {
@@ -145,6 +125,7 @@ namespace StudentTracker.Site.Controllers {
             appointmentViewModels.Students =
                     _studentService.GetStudentsByTopic(appointmentViewModels.TopicId).ToDictionary(x => x.Id,
                                                                                                    y => y.Name);
+           appointmentViewModels.AbsentStudents=appointmentViewModels.Students.ToDictionary(x => x.Key, y => y.Value);
             appointmentViewModels.Teachers = _teacherService.GetTeachersDictionary();
             var temp = _staticData.GetCourses().ToList();
             var courses =
@@ -213,13 +194,23 @@ namespace StudentTracker.Site.Controllers {
                 return RedirectToAction("CreateAppointment", appointmentViewModels);
             } else {
                 _appService.SaveAppointment(appointmentViewModels.MapToDomain(), appointmentViewModels.TopicId,
-                                            appointmentViewModels.TeacherId, appointmentViewModels.StudentsId,
+                                            appointmentViewModels.TeacherId, appointmentViewModels.StudentsId,appointmentViewModels.AbsentStudentsId,
                                             startTime, endTime);
 
             }
             return RedirectToAction("List", "Student");
 
         }
+
+        public ActionResult GetAppointmentStatus() {
+            var allAppointmentByStudents=_appService.GetAllAppointmentByStudents();
+            var appointMentStatus=new AppointMentStatus();
+            appointMentStatus.TotalStatus=allAppointmentByStudents.ElementAt(0);
+            appointMentStatus.GroupedStatus=allAppointmentByStudents.ElementAt(1);
+            appointMentStatus.PersonalStatus=allAppointmentByStudents.ElementAt(2);
+            return View(appointMentStatus);
+        }
+
         [NonAction]
         public ActionResult ListAll() {
             var Appointment = _appService.GetAllAppointment();

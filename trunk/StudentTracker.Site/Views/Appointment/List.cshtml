@@ -3,16 +3,28 @@
     ViewBag.Title = "List";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<style type="text/css">
+    .red
+    {
+        color: red;
+    }
+</style>
 <h2>
     List of Appointment for : @Model.StudentViewModel.Name
 </h2>
 <br>
-<b>Group Classes : @(Model.GroupedDurations.Hours+Model.GroupedDurations.Days*24) Hours @Model.GroupedDurations.Minutes Minute</b>
-<br/>
-<b>Personal Classes : @(Model.PersonalDurations.Hours+Model.PersonalDurations.Days*24) Hours @Model.PersonalDurations.Minutes Minute</b>
-<br/>
-<b>Total Classes : @(Model.TotalDurations.Hours + Model.TotalDurations.Days * 24) Hours @Model.TotalDurations.Minutes Minute</b>
-<br/>
+<b>Group Classes : @(Model.GroupedDurations.Hours + Model.GroupedDurations.Days * 24)
+    Hours @Model.GroupedDurations.Minutes Minute</b>
+<br />
+<b>Personal Classes : @(Model.PersonalDurations.Hours + Model.PersonalDurations.Days * 24)
+    Hours @Model.PersonalDurations.Minutes Minute</b>
+<br />
+<b>Total Classes : @(Model.TotalDurations.Hours + Model.TotalDurations.Days * 24)
+    Hours @Model.TotalDurations.Minutes Minute</b>
+<br />
+<br />
+<b>Missed Classes : @(Model.MissedDurations.Hours + Model.MissedDurations.Days * 24)
+    Hours @Model.MissedDurations.Minutes Minute</b>
 <br />
 <br />
 <table class="data" cellspacing="0">
@@ -30,12 +42,6 @@
             <th>
                 Duration
             </th>
-            @*<th>
-                Time Slot
-            </th>
-            <th>
-                Appointment Type
-            </th>*@
             <th>
                 Teacher Name
             </th>
@@ -45,15 +51,13 @@
             <th>
                 Type
             </th>
-            @* <th>
-                &nbsp;
-            </th>*@
         </tr>
     </thead>
     <tbody>
         @if (Model.Appointments != null) {
             foreach (var app in Model.Appointments) { 
-            <tr>
+                
+            <tr class='@(app.IsMissed ? "red" : "green")'>
                 <td>
                     @string.Format("{0:dd MMM yyyy}", app.Date)
                 </td>
@@ -66,11 +70,6 @@
                 <td>
                     @string.Format("{0:hh\\:mm}", app.Duration)
                 </td>
-                @* <td>
-                    @app.Timeslot.Display
-                </td>*@ @*{<td>
-                     @app.AppointmentType.ToString()
-                 </td>}*@
                 <td>
                     @app.Teacher
                 </td>
@@ -78,7 +77,7 @@
                     @app.Topic
                 </td>
                 <td>
-                    @(app.IsPersonal?"Personal":"Group")
+                    @(app.IsPersonal.HasValue ? (app.IsPersonal.Value ? "Personal" : "Group") : "Missed")
                 </td>
                 <td>
                     <a href="/Appointment/Delete?studentId=@Model.StudentViewModel.Id&appointmentId=@app.Id">

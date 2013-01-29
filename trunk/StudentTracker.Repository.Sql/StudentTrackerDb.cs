@@ -8,6 +8,12 @@ using StudentTracker.Models;
 namespace StudentTracker.Repository.Sql {
     public class StudentTrackerDb : DbContext {
 
+        protected  override void OnModelCreating(DbModelBuilder modelBuilder) {
+            modelBuilder.Entity<Student>().HasMany(x => x.Appointments).WithMany(x => x.Students).Map(x => x.ToTable("AppointmentStudents"));
+            modelBuilder.Entity<Student>().HasMany(x=>x.Missed).WithMany(x=>x.AbsentStudents).Map(x=>x.ToTable("MissedAppoinments"));
+
+        }
+
         public StudentTrackerDb()
             : base("studentDb") {
         }

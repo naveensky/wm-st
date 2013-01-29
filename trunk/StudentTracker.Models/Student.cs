@@ -6,12 +6,7 @@ using System.Text;
 using Norm;
 
 namespace StudentTracker.Models {
-    public class Student:IEntity {
-
-        public Student() {
-          // Appointments = new List<Appointment>();
-        }
-
+    public class Student : IEntity {
         [Key]
         public int Id { get; set; }
 
@@ -60,8 +55,14 @@ namespace StudentTracker.Models {
         [Display(Name = "Mobile / Other Contact Number")]
         public string Mobile { get; set; }
         public virtual Course Course { get; set; }
+
+        public decimal? AmountPaid { get; set; }
+        public decimal? AmountPending { get; set; }
+        public DateTime? PaymentDate { get; set; }
+        public string Remarks { get; set; }
         public virtual ICollection<Appointment> Appointments { get; set; }
-        
-       
+        public virtual ICollection<Appointment> Missed { get; set; } 
+
+
     }
 }

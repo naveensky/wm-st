@@ -58,6 +58,7 @@
                 <th style="text-align: center">
                     Software
                 </th>
+                <th>&nbsp;</th>
                 <th>
                     &nbsp;
                 </th>
@@ -124,8 +125,13 @@
                             <img src="/Content/Images/user_edit.png" alt="Edit Student" title="Edit Student" />
                         </a>
                     </td>
+                    <td style="text-align: right">
+                        <a href="/Student/PaymentStatus?studentid=@student.Id">
+                            <img src="/Content/Images/money.png" alt="Payment Status" title="Payment Status" />
+                        </a>
+                    </td>
                     <td align="right">
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/Student/Delete/@student.Id" onclick="return ConfirmDelete('@student.Name')">
+                      &nbsp;  <a href="/Student/Delete/@student.Id" onclick="return ConfirmDelete('@student.Name')">
                             <img src="/Content/Images/cross.png" alt="Delete Student" title="Delete Student" />
                         </a>
                     </td>
@@ -141,7 +147,7 @@
         <ul class="links">
             <li>@Html.ActionLink("Create Student", "Create", "Student")</li>
             <li>@Html.ActionLink("Create Teacher", "Create", "Teacher")</li>
-            <li>@Html.ActionLink("Create Appointments","Create","Appointment")</li>
+            <li>@Html.ActionLink("Create Appointments", "Create", "Appointment")</li>
         </ul>
     </div>
 }

@@ -26,6 +26,14 @@ namespace StudentTracker.Site.ViewModels.Student {
         public string WmPrepUsername { get; set; }
 
         public virtual Common.StudyCenterViewModel StudyCenter { get; set; }
-        public ViewModels.Common.CourseViewModel Course { get; set; }
+        public Common.CourseViewModel Course { get; set; }
+        public int AppointmentCounts { get; set; }
+        [Display(Name = "Amount Paid")]
+        public decimal? AmountPaid { get; set; }
+        [Display(Name = "Amount Pending")]
+        public decimal? AmountPending { get; set; }
+        [Display(Name = "Payment Date")]
+        public DateTime? PaymentDate { get; set; }
+        public string Remarks { get; set; }
     }
 }

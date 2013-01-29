@@ -1,0 +1,31 @@
+﻿@model StudentTracker.Site.ViewModels.Student.PaymentModel
+@{
+    ViewBag.Title = "Payment Status";
+}
+<h2>
+    Payment Status</h2>
+@using (Html.BeginForm("PaymentStatus", "Student", FormMethod.Post)) {
+    @Html.HiddenFor(model => model.StudentId)
+    <div class="editor-label">
+        @Html.LabelFor(model => model.AmountPaid)
+    </div>
+    <div class="editor-field">
+        @Html.TextBoxFor(model => model.AmountPaid)
+        @Html.ValidationMessageFor(model => model.AmountPaid)
+    </div>
+    <div class="editor-label">
+        @Html.LabelFor(model => model.AmountPending)
+    </div>
+    <div class="editor-field">
+        @Html.TextBoxFor(model => model.AmountPending)
+        @Html.ValidationMessageFor(model => model.AmountPending)
+    </div>
+    <div class="editor-label">
+        @Html.LabelFor(model => model.PaymentDate)
+    </div>
+    <div class="editor-field">
+        @Html.TextBoxFor(model => model.PaymentDate, new { @class = "date", @Value = DateTime.Now.ToString("dd MMM yyyy") })
+        @Html.ValidationMessageFor(model => model.PaymentDate)
+    </div>  
+    <p><input type="submit" value="update"/></p>  
+}

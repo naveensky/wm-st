@@ -1,0 +1,131 @@
+﻿@model StudentTracker.Site.ViewModels.Appointment.AppointMentStatus
+@{
+    ViewBag.Title = "Appointment Status";
+}
+<script type="text/javascript">
+
+    $(function () {
+        $("#accordion").accordion({
+            autoHeight: false
+        });
+    });
+</script>
+<h2>
+    Appointment Status</h2>
+<div id="accordion">
+    <h3>
+        <a href="#">Personal Status</a>
+    </h3>
+    <div>
+        <table class="data" cellspacing="0">
+            <thead>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Roll No
+                </th>
+                <th style="text-align: center">
+                    Hours
+                </th>
+                <th style="text-align: center">
+                    Appointments
+                </th>
+            </thead>
+            <tbody>
+                @foreach (var pmodel in Model.PersonalStatus) {
+                    <tr>
+                        <td>@pmodel.Name
+                        </td>
+                        <td>@pmodel.Roll
+                        </td>
+                        <td style="text-align: center">@(pmodel.AppointmentCounts/60) Hours
+                        </td>
+                        <td style="text-align: center">
+                            <a href=@string.Format("/Appointment/List/{0}", pmodel.Id)>
+                                <img title="View All Appointments" src="/Content/Images/table.png">
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <h3>
+        <a href="#">Grouped Status</a>
+    </h3>
+    <div>
+        <table class="data" cellspacing="0">
+            <thead>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Roll No
+                </th>
+                <th style="text-align: center">
+                    Hours
+                </th>
+                <th style="text-align: center">
+                    Appointments
+                </th>
+            </thead>
+            <tbody>
+                @foreach (var pmodel in Model.GroupedStatus) {
+                    <tr>
+                        <td>@pmodel.Name
+                        </td>
+                        <td>@pmodel.Roll
+                        </td>
+                        <td style="text-align: center">@(pmodel.AppointmentCounts/60) Hours
+                        </td>
+                        <td style="text-align: center">
+                            <a href=@string.Format("/Appointment/List/{0}", pmodel.Id)>
+                                <img title="View All Appointments" src="/Content/Images/table.png">
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <h3>
+        <a href="#">Total Status</a>
+    </h3>
+    <div>
+        <table class="data" cellspacing="0">
+            <thead>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Roll No
+                </th>
+                <th style="text-align: center">
+                    Hours
+                </th>
+                <th style="text-align: center">
+                    Appointments
+                </th>
+            </thead>
+            <tbody>
+                @foreach (var pmodel in Model.TotalStatus) {
+                    <tr>
+                        <td>@pmodel.Name
+                        </td>
+                        <td>@pmodel.Roll
+                        </td>
+                        <td style="text-align: center">@(pmodel.AppointmentCounts/60) Hours
+                        </td>
+                        <td style="text-align: center">
+                            <a href=@string.Format("/Appointment/List/{0}", pmodel.Id)>
+                                <img title="View All Appointments" src="/Content/Images/table.png">
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+

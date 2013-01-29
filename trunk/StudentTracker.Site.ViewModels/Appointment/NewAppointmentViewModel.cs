@@ -33,23 +33,13 @@ namespace StudentTracker.Site.ViewModels.Appointment {
         [Display(Name = "Start Time")]
         public string StartTime { get; set; }
         [Required]
-        //[Range(0.5, 9, ErrorMessage = "A class has to be at least of 30 mints and maximum of 9 hours")]
+
         [Display(Name = "End Time")]
         [RegularExpression("([1][0-2]|[1-9]):[0-5][0-9] (AM|PM)", ErrorMessage = "Enter a Valid Time")]
         public string EndTime { get; set; }
         [Display(Name = "Topic")]
-        public IDictionary<int,string> Topic { get; set; }
-        // public IDictionary<int, string> Topics { get; set; }
-        //public int SelectedTopicId { get; set; }
-
-
-
-        //public IDictionary<int, string> Students { get; set; }
-        //public IList<int> SelectedStudents;
-
-
-
-         public TeacherViewModel Teacher { get; set; }
+        public IDictionary<int, string> Topic { get; set; }
+        public TeacherViewModel Teacher { get; set; }
 
 
     }

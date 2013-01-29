@@ -85,6 +85,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Images\money.png" />
     <Content Include="Content\Images\add.png" />
     <Content Include="Content\Images\ajax-loader.gif" />
     <Content Include="Content\Images\cancel.png" />
@@ -135,6 +136,7 @@
     <Content Include="Content\Scripts\MicrosoftMvcValidation.js" />
     <Content Include="Content\Styles\chosen.css" />
     <Content Include="Content\Styles\grid.css" />
+    <Content Include="Content\Styles\jquery-ui.css" />
     <Content Include="Content\Styles\main.css" />
     <Content Include="Content\Styles\Site.css" />
     <Content Include="Controllers\Content\Images\add.png" />
@@ -303,6 +305,8 @@
       <IsTransformFile>True</IsTransformFile>
     </Content>
     <Content Include="Views\Student\GenerateStatus.cshtml" />
+    <Content Include="Views\Appointment\GetAppointMentStatus.cshtml" />
+    <Content Include="Views\Student\PaymentStatus.cshtml" />
     <None Include="_bin_deployableAssemblies\System.Web.Mvc.dll" />
     <None Include="_bin_deployableAssemblies\WebMatrix.WebData.xml" />
     <None Include="_bin_deployableAssemblies\WebMatrix.WebData.dll" />

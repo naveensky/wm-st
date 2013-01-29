@@ -26,18 +26,6 @@ namespace StudentTracker.Converters {
                 CreateHeaders(sheet);
 
                 var rowIdx = 2;
-               /* if (student.Appointments != null && student.Appointments.Count > 0) {
-
-                    foreach (var appointment in student.Appointments) {
-                        sheet.Cells[rowIdx, DateCol].Value = string.Format("{0:dd-MMM-yyyy}", appointment.Date);
-                        Decimal duration = appointment.StartTime.SubtractFrom(appointment.EndTime);
-                        sheet.Cells[rowIdx, DurationCol].Value = decimal.Round(duration, 2);
-                        sheet.Cells[rowIdx, TeacherCol].Value = appointment.Teacher.Name;
-                        sheet.Cells[rowIdx, CourseCol].Value = appointment.Course.Name;
-                        sheet.Cells[rowIdx, TypeCol].Value = appointment.AppointmentType;
-                        ++rowIdx;
-                    }
-                }*/
 
                 rowIdx = 2;
                 sheet.Cells[rowIdx, DetailLabelCol].Value = "Name";
@@ -58,26 +46,13 @@ namespace StudentTracker.Converters {
                 sheet.Cells[rowIdx, DetailValueCol].Value = student.SoftwareGiven ? "Yes" : "No";
                 sheet.Cells[++rowIdx, DetailLabelCol].Value = "Books Given";
                 sheet.Cells[rowIdx, DetailValueCol].Value = student.BooksGiven ? "Yes" : "No";
-              /*  if (student.Appointments != null && student.Appointments.Count > 0) {
-                    sheet.Cells[++rowIdx, DetailLabelCol].Value = "Total Individual Hours";
-                    sheet.Cells[rowIdx, DetailValueCol].Value = decimal.Round(student.Appointments.Where(x => x.AppointmentType == AppointmentType.Individual).Sum(x => x.StartTime.SubtractFrom(x.EndTime)), 2);
-                    sheet.Cells[++rowIdx, DetailLabelCol].Value = "Total Group Hours";
-                    sheet.Cells[rowIdx, DetailValueCol].Value = decimal.Round(student.Appointments.Where(x => x.AppointmentType == AppointmentType.Group).Sum(x => x.StartTime.SubtractFrom(x.EndTime)), 2);
-                    sheet.Cells[++rowIdx, DetailLabelCol].Value = "Total Doubt Hours";
-                    sheet.Cells[rowIdx, DetailValueCol].Value = decimal.Round(student.Appointments.Where(x => x.AppointmentType == AppointmentType.Doubt).Sum(x => x.StartTime.SubtractFrom(x.EndTime)), 2);
-                    sheet.Cells[++rowIdx, DetailLabelCol].Value = "Total Hours";
-                    sheet.Cells[rowIdx, DetailValueCol].Value = decimal.Round(student.Appointments.Sum(x => x.StartTime.SubtractFrom(x.EndTime)), 2);
-                } else {
-                    sheet.Cells[++rowIdx, DetailLabelCol].Value = "Total Individual Hours";
-                    sheet.Cells[rowIdx, DetailValueCol].Value = 0;
-                    sheet.Cells[++rowIdx, DetailLabelCol].Value = "Total Group Hours";
-                    sheet.Cells[rowIdx, DetailValueCol].Value = 0;
-                    sheet.Cells[++rowIdx, DetailLabelCol].Value = "Total Doubt Hours";
-                    sheet.Cells[rowIdx, DetailValueCol].Value = 0;
-                    sheet.Cells[++rowIdx, DetailLabelCol].Value = "Total Hours";
-                    sheet.Cells[rowIdx, DetailValueCol].Value = 0;
-                }*/
-
+                sheet.Cells[++rowIdx, DetailLabelCol].Value = "Amount Paid";
+                sheet.Cells[rowIdx, DetailValueCol].Value = student.AmountPaid.HasValue ? student.AmountPaid.Value.ToString() : string.Empty;
+                sheet.Cells[++rowIdx, DetailLabelCol].Value = "Amount Pending";
+                sheet.Cells[rowIdx, DetailValueCol].Value = student.AmountPending.HasValue ? student.AmountPending.Value.ToString() : string.Empty;
+                sheet.Cells[++rowIdx, DetailLabelCol].Value = "Payment Date";
+                sheet.Cells[rowIdx, DetailValueCol].Value = student.PaymentDate.HasValue ? student.PaymentDate.Value.ToString("dd MMM yyyy") : string.Empty;
+                
                 excel.Save();
             }
         }

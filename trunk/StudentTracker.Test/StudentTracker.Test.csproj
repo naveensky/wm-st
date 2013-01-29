@@ -31,6 +31,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=4.3.1.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL" />
     <Reference Include="Moq">
       <HintPath>..\packages\Moq.4.0.10827\lib\NET40\Moq.dll</HintPath>
     </Reference>
@@ -51,6 +52,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\StudentTracker.Repository.Sql\StudentTracker.Repository.Sql.csproj">
+      <Project>{E0934D34-2BFB-4F3E-AE18-800445028FCA}</Project>
+      <Name>StudentTracker.Repository.Sql</Name>
+    </ProjectReference>
     <ProjectReference Include="..\StudentTracker.Services.Student\StudentTracker.Services.Student.csproj">
       <Project>{FA1A9DCC-A0FC-4435-8B3C-FCA7DEE5DF9D}</Project>
       <Name>StudentTracker.Services.Student</Name>

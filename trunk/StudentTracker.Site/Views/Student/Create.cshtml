@@ -79,6 +79,34 @@
             @Html.EditorFor(model => model.BooksGiven) @Html.LabelFor(model => model.BooksGiven)
             @Html.ValidationMessageFor(model => model.BooksGiven)
         </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.AmountPaid)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.AmountPaid)
+            @Html.ValidationMessageFor(model => model.AmountPaid)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.AmountPending)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.AmountPending)
+            @Html.ValidationMessageFor(model => model.AmountPending)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.PaymentDate)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.PaymentDate, new { @class = "date", @Value = DateTime.Now.ToString("dd MMM yyyy") })
+            @Html.ValidationMessageFor(model => model.PaymentDate)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Remarks)
+        </div>
+        <div class="editor-field">
+            @Html.TextAreaFor(model => model.Remarks, new { spellcheck = "true" })
+            @Html.ValidationMessageFor(model => model.Remarks)
+        </div>
         <p>
             <input type="submit" value="Create" />
         </p>

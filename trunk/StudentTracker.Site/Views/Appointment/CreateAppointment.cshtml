@@ -54,7 +54,7 @@
             @Html.LabelFor(model => model.Date)
         </div>
         <div class="editor-field">
-            @Html.TextBoxFor(model => model.Date, new {@class = "date",})
+            @Html.TextBoxFor(model => model.Date, new { @class = "date", @Value = DateTime.Now.ToString("dd MMM yyyy") })
             @Html.ValidationMessageFor(m => m.Date)
         </div>
         <div class="editor-label">
@@ -74,6 +74,13 @@
         </div>
         <div class="editor-field">
             @Html.DropDownListFor(model => model.StudentsId, new SelectList(Model.Students, "Key", "Value"), new { multiple = "multiple", @class = "chzn-select", data_placeholder = "Choose at least one student", style = "width:100%" })
+        </div>
+        
+        <div class="editor-label">
+            @Html.LabelFor(model => model.AbsentStudentsId)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(model => model.AbsentStudentsId, new SelectList(Model.AbsentStudents, "Key", "Value"), new { multiple = "multiple", @class = "chzn-select", data_placeholder = "Choose at least one student", style = "width:100%" })
         </div>
         
         <p>

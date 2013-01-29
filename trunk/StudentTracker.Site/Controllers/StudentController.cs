@@ -12,22 +12,21 @@ namespace StudentTracker.Site.Controllers {
     [Authorize]
     public class StudentController : Controller {
 
-        private readonly StaticDataService _staticData;
-        private readonly StudentService _studentService;
-        private readonly UserService _userService;
+        private readonly StaticDataService staticData;
+        private readonly StudentService studentService;
+        private readonly UserService userService;
 
         public StudentController(StaticDataService staticData, StudentService studentService, UserService userService) {
-            _staticData = staticData;
-            _studentService = studentService;
-            _userService = userService;
+            this.staticData = staticData;
+            this.studentService = studentService;
+            this.userService = userService;
         }
 
 
         public ActionResult Create() {
             var model = new StudentRegisterViewModel {
-                Courses = _staticData.GetCourses().ToDictionary(x => x.Id, y => y.Name),
-                StudyCenters = _staticData.GetStudyCenters().ToDictionary(x => x.Id, y => y.Name),
-                //RegisterDate = DateTime.Now
+                Courses = staticData.GetCourses().ToDictionary(x => x.Id, y => y.Name),
+                StudyCenters = staticData.GetStudyCenters().ToDictionary(x => x.Id, y => y.Name),
             };
 
             return View(model);
@@ -35,15 +34,15 @@ namespace StudentTracker.Site.Controllers {
 
         [HttpPost]
         public ActionResult Create(StudentRegisterViewModel viewModel) {
-            _studentService.SaveStudent(viewModel.MapToDomain(), viewModel.CourseId, viewModel.StudyCenterId);
+            studentService.SaveStudent(viewModel.MapToDomain(), viewModel.CourseId, viewModel.StudyCenterId);
             return RedirectToAction("List");
         }
 
         [HttpGet]
         public ActionResult List() {
             var model = new StudentListViewModel {
-                Students = _studentService.GetStudents(100).Select(x => new StudentViewModel { Id = x.Id, BooksGiven = x.BooksGiven, Mobile = x.Mobile, Course = x.Course.MapToView(), Name = x.Name, Roll = x.Roll, SoftwareGiven = x.SoftwareGiven }),
-                Courses = _staticData.GetCourses().ToDictionary(x => x.Id, y => y.Name),
+                Students = studentService.GetStudents(100).Select(x => new StudentViewModel { Id = x.Id, BooksGiven = x.BooksGiven, Mobile = x.Mobile, Course = x.Course.MapToView(), Name = x.Name, Roll = x.Roll, SoftwareGiven = x.SoftwareGiven }),
+                Courses = staticData.GetCourses().ToDictionary(x => x.Id, y => y.Name),
             };
             model.Courses.Add(0, "All Course");
             return View(model);
@@ -53,39 +52,37 @@ namespace StudentTracker.Site.Controllers {
         public ActionResult List(StudentListViewModel studentSearch) {
             var model = new StudentListViewModel {
                 Students = studentSearch.IsSearchEmpty
-                               ? _studentService.GetAllStudents().Select(x => new StudentViewModel { Id = x.Id, BooksGiven = x.BooksGiven, Mobile = x.Mobile, Course = x.Course.MapToView(), Name = x.Name, Roll = x.Roll, SoftwareGiven = x.SoftwareGiven })
-                               : _studentService.SearchStudents(studentSearch.StudentNameSearchText, studentSearch.RollNoSearchText, studentSearch.CourseId).Select(x => new StudentViewModel { Id = x.Id, BooksGiven = x.BooksGiven, Mobile = x.Mobile, Course = x.Course.MapToView(), Name = x.Name, Roll = x.Roll, SoftwareGiven = x.SoftwareGiven }),
+                               ? studentService.GetAllStudents().Select(x => new StudentViewModel { Id = x.Id, BooksGiven = x.BooksGiven, Mobile = x.Mobile, Course = x.Course.MapToView(), Name = x.Name, Roll = x.Roll, SoftwareGiven = x.SoftwareGiven })
+                               : studentService.SearchStudents(studentSearch.StudentNameSearchText, studentSearch.RollNoSearchText, studentSearch.CourseId).Select(x => new StudentViewModel { Id = x.Id, BooksGiven = x.BooksGiven, Mobile = x.Mobile, Course = x.Course.MapToView(), Name = x.Name, Roll = x.Roll, SoftwareGiven = x.SoftwareGiven }),
                 CourseId = studentSearch.CourseId,
                 RollNoSearchText = studentSearch.RollNoSearchText,
                 StudentNameSearchText = studentSearch.StudentNameSearchText,
-                Courses = _staticData.GetCourses().ToDictionary(x => x.Id, y => y.Name)
-                };
+                Courses = staticData.GetCourses().ToDictionary(x => x.Id, y => y.Name)
+            };
             model.Courses.Add(0, "All Course");
             return View(model);
         }
 
         public ActionResult Edit(int id) {
-            var temp = _studentService.GetStudent(id);
-            var studentEditModel = new StudentEditViewModel { StudentViewModel = temp.MapToView(), Courses = _staticData.GetCourses().ToDictionary(x => x.Id, y => y.Name), StudyCenters = _staticData.GetStudyCenters().ToDictionary(x => x.Id, y => y.Name) };
-            // studentEditModel.Courses = _staticData.GetCourses().Select(x => x.MapToDomain());
-            //studentEditModel.StudyCenters = _staticData.GetStudyCenters().Select(x => x.MapToDomain());
-            studentEditModel.StudyCenterId = _userService.GetCurrentUser().StudyCenter.Id;
+            var temp = studentService.GetStudent(id);
+            var studentEditModel = new StudentEditViewModel { StudentViewModel = temp.MapToView(), Courses = staticData.GetCourses().ToDictionary(x => x.Id, y => y.Name), StudyCenters = staticData.GetStudyCenters().ToDictionary(x => x.Id, y => y.Name) };
+            studentEditModel.StudyCenterId = userService.GetCurrentUser().StudyCenter.Id;
             return View(studentEditModel);
         }
 
         [HttpPost]
         public ActionResult Edit(StudentEditViewModel model) {
-            _studentService.UpdateStudent(model.StudentViewModel.MapToDomain(), model.StudyCenterId);
+            studentService.UpdateStudent(model.StudentViewModel.MapToDomain(), model.StudyCenterId);
             return RedirectToAction("List");
         }
 
         public ActionResult Delete(int id) {
-            _studentService.DeleteStudent(id);
+            studentService.DeleteStudent(id);
             return RedirectToAction("List");
         }
 
         public void GenerateExcel(int id) {
-            var student = _studentService.GetStudent(id);
+            var student = studentService.GetStudent(id);
             var tempPath = CoreService.ConvertToAbsolute(CoreService.GetTempPath("xlsx"));
             var excelGenerator = new ExcelConverter();
             excelGenerator.GenerateExcel(tempPath, student);
@@ -98,9 +95,9 @@ namespace StudentTracker.Site.Controllers {
             return View();
         }
 
-        //[HttpPost]
+
         public void DownloadLeadsExcel(StudentDownloadViewModel viewModel) {
-            var students = _studentService.GetStudentsAsLead(viewModel.StartDate, viewModel.EndDate,
+            var students = studentService.GetStudentsAsLead(viewModel.StartDate, viewModel.EndDate,
                                                              viewModel.DownloadAll);
 
 
@@ -117,8 +114,24 @@ namespace StudentTracker.Site.Controllers {
 
         public ActionResult GenerateStatus() {
             var status = new StatusModel();
-            status.StudentStatus = _studentService.GetStudentStatus().Select(x=>new ValueModel{Student = x.Key.MapToView(),LastAppointment = x.Value});
+            status.StudentStatus = studentService.GetStudentStatus().Select(x => new ValueModel { Student = x.Key.MapToView(), LastAppointment = x.Value });
             return View(status);
+        }
+
+        public ActionResult PaymentStatus(int studentId) {
+            var student = studentService.GetStudent(studentId);
+            var model = new PaymentModel() {
+                AmountPaid = student.AmountPaid,
+                PaymentDate = student.PaymentDate,
+                AmountPending = student.AmountPending,
+                StudentId = studentId
+            };
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult PaymentStatus(PaymentModel paymentModel) {
+            studentService.UpdatePaymentStatus(paymentModel);
+            return RedirectToAction("List");
         }
     }
 }

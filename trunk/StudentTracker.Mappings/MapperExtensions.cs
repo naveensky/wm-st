@@ -28,7 +28,7 @@ namespace StudentTracker.Mappings {
             return Mapper.Map<StudentRegisterViewModel, Student>(studentViewModel);
         }
 
-        public static IEnumerable<StudentViewModel> MapToView(this IEnumerable<Models.Student> students) {
+        public static IEnumerable<StudentViewModel> MapToView(this IEnumerable<Student> students) {
             return Mapper.Map<IEnumerable<Models.Student>, IEnumerable<StudentViewModel>>(students);
         }
 
@@ -77,39 +77,39 @@ namespace StudentTracker.Mappings {
         }
 
         public static Time MapToDomain(this TimeViewModel timeViewModel) {
-            return Mapper.Map<TimeViewModel,Time>(timeViewModel);
+            return Mapper.Map<TimeViewModel, Time>(timeViewModel);
         }
 
         public static Site.ViewModels.Student.AppointmentViewModel MapToView(this AppointMentList appointMentLists) {
-            return Mapper.Map<AppointMentList,Site.ViewModels.Student.AppointmentViewModel>(appointMentLists);
+            return Mapper.Map<AppointMentList, Site.ViewModels.Student.AppointmentViewModel>(appointMentLists);
         }
 
         public static Appointment MapToDomain(this AppointmentViewModels appointmentViewModels) {
-            return Mapper.Map<AppointmentViewModels,Appointment>(appointmentViewModels);
+            return Mapper.Map<AppointmentViewModels, Appointment>(appointmentViewModels);
         }
         public static void ConfigureMappings() {
-            Mapper.CreateMap<Course, StudentTracker.Site.ViewModels.Common.CourseViewModel>()
+            Mapper.CreateMap<Course, CourseViewModel>()
                 .ForMember(d => d.Topics, s => s.MapFrom(src => src.Topics));
             Mapper.CreateMap<Topic, TopicViewModel>();
             Mapper.CreateMap<StudyCenter, StudyCenterViewModel>();
             Mapper.CreateMap<StudyCenterViewModel, StudyCenter>();
-            Mapper.CreateMap<StudentRegisterViewModel, Student>().ForMember(d => d.Course, s => s.Ignore()).ForMember(d => d.StudyCenter, s => s.Ignore()).ForMember(d=>d.Appointments,s=>s.Ignore()).ForMember(x=>x.Appointments,s=>s.Ignore()).ForMember(x=>x.Appointments,s=>s.Ignore());
+            Mapper.CreateMap<StudentRegisterViewModel, Student>().ForMember(d => d.Course, s => s.Ignore()).ForMember(d => d.StudyCenter, s => s.Ignore()).ForMember(d => d.Appointments, s => s.Ignore()).ForMember(x => x.Appointments, s => s.Ignore()).ForMember(x => x.Appointments, s => s.Ignore()).ForMember(x => x.Missed, y => y.Ignore());
             Mapper.CreateMap<IEnumerable<Models.Student>, IEnumerable<StudentViewModel>>();
-            Mapper.CreateMap<Student, StudentViewModel>();
-            Mapper.CreateMap<StudentViewModel, Student>().ForMember(d => d.Course, s => s.Ignore()).ForMember(d => d.StudyCenter, s => s.Ignore()).ForMember(d=>d.Appointments,s=>s.Ignore()); ;
+            Mapper.CreateMap<Student, StudentViewModel>().ForMember(d => d.AppointmentCounts, s => s.Ignore());
+            Mapper.CreateMap<StudentViewModel, Student>().ForMember(d => d.Course, s => s.Ignore()).ForMember(d => d.StudyCenter, s => s.Ignore()).ForMember(d => d.Appointments, s => s.Ignore()).ForMember(x => x.Missed, y => y.Ignore());
             Mapper.CreateMap<IEnumerable<Models.Teacher>, IEnumerable<TeacherViewModel>>();
-            Mapper.CreateMap<Models.Appointment,NewAppointmentViewModel>().ForMember(d=>d.TopicId,s=>s.Ignore())
-             .ForMember(d=>d.Topic,s=>s.Ignore())
-             .ForMember(d=>d.EndTime,s=>s.Ignore()).ForMember(d=>d.StartTime,s=>s.Ignore()).ForMember(d=>d.SelectedTeacherId,s=>s.Ignore())
-             .ForMember(d=>d.Teachers,s=>s.Ignore()).ForMember(d=>d.Student,s=>s.Ignore());
+            Mapper.CreateMap<Models.Appointment, NewAppointmentViewModel>().ForMember(d => d.TopicId, s => s.Ignore())
+             .ForMember(d => d.Topic, s => s.Ignore())
+             .ForMember(d => d.EndTime, s => s.Ignore()).ForMember(d => d.StartTime, s => s.Ignore()).ForMember(d => d.SelectedTeacherId, s => s.Ignore())
+             .ForMember(d => d.Teachers, s => s.Ignore()).ForMember(d => d.Student, s => s.Ignore());
             Mapper.CreateMap<Models.Teacher, TeacherViewModel>();
-            Mapper.CreateMap<NewAppointmentViewModel, Appointment>().ForMember(d => d.Topic, s => s.Ignore()).ForMember(d => d.Teacher, s => s.Ignore()).ForMember(d=>d.Students,s=>s.Ignore()).ForMember(d=>d.StartTime,s=>s.Ignore()).ForMember(d=>d.EndTime,d=>d.Ignore());
-            Mapper.CreateMap<TeacherViewModel, Teacher>().ForMember(d=>d.Appointments,s=>s.Ignore());
+            Mapper.CreateMap<NewAppointmentViewModel, Appointment>().ForMember(d => d.Topic, s => s.Ignore()).ForMember(d => d.Teacher, s => s.Ignore()).ForMember(d => d.Students, s => s.Ignore()).ForMember(d => d.StartTime, s => s.Ignore()).ForMember(d => d.EndTime, d => d.Ignore()).ForMember(d => d.AbsentStudents, s => s.Ignore());
+            Mapper.CreateMap<TeacherViewModel, Teacher>().ForMember(d => d.Appointments, s => s.Ignore());
             Mapper.CreateMap<IEnumerable<StudyCenter>, IEnumerable<StudyCenterViewModel>>();
             Mapper.CreateMap<UserViewModel, User>();
             Mapper.CreateMap<TimeViewModel, Time>();
-            Mapper.CreateMap<AppointMentList,Site.ViewModels.Student.AppointmentViewModel>();
-            Mapper.CreateMap<AppointmentViewModels, Appointment>().ForMember(d => d.Topic, s => s.Ignore()).ForMember(d => d.Teacher, s => s.Ignore()).ForMember(d => d.Students, s => s.Ignore()).ForMember(d => d.StartTime, s => s.Ignore()).ForMember(d => d.EndTime, d => d.Ignore());
+            Mapper.CreateMap<AppointMentList, Site.ViewModels.Student.AppointmentViewModel>();
+            Mapper.CreateMap<AppointmentViewModels, Appointment>().ForMember(d => d.Topic, s => s.Ignore()).ForMember(d => d.Teacher, s => s.Ignore()).ForMember(d => d.Students, s => s.Ignore()).ForMember(d => d.StartTime, s => s.Ignore()).ForMember(d => d.EndTime, d => d.Ignore()).ForMember(d => d.AbsentStudents, s => s.Ignore());
             Mapper.CreateMap<Topic, TopicViewModel>();
             Mapper.AssertConfigurationIsValid();
         }

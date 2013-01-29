@@ -3,56 +3,49 @@ using System.Collections.Generic;
 using System.Linq;
 using StudentTracker.Repository;
 using StudentTracker.Services.User;
+using StudentTracker.Site.ViewModels.Student;
 
 namespace StudentTracker.Services.Student {
     public class StudentService {
-        private readonly ISqlUnitOfWork _uow;
-        private readonly UserService _userService;
+        private readonly ISqlUnitOfWork uow;
+        private readonly UserService userService;
 
         public StudentService(ISqlUnitOfWork uow, UserService userService) {
-            _uow = uow;
-            _userService = userService;
+            this.uow = uow;
+            this.userService = userService;
         }
 
         public void SaveStudent(Models.Student student, int courseId, int studyCenterId) {
-            var course = _uow.Courses.Single(x => x.Id == courseId);
+            var course = uow.Courses.Single(x => x.Id == courseId);
             student.Course = course;
-            var studyCenter = _uow.StudyCenters.Single(x => x.Id == studyCenterId);
+            var studyCenter = uow.StudyCenters.Single(x => x.Id == studyCenterId);
             student.StudyCenter = studyCenter;
             student.Roll = string.Format("{0}-{1:#0}-{2:####0}", DateTime.Now.Year, DateTime.Now.Month,
-                                         _uow.Students.Fetch().Count() + 1);
+                                         uow.Students.Fetch().Count() + 1);
             student.ModifiedDate = DateTime.Now;
-            _uow.Students.Add(student);
-            _uow.Students.SaveChanges();
+            uow.Students.Add(student);
+            uow.Students.SaveChanges();
         }
 
         public Models.Student GetStudent(int studentId) {
-            Models.Student student = _uow.Students.FindById(studentId);
-            /*student.Id = studentId;
-            var temp = _uow.Students.Single(x => x.Id == studentId);
-            student.Name = temp.Name;
-            student.Roll = temp.Roll;
-            //return _uow.Students.Single(x => x.Id == studentId);*/
+            Models.Student student = uow.Students.FindById(studentId);
             return student;
         }
 
         public IEnumerable<Models.Student> GetAllStudents() {
-            return _uow.Students.Fetch().OrderBy(x => x.Name).ToList();
+            return uow.Students.Fetch().OrderBy(x => x.Name).ToList();
         }
 
         public IEnumerable<Models.Student> GetStudents(int count) {
-            var studyCentreId = _userService.GetCurrentUser().StudyCenter.Id;
+            var studyCentreId = userService.GetCurrentUser().StudyCenter.Id;
 
-            return (_uow.Students.Find(x => x.StudyCenter.Id == studyCentreId).Take(count).OrderBy(x => x.Name).ToList());
-            /*
-            var temp = _uow.Students.Find(x => x.StudyCenter.Id == studyCentreId).Take(count).OrderBy(x => x.Name).ToList();
-            return (temp.Select(x => new Site.ViewModels.Student.Student { Id = x.Id, Name = x.Name, Roll = x.Roll }));*/
+            return (uow.Students.Find(x => x.StudyCenter.Id == studyCentreId).Take(count).OrderBy(x => x.Name).ToList());
         }
 
         public IEnumerable<Models.Student> SearchStudents(string studentName, string rollNo, int courseId) {
-            var studyCentreId = _userService.GetCurrentUser().StudyCenter.Id;
-            //var temp = _uow.Students.Fetch();
-            var students = _uow.Students.Find(x => x.StudyCenter.Id == studyCentreId);
+            var studyCentreId = userService.GetCurrentUser().StudyCenter.Id;
+
+            var students = uow.Students.Find(x => x.StudyCenter.Id == studyCentreId);
 
             //filter by studentname if not empty
             students = string.IsNullOrEmpty(studentName)
@@ -73,9 +66,9 @@ namespace StudentTracker.Services.Student {
         }
 
         public void UpdateStudent(Models.Student student, int studyCenterId) {
-            var originalStudent = _uow.Students.Single(x => x.Id == student.Id);
-            student.StudyCenter = _uow.StudyCenters.FindById(studyCenterId);
-            originalStudent.StudyCenter = _uow.StudyCenters.FindById(studyCenterId);
+            var originalStudent = uow.Students.Single(x => x.Id == student.Id);
+            student.StudyCenter = uow.StudyCenters.FindById(studyCenterId);
+            originalStudent.StudyCenter = uow.StudyCenters.FindById(studyCenterId);
 
             originalStudent.ActualExamDate = student.ActualExamDate;
             originalStudent.BooksGiven = student.BooksGiven;
@@ -85,25 +78,25 @@ namespace StudentTracker.Services.Student {
             originalStudent.SoftwareGiven = student.SoftwareGiven;
             originalStudent.WmPrepUsername = student.WmPrepUsername;
             originalStudent.ModifiedDate = DateTime.UtcNow.AddHours(5).AddMinutes(30);
-            _uow.Students.SaveChanges();
+            uow.Students.SaveChanges();
         }
 
         public void DeleteStudent(int studentId) {
-            var student = _uow.Students.Single(x => x.Id == studentId);
-            _uow.Students.Remove(student);
+            var student = uow.Students.Single(x => x.Id == studentId);
+            uow.Students.Remove(student);
 
         }
 
         public IEnumerable<Models.Student> GetStudentsAsLead(DateTime startTime, DateTime endTime, bool getAll) {
             //using (var repo = new MongoRepository<Models.Student>(CoreService.GetServer())) {
-            var studentsWithScore = _uow.Students.Find(x => x.Score >= 0).ToList().Where(x => x.ModifiedDate.Date >= startTime.Date && x.ModifiedDate.Date <= endTime.Date);
+            var studentsWithScore = uow.Students.Find(x => x.Score >= 0).ToList().Where(x => x.ModifiedDate.Date >= startTime.Date && x.ModifiedDate.Date <= endTime.Date);
 
             // studentsWithScore = studentsWithScore).ToList();
 
             if (!getAll)
                 studentsWithScore = studentsWithScore.Where(x => !x.IsDownloaded).ToList();
 
-            var studentInRange = _uow.Students.Find(x => x.ActualExamDate != null).ToList().Where(x => x.ActualExamDate.Value.Date <= endTime.Date && x.ActualExamDate.Value.Date >= endTime.Date);
+            var studentInRange = uow.Students.Find(x => x.ActualExamDate != null).ToList().Where(x => x.ActualExamDate.Value.Date <= endTime.Date && x.ActualExamDate.Value.Date >= endTime.Date);
 
             if (!getAll)
                 studentInRange = studentInRange.Where(x => !x.IsDownloaded);
@@ -114,8 +107,8 @@ namespace StudentTracker.Services.Student {
             foreach (var student in data) {
                 student.ModifiedDate = DateTime.UtcNow.AddHours(5).AddMinutes(30);
                 student.IsDownloaded = true;
-                _uow.Students.Add(student);
-                _uow.Students.SaveChanges();
+                uow.Students.Add(student);
+                uow.Students.SaveChanges();
             }
 
             return studentsWithScore;
@@ -123,7 +116,7 @@ namespace StudentTracker.Services.Student {
         }
 
         public IDictionary<int, string> GetStudentsDictionary() {
-            return (_uow.Students.Fetch().ToDictionary(x => x.Id, x => x.Name));
+            return (uow.Students.Fetch().ToDictionary(x => x.Id, x => x.Name));
         }
 
         /*  public IEnumerable<Models.Student> ConvetToViewModel(IEnumerable<Models.Student> enumerable) {
@@ -131,15 +124,15 @@ namespace StudentTracker.Services.Student {
           }*/
 
         public IEnumerable<Models.Student> GetStudentsByTopic(int topicId) {
-            var studyCentreId = _userService.GetCurrentUser().StudyCenter.Id;
-            int couseId = _uow.Topics.FindById(topicId).Course.Id;
-            var students = _uow.Students.Find(x => x.Course.Id == couseId && x.StudyCenter.Id == studyCentreId);
+            var studyCentreId = userService.GetCurrentUser().StudyCenter.Id;
+            int couseId = uow.Topics.FindById(topicId).Course.Id;
+            var students = uow.Students.Find(x => x.Course.Id == couseId && x.StudyCenter.Id == studyCentreId);
             return students;
         }
 
         public IDictionary<Models.Student, DateTime> GetStudentStatus() {
-            var studyCentreId = _userService.GetCurrentUser().StudyCenter.Id;
-            var students = _uow.Students.Fetch().Where(x=>x.StudyCenter.Id==studyCentreId);
+            var studyCentreId = userService.GetCurrentUser().StudyCenter.Id;
+            var students = uow.Students.Fetch().Where(x => x.StudyCenter.Id == studyCentreId);
             var status = new Dictionary<Models.Student, DateTime>();
             var statusForNonAppointed = new Dictionary<Models.Student, DateTime>();
             foreach (var student in students) {
@@ -152,17 +145,24 @@ namespace StudentTracker.Services.Student {
                     var temp = lastAppointmentDate.AddDays(10);
                     if (temp <= today)
                         status.Add(student, lastAppointmentDate);
-                }
-                else {
-                    statusForNonAppointed.Add(student,lastAppointmentDate);
+                } else {
+                    statusForNonAppointed.Add(student, lastAppointmentDate);
                 }
             }
             var sortstatus = (from temp in status orderby temp.Value ascending select temp).ToDictionary(x => x.Key,
                                                                                                          y => y.Value);
             var sortstatusForNonAppointed = (from temp in statusForNonAppointed orderby (DateTime.Now - temp.Key.RegisterDate) descending select temp).ToDictionary(x => x.Key,
                                                                                                          y => y.Value);
-            var resultstatus=sortstatusForNonAppointed.Concat(sortstatus).ToDictionary(x=>x.Key,y=>y.Value);
+            var resultstatus = sortstatusForNonAppointed.Concat(sortstatus).ToDictionary(x => x.Key, y => y.Value);
             return resultstatus;
+        }
+
+        public void UpdatePaymentStatus(PaymentModel paymentModel) {
+            var student=uow.Students.FindById(paymentModel.StudentId);
+            student.AmountPaid=paymentModel.AmountPaid;
+            student.AmountPending=paymentModel.AmountPending;
+            student.PaymentDate=paymentModel.PaymentDate;
+            uow.Students.SaveChanges();
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Moq;
+using StudentTracker.Repository.Sql;
 using StudentTracker.Services.Core;
 using StudentTracker.Services.Student;
 using StudentTracker.Services.User;
@@ -21,10 +22,10 @@ namespace StudentTracker.Test {
         private StudentController _studentController;
         [TestFixtureSetUp]
         public void Setup() {
-            _staticData = new Mock<StaticDataService>().Object;
-            _studentService = new Mock<StudentService>().Object;
-            _userService = new Mock<UserService>().Object;
-            _studentController = new StudentController(_staticData, _studentService, _userService);
+            //_staticData = new Mock<StaticDataService>().Object;
+            //_studentService = new Mock<StudentService>().Object;
+            //_userService = new Mock<UserService>().Object;
+            //_studentController = new StudentController(_staticData, _studentService, _userService);
         }
         [Test]
         public void Create_Test() {
@@ -78,6 +79,15 @@ namespace StudentTracker.Test {
         [Test]
         public void DownloadLeadsExcel_Test_Post() {
             _studentController.DownloadLeadsExcel(new StudentDownloadViewModel());
+        }
+
+
+        [Test]
+        public void CreateDatabase() {
+        var database=new StudentTrackerDb();
+            database.Database.Delete();
+            database.Database.CreateIfNotExists();
+            
         }
 
         [TestFixtureTearDown]

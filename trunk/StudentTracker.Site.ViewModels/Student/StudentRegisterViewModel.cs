@@ -60,17 +60,21 @@ namespace StudentTracker.Site.ViewModels.Student {
         [Required]
         [Display(Name = "Mobile / Other Contact Number")]
         public string Mobile { get; set; }
-        [Display(Name="Course")]
+        [Display(Name = "Course")]
         public int CourseId { get; set; }
         public IDictionary<int, string> Courses { get; set; }
         public IDictionary<int, string> StudyCenters { get; set; }
         [Display(Name = "StudyCenter")]
         public int StudyCenterId { get; set; }
         public CourseViewModel Course { get; set; }
-       // public ICollection<Appointment> Appointments { get; set; }
+        [Display(Name = "Amount Paid")]
+        public decimal? AmountPaid { get; set; }
+        [Display(Name = "Amount Pending")]
+        public decimal? AmountPending { get; set; }
+        [Display(Name = "Payment Date")]
+        public DateTime? PaymentDate { get; set; }
+        public string Remarks { get; set; }
 
-
-        //public Site.ViewModels.Student.StudentViewModel StudentViewModel { get; set; }
 
     }
 }

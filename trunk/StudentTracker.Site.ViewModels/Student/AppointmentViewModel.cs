@@ -16,6 +16,7 @@ namespace StudentTracker.Site.ViewModels.Student {
            get { return EndTime.Subtract(StartTime); }
        }
 
-       public bool IsPersonal { get; set; }
+       public bool? IsPersonal { get; set; }
+       public bool IsMissed { get; set; }
    }
 }
