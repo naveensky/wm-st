@@ -67,7 +67,7 @@ namespace StudentTracker.Site.Controllers {
             } else {
                 List<int> temp = new List<int>();
                 temp.Add(model.Student.Id);
-                _appService.SaveAppointment(model.MapToDomain(), model.TopicId, model.TeacherId, temp,new List<int>(), 
+                _appService.SaveAppointment(model.MapToDomain(), model.TopicId, model.TeacherId, temp,new List<int?>(), 
                                             startTime, endTime);
 
             }
@@ -166,6 +166,8 @@ namespace StudentTracker.Site.Controllers {
 
         [HttpPost]
         public ActionResult SaveAppintment(AppointmentViewModels appointmentViewModels) {
+            if(appointmentViewModels.AbsentStudentsId==null)
+                appointmentViewModels.AbsentStudentsId=new List<int?>();
             DateTime startTime = new DateTime();
             DateTime endTime = new DateTime();
             char[] timeSpltiArray = { ' ', ':' };

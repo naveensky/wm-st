@@ -80,7 +80,12 @@
             @Html.LabelFor(model => model.AbsentStudentsId)
         </div>
         <div class="editor-field">
-            @Html.DropDownListFor(model => model.AbsentStudentsId, new SelectList(Model.AbsentStudents, "Key", "Value"), new { multiple = "multiple", @class = "chzn-select", data_placeholder = "Choose at least one student", style = "width:100%" })
+            @* @Html.DropDownListFor(model => model.AbsentStudentsId, new SelectList(Model.AbsentStudents, "Key", "Value"), new { multiple = "multiple", @class = "chzn-select", style = "width:100%" })*@
+            <select name="AbsentStudentsId" id="AbsentStudentsId" multiple="multiple" class="chzn-select" style="width: 100%">
+            @foreach(var opt in Model.AbsentStudents) {
+                <option value=@opt.Key>@opt.Value</option>
+            } 
+            </select>
         </div>
         
         <p>

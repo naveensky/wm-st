@@ -40,6 +40,6 @@ namespace StudentTracker.Site.ViewModels.Appointment {
       public IDictionary<int, string> AbsentStudents { get; set; }
       [Required]
       [Display(Name = "Absentees")]
-      public IList<int> AbsentStudentsId { get; set; }
+      public IList<int?> AbsentStudentsId { get; set; }
   }
 }

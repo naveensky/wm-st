@@ -85,7 +85,7 @@ namespace StudentTracker.Services.Appointment {
         }
 
 
-        public void SaveAppointment(Models.Appointment model, int topicId, int teacherId, IList<int> studentId, IList<int> absentStudentsId, DateTime sTime, DateTime eTime) {
+        public void SaveAppointment(Models.Appointment model, int topicId, int teacherId, IList<int> studentId, IList<int?> absentStudentsId, DateTime sTime, DateTime eTime) {
 
             model.Teacher = uow.Teachers.FindById(teacherId);
             model.Topic = uow.Topics.FindById(topicId);
@@ -93,7 +93,7 @@ namespace StudentTracker.Services.Appointment {
             model.Students = studentId.Select(x => uow.Students.FindById(x)).ToList();
             model.StartTime = sTime;
             model.EndTime = eTime;
-            model.AbsentStudents=absentStudentsId.Select(x => uow.Students.FindById(x)).ToList();
+            model.AbsentStudents=absentStudentsId.Select(x => uow.Students.FindById(x.Value)).ToList();
             uow.Appointments.Add(model);
             uow.Appointments.SaveChanges();
 
